@@ -8,3 +8,14 @@ const firebaseConfig = {
   appId: "1:927567644994:web:932550a6427910789360db",
   measurementId: "G-5HCCDCRB7K"
 };
+
+// 🔔 إشعارات تليجرام لما حد يوقّع في سجل الزوار (اختياري)
+// 1) اعمل بوت جديد من @BotFather وانسخ الـ Token
+// 2) ابعت أي رسالة للبوت بتاعك من حسابك
+// 3) افتح الرابط ده (بدّل TOKEN بالتوكن بتاعك):
+//    https://api.telegram.org/botTOKEN/getUpdates
+//    وهتلاقي جوه الرد "chat":{"id":123456789} — ده الـ Chat ID
+const TELEGRAM_CONFIG = {
+  botToken: "",
+  chatId: ""
+};

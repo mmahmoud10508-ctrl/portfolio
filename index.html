@@ -810,6 +810,20 @@ addEventListener('scroll', ()=>{
   const LOCAL_KEY = 'casemiro_gb';
   let localMode = !fbReady;
 
+  function notifyTelegram(n, m){
+    try{
+      if(typeof TELEGRAM_CONFIG === 'undefined' || !TELEGRAM_CONFIG.botToken || !TELEGRAM_CONFIG.chatId) return;
+      fetch('https://api.telegram.org/bot'+TELEGRAM_CONFIG.botToken+'/sendMessage', {
+        method:'POST',
+        headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          chat_id: TELEGRAM_CONFIG.chatId,
+          text: '✍️ رسالة جديدة في سجل الزوار 👀\n\n👤 '+n+'\n💬 '+m
+        })
+      }).catch(()=>{});
+    }catch(e){}
+  }
+
   const readLocal = ()=>{ try{ return JSON.parse(localStorage.getItem(LOCAL_KEY))||[] }catch(e){ return [] } };
   const writeLocal = a=>{ try{ localStorage.setItem(LOCAL_KEY, JSON.stringify(a.slice(0,50))) }catch(e){} };
 
@@ -864,7 +878,7 @@ addEventListener('scroll', ()=>{
     } else {
       firebase.firestore().collection('guestbook')
         .add({ name:n.slice(0,30), msg:m.slice(0,200), at:firebase.firestore.FieldValue.serverTimestamp() })
-        .then(done)
+        .then(()=>{ done(); notifyTelegram(n, m); })
         .catch(()=>{
           const a = readLocal(); a.unshift({n:n.slice(0,30), m:m.slice(0,200), t:Date.now()});
           writeLocal(a); renderLocalOnly(); done();
