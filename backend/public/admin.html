@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>لوحة التحكم | CASEMIRO</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔐</text></svg>">
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap');
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family:'Cairo', Tahoma, sans-serif;
+    background:#0a0a14; color:#e8e8f0;
+    min-height:100vh; padding:20px;
+  }
+  .wrap { max-width:900px; margin:auto; }
+
+  /* ===== تسجيل الدخول ===== */
+  #loginView {
+    min-height:90vh; display:flex; align-items:center; justify-content:center;
+  }
+  .login-box {
+    background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.09);
+    border-radius:20px; padding:40px; width:100%; max-width:400px;
+    text-align:center;
+  }
+  .login-box .lock { font-size:44px; }
+  .login-box h1 { font-size:24px; margin:12px 0 24px; font-weight:900; }
+  h1 span { color:#00e5ff; }
+
+  input, textarea {
+    width:100%; background:rgba(255,255,255,.05);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:10px; color:#e8e8f0;
+    padding:11px 14px; font-family:inherit; font-size:15px;
+    transition:.25s;
+  }
+  input:focus, textarea:focus { outline:none; border-color:#00e5ff; }
+  textarea { resize:vertical; min-height:90px; line-height:1.9; }
+
+  button.btn {
+    border:none; cursor:pointer; font-family:inherit; font-weight:700;
+    border-radius:10px; transition:.3s; font-size:15px;
+  }
+  .btn-main { background:linear-gradient(135deg,#2979ff,#00e5ff); color:#04101f; padding:12px 34px; }
+  .btn-main:hover { transform:translateY(-2px); box-shadow:0 10px 26px rgba(0,229,255,.3); }
+  .btn-main:disabled { opacity:.6; cursor:wait; transform:none; }
+  .btn-del { background:rgba(255,80,80,.12); color:#ff7a7a; padding:9px 14px; font-size:13px; }
+  .btn-del:hover { background:rgba(255,80,80,.22); }
+  .btn-add { background:rgba(0,229,255,.1); color:#00e5ff; padding:9px 18px; font-size:14px; border:1px dashed rgba(0,229,255,.4); }
+  .btn-add:hover { background:rgba(0,229,255,.18); }
+  .btn-out { background:none; border:1px solid rgba(255,120,120,.4); color:#ff9a9a; padding:8px 16px; font-size:13px; }
+  .btn-out:hover { background:rgba(255,80,80,.12); }
+
+  #loginError { color:#ff8080; font-size:14px; margin-top:12px; min-height:20px; }
+
+  /* ===== المحرر ===== */
+  #editorView { display:none; }
+  .topbar {
+    display:flex; justify-content:space-between; align-items:center;
+    gap:12px; flex-wrap:wrap;
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:16px 22px; margin-bottom:24px;
+    position:sticky; top:12px; z-index:50;
+    backdrop-filter:blur(12px);
+    background:rgba(10,10,20,.85);
+  }
+  .topbar h1 { font-size:20px; font-weight:900; }
+  .topbar .actions { display:flex; gap:10px; }
+
+  section.panel {
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:16px; padding:24px; margin-bottom:22px;
+  }
+  section.panel > h2 {
+    font-size:17px; font-weight:900; color:#00e5ff; margin-bottom:18px;
+    display:flex; align-items:center; gap:8px;
+  }
+  .field { margin-bottom:14px; }
+  .field label { display:block; font-size:13px; color:#9aa4b8; margin-bottom:6px; font-weight:600; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  @media(max-width:640px){ .grid2 { grid-template-columns:1fr; } }
+
+  .item-row {
+    background:rgba(255,255,255,.03);
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:12px; padding:14px; margin-bottom:12px;
+  }
+  .item-row .row-head { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+  .item-row .row-head b { color:#c8d2e8; font-size:14px; }
+  .row-fields { display:grid; grid-template-columns:auto 1fr auto; gap:10px; align-items:center; }
+  .row-fields.four { grid-template-columns:auto 1fr 1fr; }
+  .row-fields .w-icon { width:64px; text-align:center; font-size:22px; }
+  @media(max-width:640px){
+    .row-fields, .row-fields.four { grid-template-columns:1fr; }
+    .row-fields .w-icon { width:100%; }
+  }
+  input[type=number]{ direction:ltr; text-align:right; }
+
+  #toast {
+    position:fixed; bottom:24px; right:50%; transform:translateX(50%) translateY(80px);
+    background:linear-gradient(135deg,#2979ff,#00e5ff); color:#04101f;
+    padding:12px 30px; border-radius:30px; font-weight:700; font-size:15px;
+    opacity:0; transition:.4s; pointer-events:none; z-index:99;
+  }
+  #toast.show { opacity:1; transform:translateX(50%) translateY(0); }
+  #toast.err { background:linear-gradient(135deg,#ff5f57,#ff9a9a); color:#2a0505; }
+</style>
+</head>
+<body>
+
+<!-- ===== شاشة الدخول ===== -->
+<div id="loginView">
+  <div class="login-box">
+    <div class="lock">🔐</div>
+    <h1>لوحة تحكم <span>CASEMIRO</span></h1>
+    <input type="password" id="pwd" placeholder="اكتب كلمة السر..." autocomplete="current-password">
+    <br><br>
+    <button class="btn btn-main" id="loginBtn" style="width:100%">دخول</button>
+    <div id="loginError"></div>
+  </div>
+</div>
+
+<!-- ===== المحرر ===== -->
+<div id="editorView" class="wrap">
+  <div class="topbar">
+    <h1>🛠️ لوحة التحكم</h1>
+    <div class="actions">
+      <button class="btn btn-main" id="saveBtn">💾 حفظ التعديلات</button>
+      <button class="btn btn-out" id="logoutBtn">خروج</button>
+    </div>
+  </div>
+
+  <!-- الهيرو -->
+  <section class="panel">
+    <h2>🚀 القسم الأول (الهيرو)</h2>
+    <div class="field">
+      <label>الاسم الرئيسي</label>
+      <input id="heroName">
+    </div>
+    <div class="field">
+      <label>جمل الآلة الكاتبة (كل سطر = جملة)</label>
+      <textarea id="heroTyping" rows="4"></textarea>
+    </div>
+    <div class="field">
+      <label>وصف قصير (يسمح بـ HTML بسيط زي &lt;b class="hl"&gt;نص&lt;/b&gt; للتلوين)</label>
+      <textarea id="heroDesc" rows="4"></textarea>
+    </div>
+  </section>
+
+  <!-- النبذة -->
+  <section class="panel">
+    <h2>📖 قسم الحكاية</h2>
+    <div class="grid2 field">
+      <div>
+        <label>عنوان القسم (قبل الكلمة الملونة)</label>
+        <input id="aboutBefore">
+      </div>
+      <div>
+        <label>الكلمة الملونة من العنوان</label>
+        <input id="aboutAccent">
+      </div>
+    </div>
+    <div class="field">
+      <label>نص الحكاية (يسمح بـ HTML: &lt;br&gt;, &lt;b&gt;, &lt;b class="hl"&gt;)</label>
+      <textarea id="aboutHtml" rows="10"></textarea>
+    </div>
+  </section>
+
+  <!-- الأرقام -->
+  <section class="panel">
+    <h2>🔢 الأرقام</h2>
+    <div id="statsList"></div>
+    <button class="btn btn-add" data-add="stat">+ إضافة رقم</button>
+  </section>
+
+  <!-- المهارات -->
+  <section class="panel">
+    <h2>⚡ المهارات</h2>
+    <div id="skillsList"></div>
+    <button class="btn btn-add" data-add="skill">+ إضافة مهارة</button>
+  </section>
+
+  <!-- التواصل -->
+  <section class="panel">
+    <h2>📬 بيانات التواصل</h2>
+    <div id="contactList"></div>
+    <button class="btn btn-add" data-add="contact">+ إضافة وسيلة تواصل</button>
+  </section>
+</div>
+
+<div id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+let content = null;
+
+function toast(msg, isErr){
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.toggle('err', !!isErr);
+  t.classList.add('show');
+  clearTimeout(t._h);
+  t._h = setTimeout(()=> t.classList.remove('show'), 2600);
+}
+
+// ===== الدخول =====
+async function login(){
+  const btn = $('loginBtn');
+  btn.disabled = true;
+  $('loginError').textContent = '';
+  try{
+    const r = await fetch('/api/login', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ password: $('pwd').value })
+    });
+    const d = await r.json();
+    if(r.ok){ await openEditor(); }
+    else $('loginError').textContent = d.error || 'حصل خطأ';
+  }catch(e){
+    $('loginError').textContent = 'مشكلة في الاتصال بالسيرفر';
+  }
+  btn.disabled = false;
+}
+$('loginBtn').onclick = login;
+$('pwd').addEventListener('keydown', e => { if(e.key==='Enter') login(); });
+
+$('logoutBtn').onclick = async ()=>{
+  await fetch('/api/logout', {method:'POST'});
+  location.reload();
+};
+
+// ===== فتح المحرر =====
+async function openEditor(){
+  const r = await fetch('/api/content');
+  if(!r.ok) throw new Error('content fetch failed');
+  content = await r.json();
+  $('loginView').style.display = 'none';
+  $('editorView').style.display = 'block';
+  fillForm(content);
+}
+
+// ===== تعبئة الفورم =====
+function fillForm(c){
+  $('heroName').value = c.hero?.name || '';
+  $('heroTyping').value = (c.hero?.typing || []).join('\n');
+  $('heroDesc').value = c.hero?.desc || '';
+  $('aboutBefore').value = c.about?.title_before || '';
+  $('aboutAccent').value = c.about?.title_accent || '';
+  $('aboutHtml').value = c.about?.html || '';
+  renderList('statsList', statRow, c.stats || []);
+  renderList('skillsList', skillRow, c.skills || []);
+  renderList('contactList', contactRow, c.contact || []);
+}
+
+// ===== صفوف القوائم =====
+function renderList(containerId, rowFn, items){
+  const box = $(containerId);
+  box.innerHTML = '';
+  items.forEach((item, i) => box.appendChild(rowFn(item, i)));
+}
+
+function statRow(item){
+  const div = document.createElement('div');
+  div.className = 'item-row';
+  div.innerHTML =
+    '<div class="row-head"><b>رقم</b><button class="btn btn-del">حذف</button></div>' +
+    '<div class="row-fields four">' +
+      '<div class="field" style="margin:0"><label>الرقم</label><input type="number" class="f-num" value="'+(+item.num||0)+'"></div>' +
+      '<div class="field" style="margin:0"><label>الوصف</label><input class="f-label" value=""></div>' +
+    '</div>';
+  div.querySelector('.f-label').value = item.label || '';
+  div.querySelector('.btn-del').onclick = ()=> div.remove();
+  return div;
+}
+
+function skillRow(item){
+  const div = document.createElement('div');
+  div.className = 'item-row';
+  div.innerHTML =
+    '<div class="row-head"><b>مهارة</b><button class="btn btn-del">حذف</button></div>' +
+    '<div class="row-fields">' +
+      '<input class="f-icon w-icon" maxlength="4" value="">' +
+      '<div class="field" style="margin:0"><label>اسم المهارة</label><input class="f-name" value=""></div>' +
+      '<div class="field" style="margin:0"><label>النسبة %</label><input type="number" min="0" max="100" class="f-level" value="0"></div>' +
+    '</div>';
+  div.querySelector('.f-icon').value = item.icon || '⚡';
+  div.querySelector('.f-name').value = item.name || '';
+  div.querySelector('.f-level').value = Math.max(0,Math.min(100,+item.level||0));
+  div.querySelector('.btn-del').onclick = ()=> div.remove();
+  return div;
+}
+
+function contactRow(item){
+  const div = document.createElement('div');
+  div.className = 'item-row';
+  div.innerHTML =
+    '<div class="row-head"><b>وسيلة تواصل</b><button class="btn btn-del">حذف</button></div>' +
+    '<div class="row-fields four">' +
+      '<input class="f-icon w-icon" maxlength="4" value="">' +
+      '<div class="field" style="margin:0"><label>الاسم</label><input class="f-name" value=""></div>' +
+      '<div class="field" style="margin:0"><label>الرابط (href)</label><input class="f-link" dir="ltr" value=""></div>' +
+    '</div>' +
+    '<div class="field" style="margin-top:10px"><label>النص المعروض</label><input class="f-value" dir="ltr" value=""></div>';
+  div.querySelector('.f-icon').value = item.icon || '📧';
+  div.querySelector('.f-name').value = item.name || '';
+  div.querySelector('.f-link').value = item.link || '';
+  div.querySelector('.f-value').value = item.value || '';
+  div.querySelector('.btn-del').onclick = ()=> div.remove();
+  return div;
+}
+
+document.querySelectorAll('[data-add]').forEach(btn=>{
+  btn.onclick = ()=>{
+    const t = btn.dataset.add;
+    if(t==='stat')   $('statsList').appendChild(statRow({num:0,label:''}));
+    if(t==='skill')  $('skillsList').appendChild(skillRow({icon:'⚡',name:'',level:50}));
+    if(t==='contact')$('contactList').appendChild(contactRow({icon:'📧',name:'',link:'',value:''}));
+  };
+});
+
+// ===== جمع البيانات وحفظها =====
+function collect(){
+  return {
+    hero: {
+      name: $('heroName').value.trim(),
+      typing: $('heroTyping').value.split('\n').map(s=>s.trim()).filter(Boolean),
+      desc: $('heroDesc').value
+    },
+    about: {
+      title_before: $('aboutBefore').value,
+      title_accent: $('aboutAccent').value,
+      html: $('aboutHtml').value
+    },
+    stats: [...document.querySelectorAll('#statsList .item-row')].map(div=>({
+      num: +div.querySelector('.f-num').value || 0,
+      label: div.querySelector('.f-label').value.trim()
+    })),
+    skills: [...document.querySelectorAll('#skillsList .item-row')].map(div=>({
+      icon: div.querySelector('.f-icon').value.trim(),
+      name: div.querySelector('.f-name').value.trim(),
+      level: Math.max(0,Math.min(100,+div.querySelector('.f-level').value||0))
+    })),
+    contact: [...document.querySelectorAll('#contactList .item-row')].map(div=>({
+      icon: div.querySelector('.f-icon').value.trim(),
+      name: div.querySelector('.f-name').value.trim(),
+      link: div.querySelector('.f-link').value.trim(),
+      value: div.querySelector('.f-value').value.trim()
+    }))
+  };
+}
+
+$('saveBtn').onclick = async ()=>{
+  const btn = $('saveBtn');
+  btn.disabled = true;
+  btn.textContent = 'جاري الحفظ...';
+  try{
+    const r = await fetch('/api/content', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify(collect())
+    });
+    const d = await r.json();
+    toast(r.ok ? '✅ ات حفظ يا معلم!' : (d.error || 'حصل خطأ'), !r.ok);
+  }catch(e){
+    toast('مشكلة في الاتصال بالسيرفر', true);
+  }
+  btn.disabled = false;
+  btn.textContent = '💾 حفظ التعديلات';
+};
+
+// ===== هل هو مسجل بالفعل؟ =====
+(async ()=>{
+  try{
+    const r = await fetch('/api/session');
+    if(r.ok) openEditor();
+  }catch(e){}
+})();
+</script>
+</body>
+</html>
