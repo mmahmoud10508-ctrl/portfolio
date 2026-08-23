@@ -1,10 +1,10 @@
 // ⚙️ إعدادات مشروع Firebase بتاعك
-// انسخ القيم من: Firebase Console > Project Settings > Your apps > SDK setup and configuration
 const firebaseConfig = {
-  apiKey: "PASTE_API_KEY_HERE",
-  authDomain: "PASTE_AUTH_DOMAIN_HERE",
-  projectId: "PASTE_PROJECT_ID_HERE",
-  storageBucket: "PASTE_STORAGE_BUCKET_HERE",
-  messagingSenderId: "PASTE_MESSAGING_SENDER_ID_HERE",
-  appId: "PASTE_APP_ID_HERE"
+  apiKey: "AIzaSyDc28-82Jw7CzamseiQV2MLDMfZvecA5VA",
+  authDomain: "elhkm-26866.firebaseapp.com",
+  projectId: "elhkm-26866",
+  storageBucket: "elhkm-26866.firebasestorage.app",
+  messagingSenderId: "927567644994",
+  appId: "1:927567644994:web:932550a6427910789360db",
+  measurementId: "G-5HCCDCRB7K"
 };
