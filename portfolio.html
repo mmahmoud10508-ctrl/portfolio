@@ -420,9 +420,6 @@
   }
 </style>
 <script>try{ if(localStorage.getItem('theme')==='light') document.documentElement.classList.add('light'); }catch(e){}</script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
-<script src="firebase-config.js"></script>
 </head>
 <body>
 
@@ -455,9 +452,7 @@
     <a href="#skills" class="btn btn-ghost">شوف مهاراتي</a>
   </div>
   <div class="live-bar reveal">
-    👁️ <b id="visCount">…</b> زائر للموقع
-    <span class="sep">|</span>
-    <span class="on-dot"></span> <b id="onlineCount">…</b> متصل الآن
+    👁️ زياراتك للموقع: <b id="visCount">…</b>
   </div>
 </header>
 
@@ -591,64 +586,13 @@ themeBtn.addEventListener('click', ()=>{
   applyTheme(light);
 });
 
-// ===== تحميل المحتوى من Firebase (لو فشل يفضل الافتراضي) =====
+// ===== أدوات مشتركة =====
 function esc(s){
   return String(s ?? '').replace(/[&<>"']/g,
     m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
 
-function applyContent(c){
-  try{
-    if(c.hero && c.hero.name) document.getElementById('heroName').textContent = c.hero.name;
-    if(c.hero && Array.isArray(c.hero.typing)) window.__typingWords = c.hero.typing.filter(w=>typeof w==='string');
-    if(c.hero && typeof c.hero.desc === 'string')
-      document.getElementById('heroDesc').innerHTML = c.hero.desc;
-
-    if(c.about){
-      document.getElementById('aboutTitle').innerHTML =
-        esc(c.about.title_before||'') + '<span>' + esc(c.about.title_accent||'') + '</span>';
-      document.getElementById('aboutCard').innerHTML =
-        '<div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>' +
-        '<em>root@casemiro:~$ cat story.txt</em></div>' +
-        (typeof c.about.html === 'string' ? c.about.html : '');
-    }
-
-    if(Array.isArray(c.stats))
-      document.getElementById('statsGrid').innerHTML = c.stats.map(s=>
-        '<div class="stat"><span class="num" data-target="'+(+s.num||0)+'">0</span><p>'+esc(s.label)+'</p></div>'
-      ).join('');
-
-    if(Array.isArray(c.skills))
-      document.getElementById('skillsGrid').innerHTML = c.skills.map(s=>
-        '<div class="skill"><div class="icon">'+esc(s.icon)+'</div><h3>'+esc(s.name)+
-        '</h3><div class="lvl"><i data-w="'+Math.max(0,Math.min(100,+s.level||0))+'%"></i></div></div>'
-      ).join('');
-
-    if(Array.isArray(c.contact))
-      document.getElementById('contactGrid').innerHTML = c.contact.map(s=>
-        '<a class="cc-link" href="'+esc(s.link)+'" target="_blank" rel="noopener">'+
-        '<div class="ccard"><div class="icon">'+esc(s.icon)+'</div><h3>'+esc(s.name)+
-        '</h3><p>'+esc(s.value)+'</p></div></a>'
-      ).join('');
-  }catch(e){ console.warn('content apply error:', e); }
-}
-
-let fbReady = false;
-try{
-  firebase.initializeApp(firebaseConfig);
-  fbReady = true;
-}catch(e){ console.warn('firebase init error:', e); }
-
-const contentPromise = fbReady
-  ? Promise.race([
-      firebase.firestore().collection('site').doc('content').get()
-        .then(s => s.exists ? s.data() : null)
-        .catch(err => { console.warn('firestore read:', err.code || err.message); return null; }),
-      new Promise(res => setTimeout(()=>res(null), 3500))
-    ])
-  : Promise.resolve(null);
-
-contentPromise.then(c => { if(c) applyContent(c); initPage(); });
+initPage();
 
 // ===== كل تأثيرات الصفحة =====
 function initPage(){
@@ -757,46 +701,19 @@ addEventListener('scroll', ()=>{
 // ============  الإضافات الجديدة (شغالة على طول)  ============
 // ============================================================
 
-// ===== 1) عداد الزوار + المتصلين الآن =====
+// ===== 1) عداد الزيارات (محلي على كل جهاز) + إعدادات تليجرام =====
+const TELEGRAM_CONFIG = {
+  botToken: "",
+  chatId: ""
+};
 (function(){
   const visEl = document.getElementById('visCount');
-  const onEl  = document.getElementById('onlineCount');
-  if(!fbReady){ if(visEl) visEl.textContent='—'; if(onEl) onEl.textContent='—'; return; }
-  const dbx = firebase.firestore();
-
-  const vRef = dbx.collection('stats').doc('visitors');
-  let visited = false;
-  try{ visited = sessionStorage.getItem('casemiro_visited')==='1'; }catch(e){}
-  if(!visited){
-    try{
-      sessionStorage.setItem('casemiro_visited','1');
-      vRef.set({
-        count: firebase.firestore.FieldValue.increment(1),
-        last: firebase.firestore.FieldValue.serverTimestamp()
-      }, {merge:true}).catch(err=>console.warn('visits write:', err.code||err.message));
-    }catch(e){}
-  }
-  vRef.onSnapshot(
-    s => { visEl.textContent = s.exists ? (s.data().count ?? 0) : 0; },
-    err => { console.warn('visits read:', err.code||err.message); visEl.textContent='—'; }
-  );
-
-  let sid = '';
-  try{ sid = localStorage.getItem('casemiro_sid')||''; }catch(e){}
-  if(!sid){
-    sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
-    try{ localStorage.setItem('casemiro_sid', sid); }catch(e){}
-  }
-  const meRef = dbx.collection('presence').doc(sid);
-  const beat = ()=> meRef.set({ t: firebase.firestore.FieldValue.serverTimestamp() }).catch(()=>{});
-  beat();
-  setInterval(beat, 25000);
-  dbx.collection('presence')
-    .where('t','>', new Date(Date.now()-70000))
-    .onSnapshot(
-      q => { onEl.textContent = q.size; },
-      err => { console.warn('presence:', err.code||err.message); onEl.textContent='—'; }
-    );
+  if(!visEl) return;
+  let n = 0;
+  try{ n = +(localStorage.getItem('casemiro_visits')||0); }catch(e){}
+  n++;
+  try{ localStorage.setItem('casemiro_visits', String(n)); }catch(e){}
+  visEl.textContent = n.toLocaleString('ar-EG');
 })();
 
 // ===== 2) سجل الزوار (Guestbook) =====
@@ -808,7 +725,6 @@ addEventListener('scroll', ()=>{
         errEl = document.getElementById('gbErr');
   if(!form) return;
   const LOCAL_KEY = 'casemiro_gb';
-  let localMode = !fbReady;
 
   function notifyTelegram(n, m){
     try{
@@ -839,26 +755,7 @@ addEventListener('scroll', ()=>{
       : '<div class="gb-empty">لازم تكون أول واحد يوقّع في السجل ✍️🔥</div>';
   }
 
-  if(localMode){ renderLocalOnly(); }
-  else{
-    firebase.firestore().collection('guestbook').orderBy('at','desc').limit(50)
-      .onSnapshot(q=>{
-        const rows = [];
-        q.forEach(d=>{
-          const x = d.data();
-          rows.push(itemHTML(x.name, x.msg, x.at && x.at.toDate ? x.at.toDate().toLocaleString('ar-EG') : ''));
-        });
-        const pend = readLocal().map(i=>itemHTML(i.n, i.m, '⏳'));
-        list.innerHTML = (rows.length || pend.length)
-          ? pend.concat(rows).join('')
-          : '<div class="gb-empty">لازم تكون أول واحد يوقّع في السجل ✍️🔥</div>';
-      }, err=>{
-        console.warn('guestbook:', err.code||err.message);
-        localMode = true;
-        renderLocalOnly();
-        errEl.textContent = 'وضع محلي فقط — عدّل قواعد Firestore عشان الرسائل تظهر للكل';
-      });
-  }
+  renderLocalOnly();
 
   let lastSend = 0;
   form.addEventListener('submit', e=>{
@@ -867,23 +764,12 @@ addEventListener('scroll', ()=>{
     if(!n || !m) return;
     if(Date.now() - lastSend < 30000){ errEl.textContent='استنى شوية بين كل رسالة والتانية 😅'; return; }
     errEl.textContent = '';
-    const done = ()=>{
-      nameEl.value=''; msgEl.value=''; lastSend=Date.now();
-      errEl.style.color='#28c840'; errEl.textContent='اتوقّعت ✔';
-      setTimeout(()=>{ errEl.textContent=''; errEl.style.color=''; }, 2500);
-    };
-    if(localMode){
-      const a = readLocal(); a.unshift({n:n.slice(0,30), m:m.slice(0,200), t:Date.now()});
-      writeLocal(a); renderLocalOnly(); done();
-    } else {
-      firebase.firestore().collection('guestbook')
-        .add({ name:n.slice(0,30), msg:m.slice(0,200), at:firebase.firestore.FieldValue.serverTimestamp() })
-        .then(()=>{ done(); notifyTelegram(n, m); })
-        .catch(()=>{
-          const a = readLocal(); a.unshift({n:n.slice(0,30), m:m.slice(0,200), t:Date.now()});
-          writeLocal(a); renderLocalOnly(); done();
-        });
-    }
+    const a = readLocal(); a.unshift({n:n.slice(0,30), m:m.slice(0,200), t:Date.now()});
+    writeLocal(a); renderLocalOnly();
+    nameEl.value=''; msgEl.value=''; lastSend=Date.now();
+    notifyTelegram(n, m);
+    errEl.style.color='#28c840'; errEl.textContent='اتوقّعت ✔';
+    setTimeout(()=>{ errEl.textContent=''; errEl.style.color=''; }, 2500);
   });
 })();
 
@@ -1023,7 +909,7 @@ addEventListener('scroll', ()=>{
     ls(){ print('story.txt   skills.txt   contacts.txt   secrets.dat'); },
     'cat secrets.dat'(){ print('cat: secrets.dat: Permission denied 😈\nحتى أنا مقدرتش... لسه بجد','t-err'); },
     'sudo hire-me'(){ print('[sudo] password for guest: ********\nتم القبول على طول — CASEMIRO مستني رسالتك على الواتساب ✔','t-ok'); },
-    visit(){ print('إجمالي الزوار: '+(document.getElementById('visCount')?.textContent ?? '—')+' 👁️\nمتصل الآن: '+(document.getElementById('onlineCount')?.textContent ?? '—')+' 🟢'); },
+    visit(){ print('زياراتك (على الجهاز ده): '+(document.getElementById('visCount')?.textContent ?? '0')+' 👁️'); },
     date(){ print(new Date().toString()); },
     banner(){ BANNER.forEach(l=>print(l,'t-acc')); },
     clear(){ out.innerHTML=''; },
