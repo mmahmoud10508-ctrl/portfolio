@@ -267,6 +267,144 @@
   .skills.reveal.on .skill:nth-child(5){animation-delay:.45s}
   @keyframes pop { from { opacity:0; transform:translateY(24px) scale(.94); } }
 
+  /* ===== شريط الزوار المباشر ===== */
+  .live-bar {
+    margin-top:30px;
+    display:inline-flex; align-items:center; gap:10px;
+    padding:10px 22px; border-radius:30px;
+    background:var(--panel); border:1px solid var(--border);
+    color:var(--muted); font-size:14px; font-weight:600;
+  }
+  .live-bar b { color:var(--acc); }
+  .live-bar .sep { opacity:.35; }
+  .on-dot {
+    width:9px; height:9px; border-radius:50%;
+    background:#28c840; display:inline-block;
+    box-shadow:0 0 8px #28c840;
+    animation:pulse 1.6s ease infinite;
+  }
+  @keyframes pulse { 50% { opacity:.35; transform:scale(.8); } }
+
+  /* ===== ساحة الهاكرز ===== */
+  .pg-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:22px; align-items:stretch; }
+  [hidden] { display:none !important; }
+
+  /* التيرمنال التفاعلي */
+  .hterm {
+    background:#0b0b16; border:1px solid var(--border);
+    border-radius:16px; overflow:hidden;
+    display:flex; flex-direction:column;
+    box-shadow:0 20px 50px rgba(0,0,0,.35);
+  }
+  .hterm .term-bar { padding:14px 16px 12px; margin-bottom:0; }
+  #termOut {
+    flex:1; min-height:280px; max-height:360px;
+    overflow-y:auto; padding:14px 16px;
+    font-family:'Consolas','Courier New',monospace;
+    font-size:13px; line-height:1.7; color:#c8c8d8;
+    white-space:pre-wrap; word-break:break-word;
+  }
+  #termOut .t-in  { color:#00e5ff; font-weight:bold; }
+  #termOut .t-ok  { color:#28c840; }
+  #termOut .t-err { color:#ff5f57; }
+  #termOut .t-dim { color:#777; }
+  .term-line {
+    display:flex; align-items:center; gap:8px;
+    padding:10px 16px 14px;
+    border-top:1px solid rgba(255,255,255,.08);
+  }
+  .tprompt { color:#28c840; font-family:'Consolas',monospace; font-size:13px; white-space:nowrap; }
+  #termIn {
+    flex:1; background:none; border:none; outline:none;
+    color:#e8e8f0; font-family:'Consolas',monospace; font-size:13px;
+    caret-color:#00e5ff;
+  }
+  #termIn::placeholder { color:#555; }
+
+  /* لعبة Hack the Button */
+  .game-card {
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:16px; overflow:hidden;
+    display:flex; flex-direction:column;
+  }
+  .game-card .term-bar { padding:14px 16px 12px; margin-bottom:0; }
+  #playArea {
+    flex:1; position:relative; min-height:310px;
+    overflow:hidden; cursor:crosshair;
+    background:
+      linear-gradient(rgba(var(--accRGB),.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(var(--accRGB),.05) 1px, transparent 1px);
+    background-size:26px 26px;
+  }
+  .g-center {
+    position:absolute; inset:0; z-index:5;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:8px; text-align:center; padding:20px;
+    background:rgba(8,8,16,.42); backdrop-filter:blur(3px);
+  }
+  .g-title { font-weight:900; font-size:23px; letter-spacing:1px; }
+  .g-sub { color:var(--muted); font-size:14px; max-width:270px; line-height:1.9; }
+  .g-best { color:var(--type); font-size:13px; font-weight:700; min-height:18px; }
+  #hackBtn {
+    position:absolute; z-index:4;
+    width:94px; height:94px; border-radius:50%;
+    border:none; cursor:pointer;
+    background:radial-gradient(circle at 32% 30%, #ff8a80, #e53935 60%, #b71c1c);
+    color:#fff; font-weight:900; font-size:15px; line-height:1.3;
+    font-family:'Cairo',sans-serif;
+    box-shadow:0 0 26px rgba(255,60,60,.45), inset 0 -6px 14px rgba(0,0,0,.35);
+    transition:left .22s ease, top .22s ease, transform .08s;
+    user-select:none; touch-action:manipulation;
+  }
+  #hackBtn:active { transform:scale(.86); }
+  #hackBtn.hit { animation:hitfx .35s ease; }
+  @keyframes hitfx {
+    0%   { box-shadow:0 0 0 0 rgba(40,200,64,.65); }
+    100% { box-shadow:0 0 0 30px rgba(40,200,64,0); }
+  }
+  .g-hud {
+    position:absolute; z-index:6; right:0; left:0; bottom:0;
+    display:flex; align-items:center; gap:12px;
+    padding:10px 16px;
+    background:rgba(8,8,16,.72); backdrop-filter:blur(6px);
+    border-top:1px solid var(--border);
+    font-weight:800; font-size:14px;
+  }
+  .g-hud span { direction:ltr; color:var(--text); min-width:46px; text-align:center; }
+  #gTime { color:var(--acc); }
+  .lvl.breach { flex:1; margin:0; }
+
+  /* سجل الزوار */
+  .gb-wrap { max-width:640px; margin:auto; }
+  #gbForm {
+    display:flex; flex-direction:column; gap:12px;
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:16px; padding:20px;
+  }
+  #gbForm input, #gbForm textarea {
+    background:rgba(0,0,0,.25); border:1px solid var(--border);
+    border-radius:10px; padding:12px 14px;
+    color:var(--text); font-family:inherit; font-size:15px;
+    outline:none; transition:.3s; resize:vertical;
+  }
+  html.light #gbForm input, html.light #gbForm textarea { background:rgba(255,255,255,.6); }
+  #gbForm input:focus, #gbForm textarea:focus { border-color:var(--acc); }
+  #gbForm button { align-self:flex-start; border:none; cursor:pointer; }
+  .gb-err { color:#ff6b6b; font-size:13px; font-weight:700; min-height:18px; }
+  .gb-list { display:flex; flex-direction:column; gap:12px; margin-top:22px; }
+  .gb-item {
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:14px; padding:16px 18px;
+    animation:pop .45s ease backwards;
+  }
+  .gb-head { display:flex; justify-content:space-between; gap:10px; margin-bottom:6px; }
+  .gb-head b { color:var(--acc); }
+  .gb-head time { color:var(--foot); font-size:12px; }
+  .gb-item p { color:var(--card-text); line-height:1.9; word-break:break-word; }
+  .gb-empty { text-align:center; color:var(--muted); padding:26px 0; }
+
+  @media(max-width:860px){ .pg-grid { grid-template-columns:1fr; } }
+
   @media(max-width:640px){
     .menu-btn { display:block; }
     nav ul {
@@ -293,7 +431,9 @@
   <ul id="navLinks">
     <li><a href="#about">نبذة</a></li>
     <li><a href="#skills">مهاراتي</a></li>
+    <li><a href="#playground">الساحة</a></li>
     <li><a href="#contact">تواصل</a></li>
+    <li><a href="#guestbook">الزوار</a></li>
   </ul>
   <div class="nav-actions">
     <button class="theme-btn" id="themeBtn" title="تبديل الوضع الليلي / النهاري" aria-label="تبديل الثيم">☀️</button>
@@ -306,13 +446,18 @@
   <h1><span id="heroName">CASEMIRO EL_HKM</span></h1>
   <div id="typing"></div>
   <p class="desc" id="heroDesc">
-    وفيه ناس بتبدأ شغلها في الثلاثين... وبدأت <b class="hl">وعندي 10 سنين</b> 🔥
-    من سنة 2018 وإنا بحفر في عالم الاختراق والحماية، والنهارده بعد 8 سنين من الشغف
+    في ناس بدأت شغلها في الثلاثين... وأنا بدأت <b class="hl">وعندي 10 سنين</b> 🔥
+    من سنة 2018 وإني بحفر في عالم الاختراق والحماية، والنهارده بعد 8 سنين من الشغف
     بقولها بثقة: الأمن السيبراني مش هواية... ده القدر.
   </p>
   <div class="cta">
     <a href="#contact" class="btn btn-main">تواصل معايا</a>
     <a href="#skills" class="btn btn-ghost">شوف مهاراتي</a>
+  </div>
+  <div class="live-bar reveal">
+    👁️ <b id="visCount">…</b> زائر للموقع
+    <span class="sep">|</span>
+    <span class="on-dot"></span> <b id="onlineCount">…</b> متصل الآن
   </div>
 </header>
 
@@ -326,13 +471,13 @@
     <b class="hl">سنة 2018...</b> وعمري 10 سنين بس. في الوقت اللي الأطفال كانوا بيلعبوا
     في ألعاب الفيديو، أنا كنت سائل نفسي سؤال واحد: <b>"إزاي اللعبة دي بتتهكر؟! وإزاي أمنعها؟"</b>
     <br><br>
-    ومن اليوم ده والنار تحت رجليّ 🔥 — 8 سنين كاملة وأنا بتعلم ذاتيًا، ليالي طويلة قدام الشاشة،
+    ومن اليوم ده والنار تحت رجليّ 🔥 — 8 سنين كاملة من التعلم الذاتي: ليالي طويلة قدام الشاشة،
     تجارب، أخطاء، ودروس ماكانش أي حد هيعلّمهالي في مدرسة. اتربيت على الطرفية (Terminal)
-    أكتر ما اتربيت على العاب البلايستيشن، وحفظت أوامر لينكس زي ما الحفظة بحفظوا القصائد.
+    أكتر ما اتربيت على ألعاب البلايستيشن، وحفظت أوامر لينكس زي ما حفظة الشعر بيحفظوا قصايدهم.
     <br><br>
     النهارده وعندي 18 سنة بس، بشوف العالم بعنية مختلفة: كل نظام فيه ثغرة مستترة،
-    وكل شبكة ليها ضعف مخفي... وشغلي إني <b class="hl">أوصلهم قبل سوء النية</b>.
-    عمري رقم صغير، لكن الخبرة اللي جواه مش بالساهل — والمسافة اللي قدامي لسه أطول.
+    وكل شبكة ليها ضعف مخفي... وشغلي إني <b class="hl">أوصل ليهم قبل سوء النية</b>.
+    السن رقم صغير، لكن الخبرة اللي جوايا مش بالساهل — والطريق اللي قدامي لسه أطول.
     <br><br>
     <b>"ماشي في طريق ما يعرفه الكثيرون... طريق الهكر الأخلاقي" 😈🛡️</b>
   </div>
@@ -357,6 +502,53 @@
   </div>
 </section>
 
+<section id="playground">
+  <h2 class="sec-title reveal">ساحة الـ<span>هاكرز</span> 🕹️</h2>
+  <div class="pg-grid reveal">
+
+    <!-- التيرمنال التفاعلي -->
+    <div class="hterm">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>guest@casemiro: ~/terminal</em>
+      </div>
+      <div id="termOut" dir="ltr"></div>
+      <div class="term-line">
+        <span class="tprompt">guest@casemiro:~$</span>
+        <input id="termIn" dir="ltr" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help">
+      </div>
+    </div>
+
+    <!-- لعبة Hack the Button -->
+    <div class="game-card">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./breach.exe</em>
+      </div>
+      <div id="playArea">
+        <div id="gIdle" class="g-center">
+          <p class="g-title">HACK THE BUTTON</p>
+          <p class="g-sub">الزرار هيهرب منك... امسكه 15 مرة خلال 20 ثانية وكسر الحماية 🔓</p>
+          <button id="gStart" class="btn btn-main" type="button">▶ ابدأ الاختراق</button>
+          <p class="g-best" id="gBest"></p>
+        </div>
+        <div id="gEnd" class="g-center" hidden>
+          <p class="g-title" id="gEndTitle"></p>
+          <p class="g-sub" id="gEndSub"></p>
+          <button id="gAgain" class="btn btn-ghost" type="button">🔁 تاني</button>
+        </div>
+        <button id="hackBtn" type="button" hidden>HACK<br>ME</button>
+        <div class="g-hud" id="gHud" hidden>
+          <div class="lvl breach"><i id="gProg"></i></div>
+          <span id="gScore">0/15</span>
+          <span id="gTime">20s</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section id="contact">
   <h2 class="sec-title reveal">تواصل <span>معايا</span></h2>
   <div class="contact-cards reveal" id="contactGrid">
@@ -367,7 +559,20 @@
   </div>
 </section>
 
-<footer>صُنع بـ ❤️ © <span id="year"></span> جميع الحقوق محفوظة</footer>
+<section id="guestbook">
+  <h2 class="sec-title reveal">سجل <span>الزوار</span> ✍️</h2>
+  <div class="gb-wrap reveal">
+    <form id="gbForm">
+      <input id="gbName" type="text" maxlength="30" placeholder="اسمك أو أي اسم مستعار" required>
+      <textarea id="gbMsg" maxlength="200" placeholder="سيب رسالة لـ CASEMIRO... أو للزوار اللي هيدخلوا بعدك" required></textarea>
+      <div class="gb-err" id="gbErr"></div>
+      <button type="submit" class="btn btn-main">وقع في السجل 🖋️</button>
+    </form>
+    <div class="gb-list" id="gbList"></div>
+  </div>
+</section>
+
+<footer>صُنع بشغف ❤️ © <span id="year"></span> CASEMIRO EL_HKM — جميع الحقوق محفوظة</footer>
 <button id="toTop" title="ارجع لفوق">↑</button>
 
 <script>
@@ -538,7 +743,7 @@ toTop.onclick = ()=> scrollTo({top:0, behavior:'smooth'});
 document.getElementById('year').textContent = new Date().getFullYear();
 
 // ===== تمييز القسم النشط في القائمة =====
-const secs = ['about','skills','contact'].map(id=>document.getElementById(id));
+const secs = ['about','skills','playground','contact','guestbook'].map(id=>document.getElementById(id));
 addEventListener('scroll', ()=>{
   let cur = '';
   secs.forEach(s=>{ if(scrollY >= s.offsetTop - 200) cur = s.id; });
@@ -547,6 +752,328 @@ addEventListener('scroll', ()=>{
 });
 
 } // نهاية initPage
+
+// ============================================================
+// ============  الإضافات الجديدة (شغالة على طول)  ============
+// ============================================================
+
+// ===== 1) عداد الزوار + المتصلين الآن =====
+(function(){
+  const visEl = document.getElementById('visCount');
+  const onEl  = document.getElementById('onlineCount');
+  if(!fbReady){ if(visEl) visEl.textContent='—'; if(onEl) onEl.textContent='—'; return; }
+  const dbx = firebase.firestore();
+
+  const vRef = dbx.collection('stats').doc('visitors');
+  let visited = false;
+  try{ visited = sessionStorage.getItem('casemiro_visited')==='1'; }catch(e){}
+  if(!visited){
+    try{
+      sessionStorage.setItem('casemiro_visited','1');
+      vRef.set({
+        count: firebase.firestore.FieldValue.increment(1),
+        last: firebase.firestore.FieldValue.serverTimestamp()
+      }, {merge:true}).catch(err=>console.warn('visits write:', err.code||err.message));
+    }catch(e){}
+  }
+  vRef.onSnapshot(
+    s => { visEl.textContent = s.exists ? (s.data().count ?? 0) : 0; },
+    err => { console.warn('visits read:', err.code||err.message); visEl.textContent='—'; }
+  );
+
+  let sid = '';
+  try{ sid = localStorage.getItem('casemiro_sid')||''; }catch(e){}
+  if(!sid){
+    sid = Math.random().toString(36).slice(2) + Date.now().toString(36);
+    try{ localStorage.setItem('casemiro_sid', sid); }catch(e){}
+  }
+  const meRef = dbx.collection('presence').doc(sid);
+  const beat = ()=> meRef.set({ t: firebase.firestore.FieldValue.serverTimestamp() }).catch(()=>{});
+  beat();
+  setInterval(beat, 25000);
+  dbx.collection('presence')
+    .where('t','>', new Date(Date.now()-70000))
+    .onSnapshot(
+      q => { onEl.textContent = q.size; },
+      err => { console.warn('presence:', err.code||err.message); onEl.textContent='—'; }
+    );
+})();
+
+// ===== 2) سجل الزوار (Guestbook) =====
+(function(){
+  const form = document.getElementById('gbForm'),
+        nameEl = document.getElementById('gbName'),
+        msgEl = document.getElementById('gbMsg'),
+        list = document.getElementById('gbList'),
+        errEl = document.getElementById('gbErr');
+  if(!form) return;
+  const LOCAL_KEY = 'casemiro_gb';
+  let localMode = !fbReady;
+
+  const readLocal = ()=>{ try{ return JSON.parse(localStorage.getItem(LOCAL_KEY))||[] }catch(e){ return [] } };
+  const writeLocal = a=>{ try{ localStorage.setItem(LOCAL_KEY, JSON.stringify(a.slice(0,50))) }catch(e){} };
+
+  function itemHTML(name, msg, timeStr){
+    return '<div class="gb-item"><div class="gb-head"><b>'+esc(name)+'</b>'+
+           (timeStr ? '<time>'+esc(timeStr)+'</time>' : '')+
+           '</div><p>'+esc(msg)+'</p></div>';
+  }
+  function renderLocalOnly(){
+    const items = readLocal();
+    list.innerHTML = items.length
+      ? items.map(i=>itemHTML(i.n, i.m, i.t ? new Date(i.t).toLocaleString('ar-EG') : '')).join('')
+      : '<div class="gb-empty">لازم تكون أول واحد يوقّع في السجل ✍️🔥</div>';
+  }
+
+  if(localMode){ renderLocalOnly(); }
+  else{
+    firebase.firestore().collection('guestbook').orderBy('at','desc').limit(50)
+      .onSnapshot(q=>{
+        const rows = [];
+        q.forEach(d=>{
+          const x = d.data();
+          rows.push(itemHTML(x.name, x.msg, x.at && x.at.toDate ? x.at.toDate().toLocaleString('ar-EG') : ''));
+        });
+        const pend = readLocal().map(i=>itemHTML(i.n, i.m, '⏳'));
+        list.innerHTML = (rows.length || pend.length)
+          ? pend.concat(rows).join('')
+          : '<div class="gb-empty">لازم تكون أول واحد يوقّع في السجل ✍️🔥</div>';
+      }, err=>{
+        console.warn('guestbook:', err.code||err.message);
+        localMode = true;
+        renderLocalOnly();
+        errEl.textContent = 'وضع محلي فقط — عدّل قواعد Firestore عشان الرسائل تظهر للكل';
+      });
+  }
+
+  let lastSend = 0;
+  form.addEventListener('submit', e=>{
+    e.preventDefault();
+    const n = nameEl.value.trim(), m = msgEl.value.trim();
+    if(!n || !m) return;
+    if(Date.now() - lastSend < 30000){ errEl.textContent='استنى شوية بين كل رسالة والتانية 😅'; return; }
+    errEl.textContent = '';
+    const done = ()=>{
+      nameEl.value=''; msgEl.value=''; lastSend=Date.now();
+      errEl.style.color='#28c840'; errEl.textContent='اتوقّعت ✔';
+      setTimeout(()=>{ errEl.textContent=''; errEl.style.color=''; }, 2500);
+    };
+    if(localMode){
+      const a = readLocal(); a.unshift({n:n.slice(0,30), m:m.slice(0,200), t:Date.now()});
+      writeLocal(a); renderLocalOnly(); done();
+    } else {
+      firebase.firestore().collection('guestbook')
+        .add({ name:n.slice(0,30), msg:m.slice(0,200), at:firebase.firestore.FieldValue.serverTimestamp() })
+        .then(done)
+        .catch(()=>{
+          const a = readLocal(); a.unshift({n:n.slice(0,30), m:m.slice(0,200), t:Date.now()});
+          writeLocal(a); renderLocalOnly(); done();
+        });
+    }
+  });
+})();
+
+// ===== 3) لعبة Hack the Button =====
+(function(){
+  const area = document.getElementById('playArea'),
+        btn = document.getElementById('hackBtn'),
+        idle = document.getElementById('gIdle'),
+        endP = document.getElementById('gEnd'),
+        hud = document.getElementById('gHud'),
+        prog = document.getElementById('gProg'),
+        scoreEl = document.getElementById('gScore'),
+        timeEl = document.getElementById('gTime'),
+        bestEl = document.getElementById('gBest'),
+        endTitle = document.getElementById('gEndTitle'),
+        endSub = document.getElementById('gEndSub');
+  if(!area) return;
+  const TARGET = 15, TOTAL = 20;
+  let score = 0, timeLeft = TOTAL, tick = null, jumper = null, running = false;
+
+  let best = 0;
+  try{ best = +(localStorage.getItem('htb_best')||0); }catch(e){}
+  const showBest = ()=> bestEl.textContent = best ? ('🏆 أفضل نتيجة: '+best+'/'+TARGET) : '';
+  showBest();
+
+  function place(){
+    const r = area.getBoundingClientRect();
+    const x = Math.random()*Math.max(1,(r.width - btn.offsetWidth - 16)) + 8;
+    const y = Math.random()*Math.max(1,(r.height - btn.offsetHeight - 60)) + 8;
+    btn.style.left = x+'px'; btn.style.top = y+'px';
+  }
+  function jump(){
+    if(!running) return;
+    place();
+    jumper = setTimeout(jump, Math.max(330, 950 - score*45));
+  }
+  function stopAll(){ running=false; clearInterval(tick); clearTimeout(jumper); btn.hidden = true; }
+
+  function finish(win){
+    stopAll(); hud.hidden = true; endP.hidden = false;
+    if(win){
+      endTitle.innerHTML = '<span style="color:#28c840">✔ SYSTEM BREACHED</span>';
+      endSub.textContent = 'كسرت الحماية في ' + (TOTAL-timeLeft) + ' ثانية 🔥';
+    } else {
+      endTitle.innerHTML = '<span style="color:#ff5f57">✘ CONNECTION LOST</span>';
+      endSub.textContent = 'وصلت لـ '+score+' من '+TARGET+'... الزرار كسبانك المرة دي 😏';
+    }
+    if(score > best){ best = score; try{ localStorage.setItem('htb_best', best); }catch(e){} showBest(); }
+  }
+
+  function start(){
+    idle.hidden = true; endP.hidden = true; hud.hidden = false;
+    score = 0; timeLeft = TOTAL;
+    prog.style.width = '0%'; scoreEl.textContent = '0/'+TARGET; timeEl.textContent = TOTAL+'s';
+    btn.hidden = false; place();
+    running = true; jump();
+    tick = setInterval(()=>{
+      timeLeft--; timeEl.textContent = timeLeft+'s';
+      if(timeLeft <= 0) finish(score >= TARGET);
+    }, 1000);
+  }
+
+  btn.addEventListener('click', ()=>{
+    if(!running) return;
+    score++;
+    scoreEl.textContent = score+'/'+TARGET;
+    prog.style.width = Math.min(100, score/TARGET*100)+'%';
+    btn.classList.remove('hit'); void btn.offsetWidth; btn.classList.add('hit');
+    if(score >= TARGET){ finish(true); return; }
+    clearTimeout(jumper); place();
+    jumper = setTimeout(jump, Math.max(330, 950 - score*45));
+  });
+  document.getElementById('gStart').addEventListener('click', start);
+  document.getElementById('gAgain').addEventListener('click', start);
+})();
+
+// ===== 4) التيرمنال التفاعلي =====
+(function(){
+  const out = document.getElementById('termOut'), inp = document.getElementById('termIn');
+  if(!out) return;
+
+  function print(txt='', cls=''){
+    const d = document.createElement('div');
+    if(cls) d.className = cls;
+    d.textContent = txt;
+    out.appendChild(d);
+    out.scrollTop = out.scrollHeight;
+  }
+  function printHTML(html){
+    const d = document.createElement('div');
+    d.innerHTML = html;
+    out.appendChild(d);
+    out.scrollTop = out.scrollHeight;
+  }
+
+  print('CASEMIRO TERMINAL v1.0 😈','t-acc');
+  print('اكتب help لعرض قائمة الأوامر.','t-dim');
+
+  const BANNER = [
+'  ██████╗ █████╗ ███████╗███████╗',
+' ██╔════╝██╔══██╗██╔════╝██╔════╝',
+' ██║     ███████║███████╗█████╗  ',
+' ██║     ██╔══██║╚════██║██╔══╝  ',
+' ╚██████╗██║  ██║███████║███████╗',
+'  ╚═════╝╚═╝  ╚═╝╚══════╝╚══════╝'];
+
+  const SOCIALS =
+'  Email    : m.mahmoud10508@gmail.com\n'+
+'  WhatsApp : +20 106 431 8118\n'+
+'  GitHub   : github.com/mmahmoud10508-ctrl\n'+
+'  Telegram : @cs_mr_o_1';
+
+  let hacking = false;
+  const CMDS = {
+    help(){ print(
+'الأوامر المتاحة:\n'+
+'  whoami            مين أنا؟\n'+
+'  cat story.txt     اقرأ الحكاية\n'+
+'  skills            مهاراتي ونسبها\n'+
+'  socials           طرق التواصل\n'+
+'  ls                محتويات الفولدر\n'+
+'  cat secrets.dat   جرّب بنفسك 😈\n'+
+'  sudo hire-me      طلب توظيف رسمي\n'+
+'  hack              عملية اختراق وهمية\n'+
+'  visit             إحصائيات الزوار\n'+
+'  open <section>    about / skills / playground / contact / guestbook\n'+
+'  theme             بدّيل الوضع الليلي/النهاري\n'+
+'  banner            البانر\n'+
+'  date              التاريخ والوقت\n'+
+'  echo <كلام>       رجّع الكلام\n'+
+'  clear             نضّف الشاشة'); },
+    whoami(){ print('guest — زائر فضولي جاي يتفرج 👀 (صلاحيات: قراءة بس)','t-ok'); },
+    'cat story.txt'(){ print('بدأت وهو عنده 10 سنين... ومن ساعتها والنار تحت رجليّ 🔥 (الباقي في قسم النبذة فوق)','t-dim'); },
+    skills(){ print('  Linux/Kali ......... 92%\n  Network Security ... 85%\n  Python ............ 80%\n  SOC & SIEM ......... 78%\n  Malware Analysis ... 75%'); },
+    socials(){ print(SOCIALS,'t-acc'); },
+    contact(){ CMDS.socials(); },
+    ls(){ print('story.txt   skills.txt   contacts.txt   secrets.dat'); },
+    'cat secrets.dat'(){ print('cat: secrets.dat: Permission denied 😈\nحتى أنا مقدرتش... لسه بجد','t-err'); },
+    'sudo hire-me'(){ print('[sudo] password for guest: ********\nتم القبول على طول — CASEMIRO مستني رسالتك على الواتساب ✔','t-ok'); },
+    visit(){ print('إجمالي الزوار: '+(document.getElementById('visCount')?.textContent ?? '—')+' 👁️\nمتصل الآن: '+(document.getElementById('onlineCount')?.textContent ?? '—')+' 🟢'); },
+    date(){ print(new Date().toString()); },
+    banner(){ BANNER.forEach(l=>print(l,'t-acc')); },
+    clear(){ out.innerHTML=''; },
+    theme(){
+      const light = !document.documentElement.classList.contains('light');
+      try{ localStorage.setItem('theme', light?'light':'dark'); }catch(e){}
+      applyTheme(light);
+      print('Theme switched ✔','t-ok');
+    },
+    open(arg){
+      const m = {about:'#about', skills:'#skills', playground:'#playground', contact:'#contact', guestbook:'#guestbook'};
+      const sel = m[(arg||'').toLowerCase()];
+      if(sel){ const t=document.querySelector(sel); if(t) t.scrollIntoView({behavior:'smooth'}); print('Opening '+arg+'...','t-ok'); }
+      else print('open: قسم مش معروف. جرّب about / skills / playground / contact / guestbook','t-err');
+    },
+    echo(...a){ print(esc(a.join(' '))); },
+    hack(){
+      if(hacking){ print('في عملية شغالة بالفعل... استنى','t-err'); return; }
+      hacking = true;
+      const steps = [
+        '[*] Scanning target 127.0.0.1 ...',
+        '[+] Found open port: 1337',
+        '[*] Injecting payload ...',
+        '[+] Bypassing firewall ...',
+        '[+] Cracking hash ... done',
+        '[*] Escalating privileges ...',
+        '[+] ACCESS GRANTED ✔',
+        '',
+        'مرحبا بيك في النظام يا معلم 😎 (مزاح — ده كله تمثيل)'
+      ];
+      let i = 0;
+      (function nx(){
+        if(i >= steps.length){ hacking = false; return; }
+        const s = steps[i++];
+        print(s, s.startsWith('[+]') ? 't-ok' : (s.startsWith('[') ? '' : 't-dim'));
+        setTimeout(nx, 420 + Math.random()*380);
+      })();
+    }
+  };
+
+  const hist = []; let hi = 0;
+  function run(raw){
+    const cmd = raw.trim();
+    printHTML('<span class="t-in">guest@casemiro:~$</span> ' + esc(raw));
+    if(!cmd) return;
+    hist.push(cmd); hi = hist.length;
+    const sp = cmd.indexOf(' ');
+    const name = (sp === -1 ? cmd : cmd.slice(0, sp)).toLowerCase();
+    const arg = sp === -1 ? '' : cmd.slice(sp+1).trim();
+    const fn = CMDS[name];
+    if(fn) fn(arg);
+    else print(name + ": command not found — جرّب help", 't-err');
+  }
+  inp.addEventListener('keydown', e=>{
+    if(e.key === 'Enter'){ run(inp.value); inp.value=''; }
+    else if(e.key === 'ArrowUp'){ if(hi > 0){ hi--; inp.value = hist[hi]; } e.preventDefault(); }
+    else if(e.key === 'ArrowDown'){
+      if(hi < hist.length-1){ hi++; inp.value = hist[hi]; }
+      else { hi = hist.length; inp.value=''; }
+      e.preventDefault();
+    }
+  });
+  out.parentElement.addEventListener('click', ()=> inp.focus());
+})();
 </script>
 </body>
 </html>
