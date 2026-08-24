@@ -605,6 +605,180 @@
     border-radius:999px; color:#ffd75e; direction:ltr;
   }
 
+  /* ===== دفعة الـ 15 ميزة ===== */
+
+  /* 1) شاشة الإقلاع */
+  #bootScreen {
+    position:fixed; inset:0; z-index:10000; background:#000; color:#00ff66;
+    font-family:'Consolas',monospace; padding:7vh 7vw;
+    display:flex; flex-direction:column; justify-content:center; gap:7px;
+    font-size:clamp(12px,2.2vw,17px);
+  }
+  #bootScreen.done { opacity:0; visibility:hidden; transition:.6s; }
+  #bootScreen .bdim { color:#1a7a3a; }
+  #bootScreen .bok { color:#7dffb0; }
+  #bootBar { height:16px; border:1px solid #00ff66; margin-top:14px; max-width:540px; }
+  #bootBar i { display:block; height:100%; width:0; background:#00ff66; transition:width .35s; }
+  #bootSkip {
+    position:absolute; top:18px; inset-inline-end:18px; background:none;
+    border:1px solid rgba(0,255,102,.3); color:rgba(0,255,102,.6);
+    padding:7px 16px; border-radius:8px; cursor:pointer;
+    font-family:inherit; font-size:13px; letter-spacing:1px;
+  }
+
+  /* 2) توست الإنجازات */
+  #toastZone {
+    position:fixed; bottom:92px; inset-inline-start:18px; z-index:9999;
+    display:flex; flex-direction:column; gap:10px; pointer-events:none;
+  }
+  .ach-toast {
+    display:flex; gap:12px; align-items:center;
+    background:rgba(13,20,32,.94); border:1px solid rgba(var(--accRGB),.55);
+    border-inline-start:4px solid var(--acc); border-radius:12px;
+    padding:12px 16px; min-width:250px; max-width:320px;
+    box-shadow:0 10px 30px rgba(0,0,0,.6); backdrop-filter:blur(6px);
+    animation:achIn .4s cubic-bezier(.2,1.4,.4,1);
+  }
+  .ach-toast.out { animation:achOut .35s forwards; }
+  @keyframes achIn { from { transform:translateY(26px); opacity:0; } }
+  @keyframes achOut { to { transform:translateY(14px); opacity:0; } }
+  .ach-toast .ic { font-size:27px; }
+  .ach-toast b { color:var(--acc); font-size:13.5px; display:block; }
+  .ach-toast small { color:var(--muted); font-size:12px; }
+
+  /* 3-5) الألعاب */
+  .arcade-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; }
+  .quiz-grid { display:grid; grid-template-columns:1fr 1fr; gap:22px; margin-top:22px; }
+  @media(max-width:1020px){ .arcade-grid,.quiz-grid { grid-template-columns:1fr; } }
+  .ms-top {
+    display:flex; justify-content:space-between; align-items:center; gap:8px;
+    padding:10px 14px; font-family:'Consolas',monospace; font-size:13px;
+    font-weight:800; color:#00ff66; direction:ltr; flex-wrap:wrap;
+  }
+  .ms-btn {
+    background:#12261a; color:#00ff66; border:1px solid #1e4d33;
+    border-radius:8px; padding:5px 10px; cursor:pointer;
+    font-family:'Consolas',monospace; font-size:12px; font-weight:800;
+  }
+  .ms-btn.active { background:#00ff6622; border-color:#00ff66; }
+  .ms-grid {
+    display:grid; grid-template-columns:repeat(9,34px); gap:3px;
+    justify-content:center; direction:ltr; padding:4px 12px 18px;
+  }
+  @media(max-width:430px){ .ms-grid { grid-template-columns:repeat(9,1fr); } .ms-cell { font-size:13px; height:29px; } }
+  .ms-cell {
+    height:34px; border:none; border-radius:6px; background:#12261a;
+    color:#00ff66; font-family:'Consolas',monospace; font-weight:900;
+    font-size:15px; cursor:pointer; box-shadow:inset 0 -3px 0 #0a1810;
+  }
+  .ms-cell.open { background:#0b140e; box-shadow:none; cursor:default; }
+  .ms-cell.boom { background:#3a0c0c; color:#ff5f57; }
+  .ms-cell.flagged { color:#ffd75e; }
+  .ms-cell.n1{color:#4fc3f7}.ms-cell.n2{color:#81c784}.ms-cell.n3{color:#ff8a65}.ms-cell.n4{color:#ba68c8}
+  .mem-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; padding:16px; }
+  .mem-card { aspect-ratio:1; perspective:420px; cursor:pointer; background:none; border:none; padding:0; }
+  .mem-inner { position:relative; width:100%; height:100%; transition:transform .35s; transform-style:preserve-3d; }
+  .mem-card.flip .mem-inner { transform:rotateY(180deg); }
+  .mem-face {
+    position:absolute; inset:0; display:flex; align-items:center; justify-content:center;
+    border-radius:12px; backface-visibility:hidden; font-size:clamp(20px,4vw,30px);
+  }
+  .mem-back { background:#12261a; border:1px solid #1e4d33; color:#2f6b47; }
+  .mem-front { background:#0b140e; border:1px solid rgba(0,255,102,.45); transform:rotateY(180deg); }
+  .rt-zone {
+    flex:1; min-height:235px; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; gap:10px; cursor:pointer; user-select:none;
+    text-align:center; padding:20px; background:#0d1410; transition:background .12s;
+  }
+  .rt-zone.wait { background:#3d1508; }
+  .rt-zone.go { background:#0e3d16; }
+  .rt-big { font-size:25px; font-weight:900; color:#00ff66; font-family:'Consolas',monospace; }
+  .rt-best { font-size:12.5px; color:#79a88c; font-family:'Consolas',monospace; padding-bottom:12px; }
+
+  /* 6-7) الكويزات */
+  .qz-body { padding:16px 18px 20px; display:flex; flex-direction:column; gap:12px; flex:1; }
+  .qz-msg {
+    background:#0d0d18; border:1px dashed rgba(var(--accRGB),.4); border-radius:10px;
+    padding:14px 16px; font-size:14px; line-height:1.95; min-height:88px;
+  }
+  .qz-btns { display:flex; gap:10px; flex-wrap:wrap; }
+  .qz-note { font-size:12.5px; color:var(--muted); line-height:1.85; min-height:40px; }
+  .qz-opt {
+    display:block; width:100%; text-align:start; margin-bottom:8px;
+    padding:11px 14px; border-radius:10px; cursor:pointer;
+    background:#0d0d18; border:1px solid var(--border); color:var(--text);
+    font-size:13.5px; transition:.15s;
+  }
+  .qz-opt:hover { border-color:var(--acc); }
+  .qz-opt.good { border-color:#28c840; color:#28c840; }
+  .qz-opt.bad { border-color:#ff5f57; color:#ff5f57; }
+
+  /* 8) أنا شايفك */
+  .spy-grid {
+    display:grid; grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:12px; padding:16px 18px 20px;
+  }
+  .spy-item { background:#0d0d18; border:1px solid var(--border); border-radius:10px; padding:12px 14px; }
+  .spy-item small { color:var(--muted); font-size:11px; display:block; margin-bottom:5px; letter-spacing:.5px; }
+  .spy-item b { color:var(--acc); font-size:14px; word-break:break-word; }
+
+  /* 15) FAQ */
+  #faq .faq-list { max-width:820px; margin:26px auto 0; display:flex; flex-direction:column; gap:12px; }
+  #faq details { background:var(--panel); border:1px solid var(--border); border-radius:14px; overflow:hidden; }
+  #faq summary {
+    cursor:pointer; padding:16px 20px; font-weight:800; font-size:15.5px;
+    list-style:none; display:flex; justify-content:space-between; align-items:center; gap:10px;
+  }
+  #faq summary::-webkit-details-marker { display:none; }
+  #faq summary::after { content:'+'; color:var(--acc); font-size:23px; font-weight:900; transition:.25s; }
+  #faq details[open] summary::after { transform:rotate(45deg); }
+  #faq details p { padding:0 20px 18px; color:var(--card-text); line-height:2.1; font-size:14.5px; }
+
+  /* 9-10) CV + vCard */
+  .cv-actions { display:flex; gap:14px; justify-content:center; margin-top:28px; flex-wrap:wrap; }
+  #cvPage { display:none; }
+  body.cv-mode #cvPage {
+    display:block; position:fixed; inset:0; z-index:10001; background:#fff;
+    color:#111; overflow-y:auto; padding:52px 8vw 80px;
+    direction:rtl; font-family:Tahoma,Arial,sans-serif; line-height:1.9;
+  }
+  body.cv-mode > :not(#cvPage):not(#bootScreen) { display:none !important; }
+  #cvClose, #cvPrint {
+    position:fixed; top:14px; z-index:10002; padding:10px 20px; border-radius:10px;
+    border:none; color:#fff; font-weight:800; cursor:pointer; font-size:14px;
+  }
+  #cvClose { left:14px; background:#c62828; }
+  #cvPrint { left:110px; background:#1b5e20; }
+  @media print {
+    body.cv-mode #cvClose, body.cv-mode #cvPrint { display:none; }
+    body.cv-mode #cvPage { position:static; overflow:visible; padding:0; }
+  }
+  .cv-page h1 { font-size:30px; margin:0; }
+  .cv-page .cv-sub { color:#555; font-size:14px; margin-bottom:6px; }
+  .cv-page h2 { font-size:17px; border-bottom:2px solid #222; padding-bottom:4px; margin:22px 0 10px; }
+  .cv-page ul { padding-inline-start:22px; margin:6px 0; }
+  .cv-page li { margin-bottom:5px; font-size:14px; }
+  .cv-cols { display:grid; grid-template-columns:1fr 1fr; gap:10px 30px; }
+  @media(max-width:700px){ .cv-cols { grid-template-columns:1fr; } }
+  .cv-bar { background:#ddd; height:9px; border-radius:5px; overflow:hidden; margin:3px 0 10px; }
+  .cv-bar i { display:block; height:100%; background:#333; }
+
+  /* 11-13) موسيقى + ذيل كورسر */
+  #musicBtn {
+    position:fixed; bottom:92px; inset-inline-end:20px; z-index:900;
+    width:47px; height:47px; border-radius:50%;
+    border:1px solid var(--border); background:var(--panel); color:var(--text);
+    font-size:19px; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.5); transition:.2s;
+  }
+  #musicBtn.playing { border-color:var(--acc); color:var(--acc); animation:musPulse 1s infinite; }
+  @keyframes musPulse { 50% { box-shadow:0 0 0 7px rgba(var(--accRGB),.12); } }
+  .voice-btn {
+    background:none; border:none; color:var(--muted); cursor:pointer;
+    font-size:13px; margin-inline-start:auto;
+  }
+  .voice-btn.on { color:var(--acc); }
+  #trailCv { position:fixed; inset:0; z-index:9989; pointer-events:none; }
+
   @media(max-width:860px){ .pg-grid { grid-template-columns:1fr; } }
 
   @media(max-width:640px){
@@ -658,7 +832,7 @@
     <a href="#skills" class="btn btn-ghost">شوف مهاراتي</a>
   </div>
   <div class="live-bar reveal">
-    👁️ زياراتك للموقع: <b id="visCount">…</b>
+    👁️ زياراتك للموقع: <b id="visCount">…</b> · ⏱️ أنت هنا من: <b id="sessMin">0:00</b>
   </div>
 </header>
 
@@ -693,7 +867,7 @@
 </section>
 
 <section id="skills">
-  <h2 class="sec-title reveal">مهاراتـ<span>ي</span></h2>
+  <h2 class="sec-title reveal" id="skillsTitle">مهاراتـ<span>ي</span></h2>
   <div class="skills reveal" id="skillsGrid">
     <div class="skill"><div class="icon">🌐</div><h3>أمن الشبكات</h3><div class="lvl"><i data-w="85%"></i></div></div>
     <div class="skill"><div class="icon">🐧</div><h3>Linux / Kali</h3><div class="lvl"><i data-w="92%"></i></div></div>
@@ -704,7 +878,7 @@
 </section>
 
 <section id="playground">
-  <h2 class="sec-title reveal">ساحة الـ<span>هاكرز</span> 🕹️</h2>
+  <h2 class="sec-title reveal" id="pgTitle">ساحة الـ<span>هاكرز</span> 🕹️</h2>
   <div class="pg-grid reveal">
 
     <!-- التيرمنال التفاعلي -->
@@ -712,6 +886,7 @@
       <div class="term-bar">
         <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
         <em>guest@casemiro: ~/terminal</em>
+        <button class="voice-btn" id="voiceBtn" type="button" title="قراءة صوتية للردود">🔈</button>
       </div>
       <div id="termOut" dir="ltr"></div>
       <div class="term-line">
@@ -920,18 +1095,121 @@
   </div>
 </section>
 
+<section id="arcade">
+  <h2 class="sec-title reveal" id="arcadeTitle">أركيد الـ<span>هاكرز</span> 🎮</h2>
+
+  <!-- أنا شايفك 👁️ -->
+  <div class="ops-card reveal" style="margin-bottom:22px;">
+    <div class="term-bar">
+      <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+      <em>root@casemiro: ./i-see-you --target=self 😈</em>
+    </div>
+    <div class="spy-grid" id="spyGrid"></div>
+  </div>
+
+  <div class="arcade-grid reveal">
+
+    <!-- كانسة الألغام -->
+    <div class="ops-card">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./minesweeper</em>
+      </div>
+      <div class="ms-top">
+        <span>💣 <b id="msMines">10</b></span>
+        <span>
+          <button class="ms-btn" id="msFlagBtn" type="button">🚩 FLAG MODE: OFF</button>
+          <button class="ms-btn" id="msReset" type="button">↻</button>
+        </span>
+        <span>⏱️ <b id="msTime">0</b>s</span>
+      </div>
+      <div class="ms-grid" id="msGrid"></div>
+    </div>
+
+    <!-- لعبة الذاكرة -->
+    <div class="ops-card">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./memory-leak</em>
+      </div>
+      <div class="ms-top">
+        <span>🎯 Moves: <b id="memMoves">0</b></span>
+        <button class="ms-btn" id="memReset" type="button">↻ NEW GAME</button>
+        <span>⏱️ <b id="memTime">0</b>s</span>
+      </div>
+      <div class="mem-grid" id="memGrid"></div>
+    </div>
+
+    <!-- اختبار رد الفعل -->
+    <div class="ops-card">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./reaction-time</em>
+      </div>
+      <div class="rt-zone" id="rtZone">
+        <p class="rt-big" id="rtText">دوس عشان تبدأ</p>
+        <p style="color:#79a88c;font-size:12.5px;">استنى الأخضر... ودوس بأقصى سرعة ⚡</p>
+      </div>
+      <p class="rt-best" id="rtBest" style="text-align:center;"></p>
+    </div>
+
+  </div>
+
+  <div class="quiz-grid reveal">
+
+    <!-- كويز Phishing -->
+    <div class="ops-card">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./phishing-or-not</em>
+      </div>
+      <div class="qz-body">
+        <h3 style="font-size:15px;font-weight:900;">🎣 رسالة دي آمنة ولا تصيّد؟</h3>
+        <div class="qz-msg" id="phMsg">اضغط ابدأ للاختبار...</div>
+        <div class="qz-btns">
+          <button class="btn-mini" id="phSafe" type="button" disabled>✅ آمنة</button>
+          <button class="btn-mini" id="phPhish" type="button" disabled>🎣 تصيّد</button>
+          <button class="btn-mini" id="phReset" type="button">▶ ابدأ</button>
+        </div>
+        <div class="qz-note" id="phNote"></div>
+        <div class="tt-stats"><span>النتيجة: <b id="phScore">0/0</b></span></div>
+      </div>
+    </div>
+
+    <!-- كويز المعلومات -->
+    <div class="ops-card">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./sec-quiz --hard=false</em>
+      </div>
+      <div class="qz-body">
+        <h3 style="font-size:15px;font-weight:900;">🧠 اختبر معلوماتك الأمنية</h3>
+        <div class="qz-msg" id="cqMsg">اضغط ابدأ...</div>
+        <div id="cqOpts"></div>
+        <div class="tt-stats"><span>السؤال: <b id="cqProg">0/10</b></span><span id="cqScoreWrap">النقاط: <b id="cqScore">0</b></span></div>
+        <button class="btn-mini" id="cqReset" type="button" style="align-self:flex-start;">▶ ابدأ الكويز</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
 <section id="contact">
-  <h2 class="sec-title reveal">تواصل <span>معايا</span></h2>
+  <h2 class="sec-title reveal" id="contactTitle">تواصل <span>معايا</span></h2>
   <div class="contact-cards reveal" id="contactGrid">
     <a class="cc-link" href="mailto:m.mahmoud10508@gmail.com"><div class="ccard"><div class="icon">📧</div><h3>Email</h3><p>m.mahmoud10508@gmail.com</p></div></a>
     <a class="cc-link" href="https://wa.me/201064318118" target="_blank"><div class="ccard"><div class="icon">📱</div><h3>WhatsApp</h3><p>+20 106 431 8118</p></div></a>
     <a class="cc-link" href="https://github.com/mmahmoud10508-ctrl" target="_blank"><div class="ccard"><div class="icon">💻</div><h3>GitHub</h3><p>github.com/mmahmoud10508-ctrl</p></div></a>
     <a class="cc-link" href="https://t.me/cs_mr_o_1" target="_blank"><div class="ccard"><div class="icon">✈️</div><h3>Telegram</h3><p>@cs_mr_o_1</p></div></a>
   </div>
+  <div class="cv-actions reveal">
+    <button class="btn btn-main" id="cvOpenBtn" type="button">📄 شوف السيرة الذاتية</button>
+    <button class="btn btn-ghost" id="vcfBtn" type="button">📇 أضفني لدفتر تليفونك</button>
+  </div>
 </section>
 
 <section id="guestbook">
-  <h2 class="sec-title reveal">سجل <span>الزوار</span> ✍️</h2>
+  <h2 class="sec-title reveal" id="gbTitle">سجل <span>الزوار</span> ✍️</h2>
   <div class="gb-wrap reveal">
     <div class="hof-strip" id="hofStrip" hidden>🏆 قاعة المجد — اللي كسروا التحدي السري:
       <span id="hofList"></span>
@@ -946,8 +1224,95 @@
   </div>
 </section>
 
+<section id="faq">
+  <h2 class="sec-title reveal" id="faqTitle">أسئلة <span>شائعة</span> ❓</h2>
+  <div class="faq-list reveal">
+    <details>
+      <summary>إزاي أبدأ في الأمن السيبراني من الصفر؟</summary>
+      <p>ابدأ بأساسيات الشبكات (Network+) ونظام لينكس، بعدها تعلّم بايثون، وادخل على مسارات الاختراق الأخلاقي زي eJPT وبعدها OSCP. أهم حاجة: جهاز افتراضي بـ Kali Linux ومختبر شخصي للتجارب — وسجّل كل يوم حاجة اتعلمتها.</p>
+    </details>
+    <details>
+      <summary>بتقدم خدمات فعلاً ولا لسه بتتعلم؟</summary>
+      <p>بشتغل على تأمين شبكات واختبارات اختراق للمشاريع الصغيرة، وكمان تصميم مواقع شخصية بستايل مميز زي اللي انت فيه دلوقتي 😄 — ابعتلي واتساب وهنتفقا في التفاصيل.</p>
+    </details>
+    <details>
+      <summary>ليه اسم CASEMIRO؟</summary>
+      <p>اسم قديم لازق معايا من أيام الجيمينج، وحولته لهوية رقمية كاملة — حرف C بقى توقيعي في كل مشروع بعمله.</p>
+    </details>
+    <details>
+      <summary>الموقع ده معمول بإيه؟</summary>
+      <p>HTML و CSS وجافاسكريبت خالص — بدون أي فريموركس أو مكتبات خارجية. كل التأثيرات (خريطة الهجمات، الألعاب، الأصوات) مكتوبة يدوي، والمستضاف مجاناً على GitHub Pages.</p>
+    </details>
+    <details>
+      <summary>عندك نصايح لأمان حساباتي؟</summary>
+      <p>فعّل المصادقة الثنائية 2FA، استخدم مدير كلمات مرور، وخلي لكل حساب باسورد مختلف تماماً — وجرّب فاحص القوة في قسم الساحة فوق وشوف الفرق بنفسك 🔐</p>
+    </details>
+    <details>
+      <summary>إزاي أوصلك أسرع؟</summary>
+      <p>الواتساب (+20 106 431 8118) أسرع وسيلة، أو الإيميل، أو سيب رسالة في سجل الزوار تحت — برد على الجميع.</p>
+    </details>
+  </div>
+</section>
+
 <footer>صُنع بشغف ❤️ © <span id="year"></span> CASEMIRO EL_HKM — جميع الحقوق محفوظة</footer>
 <button id="toTop" title="ارجع لفوق">↑</button>
+<button id="musicBtn" title="موسيقى الخلفية">🎵</button>
+
+<!-- صفحة CV -->
+<div id="cvPage">
+  <button id="cvClose" type="button">✕ إغلاق</button>
+  <button id="cvPrint" type="button">🖨️ طباعة / PDF</button>
+  <div class="cv-page">
+    <h1>CASEMIRO EL_HKM</h1>
+    <p class="cv-sub">Cyber Security Specialist & Ethical Hacker — Cairo, Egypt</p>
+    <p class="cv-sub">📱 +20 106 431 8118 · ✉️ m.mahmoud10508@gmail.com · 💻 github.com/mmahmoud10508-ctrl</p>
+    <h2>الملخص</h2>
+    <ul>
+      <li>خبرة 8 سنوات ذاتية في الأمن السيبراني بدأت منذ سن العاشرة (2018).</li>
+      <li>متخصص في اختبار الاختراق الأخلاقي، أمن الشبكات، وتحليل البرمجيات الخبيثة.</li>
+      <li>شغف حقيقي بالتعلم المستمر وبناء أدوات حماية عملية.</li>
+    </ul>
+    <div class="cv-cols">
+      <div>
+        <h2>المهارات التقنية</h2>
+        <b style="font-size:13px;">Linux / Kali — 92%</b><div class="cv-bar"><i style="width:92%"></i></div>
+        <b style="font-size:13px;">Network Security — 85%</b><div class="cv-bar"><i style="width:85%"></i></div>
+        <b style="font-size:13px;">Python for Security — 80%</b><div class="cv-bar"><i style="width:80%"></i></div>
+        <b style="font-size:13px;">SOC & SIEM — 78%</b><div class="cv-bar"><i style="width:78%"></i></div>
+        <b style="font-size:13px;">Malware Analysis — 75%</b><div class="cv-bar"><i style="width:75%"></i></div>
+      </div>
+      <div>
+        <h2>المسيرة</h2>
+        <ul>
+          <li><b>2018:</b> بداية الرحلة — أول سؤال: "إزاي اللعبة دي بتتهكر؟"</li>
+          <li><b>2019–2021:</b> إتقان لينكس والشبكات وأول سكريبتات بايثون.</li>
+          <li><b>2022–2024:</b> اختبار اختراق عملي وبناء مختبر منزلي كامل.</li>
+          <li><b>2025–الآن:</b> خدمات أمنية للمشاريع وتطوير مهارات التحليل المتقدم.</li>
+        </ul>
+        <h2>اللغات</h2>
+        <ul>
+          <li>العربية — اللغة الأم</li>
+          <li>الإنجليزية — احتراف (قراءة تقنية وكتابة)</li>
+        </ul>
+      </div>
+    </div>
+    <h2>مشاريع مختارة</h2>
+    <ul>
+      <li>موقع تفاعلي متكامل بأدوات أمنية تعليمية (اللي انت فيه دلوقتي).</li>
+      <li>سكريبتات فحص شبكات بأتمتة بايثون.</li>
+      <li>بيئة SOC تجريبية لرصد الأنماط الخبيثة.</li>
+    </ul>
+  </div>
+</div>
+
+<!-- شاشة الإقلاع + توستات + ذيل الكورسر -->
+<div id="bootScreen" hidden>
+  <button id="bootSkip" type="button">SKIP &gt;&gt;&gt;</button>
+  <div id="bootLines"></div>
+  <div id="bootBar"><i></i></div>
+</div>
+<div id="toastZone"></div>
+<canvas id="trailCv"></canvas>
 
 <div id="emWrap">
   <div id="emVignette"></div>
@@ -1206,7 +1571,8 @@ const TELEGRAM_CONFIG = {
       endSub.textContent = 'وصلت لـ '+score+' من '+TARGET+'... الزرار كسبانك المرة دي 😏';
     }
     if(score > best){ best = score; try{ localStorage.setItem('htb_best', best); }catch(e){} showBest(); }
-    if(win) sfx.win(); else sfx.lose();
+    if(win){ sfx.win(); window.__ach && window.__ach.unlock('breach'); }
+    else sfx.lose();
   }
 
   function start(){
@@ -1627,6 +1993,7 @@ const sfx = (function(){
         packets.splice(i,1);
         booms.push({x:p.x,y:p.y,t:0});
         score++; scoreEl.textContent=score;
+        if(score===10&&window.__ach) window.__ach.unlock('defender');
         sfx.shoot();
         break;
       }
@@ -1686,6 +2053,540 @@ const matrixFX = (function(){
     return true;
   };
   return fx;
+})();
+
+// ===== 3.4) نظام الإنجازات 🏅 =====
+window.__ach = (function(){
+  const DEFS={
+    first_cmd:['⌨️','First Command','أول أمر نفذته في التيرمنال'],
+    neo:['🌧️','Neo Mode','شغلت مطر الماتريكس'],
+    redalert:['🚨','Red Alert','فعّلت وضع الطوارئ'],
+    ctf:['🏴','CTF Conqueror','كسرت التحدي السري'],
+    breach:['🔓','System Breacher','كسبت لعبة Hack the Button'],
+    defender:['🛡️','Server Guardian','صدّيت 10 هجمات في لعبة الدفاع'],
+    sapper:['💣','Master Sapper','خلصت كانسة الألغام من غير ما تنفجر'],
+    speedster:['⚡','Speed Typist','وصلت 40+ WPM'],
+    spy:['🔑','Secret Messenger','شفّرت أول رسالة'],
+    forgery:['📸','Card Forger','عملت كارت هوية هاكر']
+  };
+  let done=[];
+  try{ done=JSON.parse(localStorage.getItem('casemiro_ach')||'[]'); }catch(e){}
+  function unlock(id){
+    if(!DEFS[id]||done.includes(id)) return;
+    done.push(id);
+    try{ localStorage.setItem('casemiro_ach',JSON.stringify(done)); }catch(e){}
+    const [ic,ti,ds]=DEFS[id];
+    const z=document.getElementById('toastZone');
+    if(z){
+      const t=document.createElement('div');
+      t.className='ach-toast';
+      t.innerHTML='<span class="ic">'+ic+'</span><div><b>🏅 إنجاز جديد: '+esc(ti)+'</b><small>'+esc(ds)+'</small></div>';
+      z.appendChild(t);
+      setTimeout(()=>{ t.classList.add('out'); setTimeout(()=>t.remove(),400); },4200);
+    }
+    sfx.pop();
+  }
+  return { unlock };
+})();
+
+// ===== شاشة الإقلاع 💻 =====
+(function(){
+  const bs=document.getElementById('bootScreen');
+  if(!bs) return;
+  let booted=false;
+  try{ booted=localStorage.getItem('casemiro_booted')==='1'; }catch(e){}
+  if(booted){ bs.remove(); return; }
+  bs.hidden=false;
+  document.body.style.overflow='hidden';
+  const lines=[
+    ['CASEMIRO BIOS v2.6 — EL_HKM SYSTEMS © 2026',0],
+    ['Checking memory ................ <span class="bok">[OK] 64GB</span>',300],
+    ['Mounting /dev/skills .......... <span class="bok">[OK]</span>',600],
+    ['Loading firewall daemon ....... <span class="bok">[OK]</span>',900],
+    ['Injecting passion ............. <span class="bok">[OK] 100%</span>',1200],
+    ['<span class="bdim">Scanning for threats ... none can handle me 😈</span>',1500],
+    ['<span class="bok">ACCESS GRANTED ✔</span>',1900]
+  ];
+  const box=document.getElementById('bootLines'), bar=document.querySelector('#bootBar i');
+  let i=0;
+  const timer=setInterval(()=>{
+    if(i>=lines.length){
+      clearInterval(timer);
+      setTimeout(done,650);
+      return;
+    }
+    const d=document.createElement('div');
+    d.innerHTML=lines[i][1];
+    box.appendChild(d);
+    bar.style.width=Math.round(((i+1)/lines.length)*100)+'%';
+    sfx.key();
+    i++;
+  },330);
+  function done(){
+    bs.classList.add('done');
+    document.body.style.overflow='';
+    try{ localStorage.setItem('casemiro_booted','1'); }catch(e){}
+    setTimeout(()=>bs.remove(),700);
+  }
+  document.getElementById('bootSkip').onclick=()=>{ clearInterval(timer); done(); };
+})();
+
+// ===== أنا شايفك 👁️ =====
+(function(){
+  const g=document.getElementById('spyGrid');
+  if(!g) return;
+  const ua=navigator.userAgent;
+  let os='Unknown';
+  if(/Windows NT 10/.test(ua)) os='Windows 10/11';
+  else if(/Android/.test(ua)) os='Android '+(ua.match(/Android ([\d.]+)/)?.[1]||'');
+  else if(/iPhone|iPad/.test(ua)) os='iOS';
+  else if(/Mac OS X/.test(ua)) os='macOS';
+  else if(/Linux/.test(ua)) os='Linux';
+  let br='Unknown';
+  if(/Edg\//.test(ua)) br='Edge';
+  else if(/SamsungBrowser/.test(ua)) br='Samsung Internet';
+  else if(/OPR\/|Opera/.test(ua)) br='Opera';
+  else if(/Chrome\//.test(ua)) br='Chrome';
+  else if(/Firefox\//.test(ua)) br='Firefox';
+  else if(/Safari\//.test(ua)) br='Safari';
+  const items=[
+    ['OPERATING SYSTEM',os],
+    ['BROWSER',br+' '+(/Chrome\/([\d]+)/.exec(ua)?.[1]||'')],
+    ['SCREEN RESOLUTION',screen.width+' x '+screen.height],
+    ['VIEWPORT',innerWidth+' x '+innerHeight],
+    ['LANGUAGE / TIMEZONE',(navigator.language||'?')+' · '+(Intl.DateTimeFormat().resolvedOptions().timeZone||'?')],
+    ['CPU CORES',(navigator.hardwareConcurrency||'?')+' threads'],
+    ['DEVICE RAM',navigator.deviceMemory?navigator.deviceMemory+' GB':'hidden 🔒'],
+    ['NETWORK',navigator.connection?(navigator.connection.effectiveType||'?')+(navigator.connection.downlink?' ~'+navigator.connection.downlink+'Mb/s':''):'hidden 🔒'],
+    ['TOUCH POINTS',String(navigator.maxTouchPoints||0)],
+    ['CONNECTION STATUS',navigator.onLine?'ONLINE 🟢':'OFFLINE 🔴']
+  ];
+  items.forEach(([k,v])=>{
+    const d=document.createElement('div');
+    d.className='spy-item';
+    d.innerHTML='<small>'+esc(k)+'</small><b>'+esc(v)+'</b>';
+    g.appendChild(d);
+  });
+  navigator.getBattery?.().then(b=>{
+    const d=document.createElement('div');
+    d.className='spy-item';
+    d.innerHTML='<small>BATTERY</small><b>'+Math.round(b.level*100)+'% '+(b.charging?'⚡ charging':'🔋')+'</b>';
+    g.appendChild(d);
+  }).catch(()=>{});
+})();
+
+// ===== كانسة الألغام 💣 =====
+(function(){
+  const grid=document.getElementById('msGrid');
+  if(!grid) return;
+  const W=9,H=9,MINES=10;
+  let cells=[],mines=new Set(),opened=new Set(),flagged=new Set(),
+      over=false,t0=0,timer=null,flagMode=false;
+  const minesEl=document.getElementById('msMines'), timeEl=document.getElementById('msTime');
+  document.getElementById('msReset').onclick=reset;
+  const fb=document.getElementById('msFlagBtn');
+  fb.onclick=()=>{ flagMode=!flagMode; fb.classList.toggle('active',flagMode); fb.textContent='🚩 FLAG MODE: '+(flagMode?'ON':'OFF'); };
+  function idx(x,y){ return y*W+x; }
+  function neighbors(i){
+    const x=i%W,y=(i-x)/W,r=[];
+    for(let dy=-1;dy<=1;dy++)for(let dx=-1;dx<=1;dx++){
+      if(!dx&&!dy) continue;
+      const nx=x+dx,ny=y+dy;
+      if(nx>=0&&nx<W&&ny>=0&&ny<H) r.push(idx(nx,ny));
+    }
+    return r;
+  }
+  function reset(){
+    clearInterval(timer); over=false; opened.clear(); flagged.clear();
+    mines.clear(); timeEl.textContent='0'; t0=0;
+    minesEl.textContent=MINES;
+    grid.innerHTML=''; cells=[];
+    for(let i=0;i<W*H;i++){
+      const b=document.createElement('button');
+      b.className='ms-cell'; b.type='button'; b.dataset.i=i;
+      grid.appendChild(b); cells.push(b);
+      b.oncontextmenu=e=>{ e.preventDefault(); toggleFlag(i); };
+    }
+  }
+  function placeMines(safe){
+    while(mines.size<MINES){
+      const m=Math.floor(Math.random()*W*H);
+      if(m!==safe&&!neighbors(safe).includes(m)) mines.add(m);
+    }
+    t0=Date.now();
+    timer=setInterval(()=>{
+      if(!over&&t0) timeEl.textContent=Math.floor((Date.now()-t0)/1000);
+    },500);
+  }
+  function countAround(i){
+    return neighbors(i).filter(n=>mines.has(n)).length;
+  }
+  function openCell(i){
+    if(over||opened.has(i)||flagged.has(i)) return;
+    if(!t0&&!timer) placeMines(i);
+    if(mines.has(i)){ boom(i); return; }
+    const stack=[i];
+    while(stack.length){
+      const c=stack.pop();
+      if(opened.has(c)||flagged.has(c)||mines.has(c)) continue;
+      opened.add(c);
+      const n=countAround(c);
+      cells[c].classList.add('open');
+      if(n){ cells[c].textContent=n; cells[c].classList.add('n'+n); }
+      else neighbors(c).forEach(nb=>stack.push(nb));
+    }
+    sfx.key();
+    if(opened.size===W*H-MINES) win();
+  }
+  function toggleFlag(i){
+    if(over||opened.has(i)) return;
+    if(flagged.has(i)){ flagged.delete(i); cells[i].classList.remove('flagged'); cells[i].textContent=''; }
+    else { flagged.add(i); cells[i].classList.add('flagged'); cells[i].textContent='🚩'; sfx.key(); }
+    minesEl.textContent=MINES-flagged.size;
+  }
+  function boom(i){
+    over=true; clearInterval(timer);
+    mines.forEach(m=>{ cells[m].classList.add('open','boom'); if(cells[m].textContent!=='🚩')cells[m].textContent='💣'; });
+    cells[i].classList.add('boom');
+    sfx.lose();
+  }
+  function win(){
+    over=true; clearInterval(timer);
+    sfx.win();
+    window.__ach.unlock('sapper');
+  }
+  grid.addEventListener('click',e=>{
+    const b=e.target.closest('.ms-cell'); if(!b) return;
+    flagMode ? toggleFlag(+b.dataset.i) : openCell(+b.dataset.i);
+  });
+  reset();
+})();
+
+// ===== لعبة الذاكرة 🃏 =====
+(function(){
+  const grid=document.getElementById('memGrid');
+  if(!grid) return;
+  const ICONS=['💀','🔐','🐍','🌐','🛡️','💣','⚡','👾'];
+  let first=null,lock=false,moves=0,found=0,t0=0,timer=null;
+  const movesEl=document.getElementById('memMoves'), timeEl=document.getElementById('memTime');
+  document.getElementById('memReset').onclick=start;
+  function start(){
+    clearInterval(timer); first=null; lock=false; moves=0; found=0; t0=Date.now();
+    movesEl.textContent='0'; timeEl.textContent='0';
+    timer=setInterval(()=>timeEl.textContent=Math.floor((Date.now()-t0)/1000),500);
+    const deck=[...ICONS,...ICONS].sort(()=>Math.random()-.5);
+    grid.innerHTML='';
+    deck.forEach(ic=>{
+      const b=document.createElement('button');
+      b.className='mem-card'; b.type='button';
+      b.innerHTML='<div class="mem-inner"><div class="mem-face mem-back">?</div><div class="mem-face mem-front">'+ic+'</div></div>';
+      b.dataset.ic=ic;
+      grid.appendChild(b);
+    });
+  }
+  grid.addEventListener('click',e=>{
+    const card=e.target.closest('.mem-card');
+    if(!card||lock||card.classList.contains('flip')) return;
+    card.classList.add('flip'); sfx.key();
+    if(!first){ first=card; return; }
+    moves++; movesEl.textContent=moves;
+    if(first.dataset.ic===card.dataset.ic){
+      first=null; found++; sfx.pop();
+      if(found===ICONS.length){
+        clearInterval(timer); sfx.win();
+        setTimeout(()=>alert('🏆 خلصتها في '+moves+' حركة و '+timeEl.textContent+' ثانية!'),350);
+      }
+    } else {
+      lock=true;
+      const a=first; first=null;
+      setTimeout(()=>{
+        a.classList.remove('flip'); card.classList.remove('flip');
+        lock=false; sfx.err();
+      },750);
+    }
+  });
+  start();
+})();
+
+// ===== اختبار رد الفعل ⚡ =====
+(function(){
+  const zone=document.getElementById('rtZone'), txt=document.getElementById('rtText'),
+        bestEl=document.getElementById('rtBest');
+  if(!zone) return;
+  let state='idle', goAt=0, toId=null;
+  let best=0; try{ best=+(localStorage.getItem('rt_best')||0); }catch(e){}
+  const showBest=()=>bestEl.textContent=best?('🏆 أسرع ردة فعل: '+best+' ms'):'';
+  showBest();
+  function set(cls,msg){ zone.className='rt-zone'+(cls?' '+cls:''); txt.textContent=msg; }
+  zone.onclick=()=>{
+    if(state==='idle'||state==='result'){
+      state='wait'; set('wait','استنى الأخضر... 🟡');
+      toId=setTimeout(()=>{
+        state='go'; goAt=performance.now(); set('go','دوس دلوقتي!! 🟢'); sfx.ok();
+      },1000+Math.random()*3000);
+    } else if(state==='wait'){
+      clearTimeout(toId); state='result';
+      set('','😅 توكت على الأخضر! دوس تاني'); sfx.err();
+    } else if(state==='go'){
+      const ms=Math.round(performance.now()-goAt);
+      state='result';
+      set('',ms+' ms ⚡ — دوس تاني');
+      sfx.pop();
+      if(ms<best||!best){ best=ms; try{ localStorage.setItem('rt_best',best); }catch(e){} showBest(); }
+    }
+  };
+})();
+
+// ===== كويز Phishing 🎣 =====
+(function(){
+  const msg=document.getElementById('phMsg'), note=document.getElementById('phNote'),
+        scoreEl=document.getElementById('phScore'), reset=document.getElementById('phReset'),
+        bSafe=document.getElementById('phSafe'), bPhish=document.getElementById('phPhish');
+  if(!msg) return;
+  const QS=[
+    ['"⚠️ البنك الأهلي: حسابك هيتقفل خلال ساعة!! أكد بياناتك فوراً عبر الرابط: ahli-verify.xyz"',true,'رابط مش رسمي (.xyz) + استعجال مصطنع + تهديد — ثلاث علامات تصيّد في رسالة واحدة!'],
+    ['"أهلاً محمود، مرفق فاتورة شهر أكتوبر من شركة الكهرباء — تقدر تراجعها من التطبيق الرسمي مباشرة."',false,'بيوجهك للتطبيق الرسمي مش رابط خارجي، ومفيش استعجال أو تهديد.'],
+    ['"🎉 مبروك! كسبت آيفون 17! ادخل بياناتك على prize-win.top قبل ما العرض يخلص النهارده!"',true,'مسابقة انت مش مشترك فيها + نطاق غريب + ضغط وقتي = تصيّد كلاسيكي.'],
+    ['"مراجعة الكود بتاعك خلصت، سيبنا تعليقاتك على GitHub وأنا راجعها بكرة."',false,'رسالة عمل عادية من زميل، مفيش روابط مشبوهة ولا طلب بيانات.'],
+    ['"DHL: شحنتك محجوزة في الجمارك. ادفع 2€ رسوم تحرير خلال 24 ساعة: dhl-parcel-red.com"',true,'مبلغ صغير مقصود يخليك تدفع بسرعة + نطاق مش الرسمي (dhl.com).'],
+    ['"واتساب من ماما: متنساش تعزمونا الجمعة الساعة ٧ يا حبيبي ❤️"',false,'رسالة شخصية طبيعية — بس خد بالك لو رقم جديد بيدّعي إنه حد قريب!'],
+    ['"IT Support: انتهت صلاحية باسوردك. جدّده فوراً عبر: portal-company-login.com/secure"',true,'قسم IT الحقيقي عمرو ما يطلب تجديد باسورد عبر لينك — دي هجمة Credential Harvesting.'],
+    ['"Google Security: تسجيل دخول جديد من Chrome على Windows — لو انت راجعه من myaccount.google.com"',false,'تنبيه أمني حقيقي بيحيلك للنطاق الرسمي مباشرة بدون طلب بيانات.'],
+    ['"عميل: اتفقنا؟ بعتلك العقد المعدل invoice_2026.exe — افتحه وأكد الاستلام",true' ,true,'ملف .exe مرفق في إيميل = أحمر داكن! دي أشهر طرز انتشار المالوير.'],
+    ['"البنك: كشف حساب شهر أكتوبر أصبح متاحاً في تطبيق البنك الرسمي، تحياتنا."',false,'إشعار عادي بيوجهك للتطبيق نفسه — مفيش لينك ولا بيانات مطلوبة.']
+  ];
+  let order=[],i=0,score=0,active=false;
+  bSafe.disabled=bPhish.disabled=true;
+  function upd(){ scoreEl.textContent=score+'/'+QS.length; }
+  function next(){
+    if(i>=order.length){ finish(); return; }
+    msg.textContent='"'+order[i][0]+'"';
+    note.textContent='';
+    upd();
+  }
+  function answer(saidPhish){
+    if(!active) return;
+    const q=order[i];
+    if(q[1]===saidPhish){ score++; note.style.color='#28c840'; note.textContent='✔ صح! '+q[2]; sfx.ok(); }
+    else { note.style.color='#ff5f57'; note.textContent='✘ غلط! '+q[2]; sfx.err(); }
+    bSafe.disabled=bPhish.disabled=true;
+    i++; upd();
+    setTimeout(()=>{ if(active) next(); enable(); },1600);
+  }
+  function enable(){ bSafe.disabled=bPhish.disabled=false; }
+  function finish(){
+    active=false; bSafe.disabled=bPhish.disabled=true;
+    const pct=Math.round(score/QS.length*100);
+    msg.textContent=pct===100?'🏆 10/10! انت صياد الصيادين — مستحيل يتضح عليك!'
+      :pct>=70?'💪 '+score+'/10 — حسن كويس، بس لسه فيه اللي بيضحك عليك!'
+      :'😱 '+score+'/10 — اقرأ النصايح فوق كويس قبل ما تفتح أي لينك!';
+    note.textContent='';
+    reset.textContent='🔁 تاني';
+  }
+  function start(){
+    order=[...QS].sort(()=>Math.random()-.5);
+    i=0; score=0; active=true; enable();
+    reset.textContent='↻ من الأول';
+    next(); sfx.ok();
+  }
+  bSafe.onclick=()=>answer(false);
+  bPhish.onclick=()=>answer(true);
+  reset.onclick=start;
+  upd();
+})();
+
+// ===== كويز المعلومات الأمنية 🧠 =====
+(function(){
+  const msg=document.getElementById('cqMsg'), opts=document.getElementById('cqOpts'),
+        prog=document.getElementById('cqProg'), scoreEl=document.getElementById('cqScore'),
+        reset=document.getElementById('cqReset');
+  if(!msg) return;
+  const QS=[
+    ['إيه أقوى حماية إضافية لأي حساب؟',['باسورد طويل جداً','التحقق بخطوتين 2FA','تغيير الباسورد كل يوم'],1,'حتى لو اتسرق باسوردك، الهكر محتاج الكود التاني.'],
+    ['HTTPS معناه إيه؟',['الموقع مضمون 100%','الاتصال مشفر','الموقع حكومي'],1,'التشفير بيحمي البيانات في الطريق، بس الموقع نفسه ممكن يكون مزيف!'],
+    ['أول تصرف لو وصلك إيميل مشبوه؟',['أرد عليهم وأستفسر','أضغط اللينك وأشوف','أسكته وأتحقق من المصدر بقنوات رسمية'],2,'التفاعل بأي شكل بيأكد للهكر إن الإيميل شغال.'],
+    ['أنهي باسورد أقوى؟',['P@ss123','casemiro2018','correct-horse-battery-staple'],2,'الطول أهم من التعقيد — عبارة عشوائية طويلة أصعب في التخمين والكسر.'],
+    ['الـ VPN بيعمل إيه أساساً؟[',['يزود سرعة النت','يشفر اتصالك ويخفي IP','يمنع الفيروسات'],1,'بيحمي خصوصيتك على الشبكات العامة بس مش بيحميك من التصيّد.'],
+    ['إيه هو الـ Malware؟',['نظام تشغيل','برنامج ضار','جدار حماية'],1,'اسم مختصر لـ Malicious Software — أي برنامج هدفه الإضرار.'],
+    ['الهندسة الاجتماعية بتستغل إيه؟',['ثغرات السيرفرات','العنصر البشري','أجهزة الراوتر'],1,'أضعف حلقة في أي نظام هي الإنسان — مش التقنية.'],
+    ['ليه تحديث النظام مهم؟',['شكله أحلى','بيزود المساحة','بيقفل ثغرات معروفة'],2,'معظم الاختراقات بتستغل ثغرات ليها تحديث موجود أصلاً!'],
+    ['أكبر خطر في الواي فاي العام؟',['البطارية بتخلص','اعتراض بياناتك (Man-in-the-Middle)','النت بيبقى بطيء'],1,'مهاجم على نفس الشبكة يقدر يلم ما بينك وبين المواقع.'],
+    ['إيه معنى Zero-Day؟',['فيروس بيمشي ببطء','ثغرة مش معروفة للمطور','هكر بيشتغل بالليل'],1,'ليها يوم صفر من التحديث — يعني مفيش ترقيع ليها لحد ما تُكتشف.']
+  ];
+  let order=[],i=0,score=0,locked=false;
+  function upd(){ prog.textContent=Math.min(i+1,QS.length)+'/'+QS.length; scoreEl.textContent=score; }
+  function show(){
+    if(i>=order.length){ finish(); return; }
+    locked=false;
+    const q=order[i];
+    msg.textContent=q[0];
+    opts.innerHTML='';
+    q[1].forEach((o,idx)=>{
+      const b=document.createElement('button');
+      b.className='qz-opt'; b.type='button'; b.textContent=o;
+      b.onclick=()=>{
+        if(locked) return; locked=true;
+        if(idx===q[2]){ b.classList.add('good'); score++; sfx.ok(); }
+        else { b.classList.add('bad'); sfx.err();
+          opts.children[q[2]].classList.add('good'); }
+        upd();
+        setTimeout(()=>{ i++; show(); },1400);
+      };
+      opts.appendChild(b);
+    });
+    upd();
+  }
+  function finish(){
+    msg.textContent=score===10?'🏆 10/10 — أسطورة أمنية فعلاً!'
+      :score>=7?'😈 '+score+'/10 — مستوى محترم، كمّل!'
+      :score>=4?'👨‍💻 '+score+'/10 — بداية كويسة، راجع النصايح اليومية'
+      :'📚 '+score+'/10 — الطريق لسه طويل.. ابدأ بنصايح قسم الساحة!';
+    opts.innerHTML='';
+    reset.textContent='🔁 تاني';
+    sfx.win();
+  }
+  reset.onclick=()=>{
+    order=[...QS].sort(()=>Math.random()-.5);
+    i=0; score=0; reset.textContent='▶ شغّال...';
+    show(); sfx.ok();
+  };
+})();
+
+// ===== CV + vCard 📄📇 =====
+(function(){
+  const open=document.getElementById('cvOpenBtn'), page=document.getElementById('cvPage');
+  if(!open) return;
+  open.onclick=()=>{
+    document.body.classList.add('cv-mode');
+    sfx.ok();
+  };
+  document.getElementById('cvClose').onclick=()=>document.body.classList.remove('cv-mode');
+  document.getElementById('cvPrint').onclick=()=>window.print();
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape') document.body.classList.remove('cv-mode');
+  });
+  document.getElementById('vcfBtn').onclick=()=>{
+    const vcf=[
+      'BEGIN:VCARD','VERSION:3.0',
+      'FN:CASEMIRO EL_HKM','N:EL_HKM;CASEMIRO;;;',
+      'ORG:Cyber Security Services',
+      'TITLE:Ethical Hacker & Security Specialist',
+      'TEL;TYPE=CELL:+201064318118',
+      'EMAIL:m.mahmoud10508@gmail.com',
+      'URL:https://mmahmoud10508-ctrl.github.io/portfolio/',
+      'NOTE:Cyber Security & Ethical Hacking',
+      'END:VCARD'
+    ].join('\r\n');
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(new Blob([vcf],{type:'text/vcard'}));
+    a.download='CASEMIRO-EL_HKM.vcf';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    sfx.pop();
+  };
+})();
+
+// ===== القارئ الآلي 🗣️ =====
+window.__speak=function(text){
+  try{
+    if(!('speechSynthesis' in window)) return;
+    speechSynthesis.cancel();
+    const clean=text.replace(/[^\u0600-\u06FFa-zA-Z0-9\s.,!?%+-]/g,' ').trim();
+    if(!clean) return;
+    const u=new SpeechSynthesisUtterance(clean.slice(0,180));
+    u.lang=/[\u0600-\u06FF]/.test(clean)?'ar-SA':'en-US';
+    u.rate=1.05; u.pitch=.85; u.volume=.9;
+    speechSynthesis.speak(u);
+  }catch(e){}
+};
+
+// ===== موسيقى الخلفية 🎵 =====
+(function(){
+  const btn=document.getElementById('musicBtn');
+  if(!btn) return;
+  let playing=false,timer=null,nextT=0,step=0,actx=null;
+  const BASS=[0,0,3,-2,0,5,3,0,0,0,3,-2,7,5,3,-2];
+  const ARPS=[12,15,19,22,24];
+  const n2f=n=>110*Math.pow(2,n/12);
+  function ac(){
+    if(!actx) actx=new (window.AudioContext||window.webkitAudioContext)();
+    if(actx.state==='suspended') actx.resume();
+    return actx;
+  }
+  function note(f,t,dur,type,vol){
+    const o=ac().createOscillator(),g=ac().createGain();
+    o.type=type; o.frequency.value=f;
+    g.gain.setValueAtTime(vol,t);
+    g.gain.exponentialRampToValueAtTime(.001,t+dur);
+    o.connect(g); g.connect(actx.destination);
+    o.start(t); o.stop(t+dur+.03);
+  }
+  function sched(){
+    while(nextT<ac().currentTime+.28){
+      const b=BASS[step%16];
+      note(n2f(b)/2,nextT,.24,'triangle',.055);
+      if(step%2===0) note(n2f(b)*2,nextT,.09,'square',.02);
+      note(n2f(b+ARPS[Math.floor(Math.random()*ARPS.length)]),nextT+.07,.08,'square',.017);
+      nextT+=60/140/2;
+      step++;
+    }
+  }
+  btn.onclick=()=>{
+    playing=!playing;
+    btn.classList.toggle('playing',playing);
+    if(playing){
+      nextT=ac().currentTime+.06; step=0;
+      timer=setInterval(sched,90); sched();
+    } else {
+      clearInterval(timer);
+      if(actx) actx.suspend();
+    }
+  };
+})();
+
+// ===== ذيل الكورسر 🖱️ =====
+(function(){
+  const cv=document.getElementById('trailCv');
+  if(!cv||matchMedia('(pointer:coarse)').matches){ if(cv) cv.remove(); return; }
+  const ctx=cv.getContext('2d');
+  const CH=['0','1','ア','カ','サ','>','λ','Σ'];
+  let parts=[],lastX=-99,lastY=-99;
+  function size(){ cv.width=innerWidth; cv.height=innerHeight; }
+  size(); addEventListener('resize',size);
+  addEventListener('mousemove',e=>{
+    if(Math.hypot(e.clientX-lastX,e.clientY-lastY)<16) return;
+    lastX=e.clientX; lastY=e.clientY;
+    parts.push({
+      x:e.clientX+(Math.random()*10-5),
+      y:e.clientY,
+      ch:CH[Math.floor(Math.random()*CH.length)],
+      life:1
+    });
+    if(parts.length>40) parts.shift();
+  });
+  (function loop(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.font='13px Consolas,monospace'; ctx.textAlign='center';
+    for(let i=parts.length-1;i>=0;i--){
+      const p=parts[i];
+      p.life-=.025; p.y+=.6;
+      if(p.life<=0){ parts.splice(i,1); continue; }
+      ctx.fillStyle='rgba(0,255,102,'+p.life*.55+')';
+      ctx.fillText(p.ch,p.x,p.y);
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+// ===== عداد الجلسة ⏱️ =====
+(function(){
+  const el=document.getElementById('sessMin');
+  if(!el) return;
+  const start=Date.now();
+  setInterval(()=>{
+    const s=Math.floor((Date.now()-start)/1000);
+    el.textContent=Math.floor(s/60)+':'+String(s%60).padStart(2,'0');
+  },1000);
 })();
 
 // ===== 3.5) وضع الطوارئ 🚨 =====
@@ -1777,6 +2678,14 @@ window.__ctf = (function(){
     'اكتب اسمك وهيطلعلك كارت عضوية رسمي في عصابة CASEMIRO 😈 — نزّله وشاركه عند أصحابك':'Type your name and get an official membership card of the CASEMIRO crew 😈 — download and share it',
     'اكتب اسمك هنا...':'Type your name here...','⚡ ولّد الكارت':'⚡ Generate Card','⬇️ نزّل PNG':'⬇️ Download PNG',
     '🏆 قاعة المجد — اللي كسروا التحدي السري:':'🏆 Hall of Fame — those who cracked the secret challenge:',
+    '· ⏱️ أنت هنا من: ':'· ⏱️ Time here: ',
+    '📄 شوف السيرة الذاتية':'📄 View CV','📇 أضفني لدفتر تليفونك':'📇 Add me to contacts',
+    'إزاي أبدأ في الأمن السيبراني من الصفر؟':"How do I start cyber security from scratch?",
+    'بتقدم خدمات فعلاً ولا لسه بتتعلم؟':'Do you actually offer services or still learning?',
+    'ليه اسم CASEMIRO؟':'Why the name CASEMIRO?',
+    'الموقع ده معمول بإيه؟':'What is this site built with?',
+    'عندك نصايح لأمان حساباتي؟':'Any tips for securing my accounts?',
+    'إزاي أوصلك أسرع؟':"What's the fastest way to reach you?",
     'صُنع بشغف ❤️ © ':'Crafted with passion ❤️ © ',' — جميع الحقوق محفوظة':' — All rights reserved'
   };
   const PLACEHOLDER={
@@ -1793,11 +2702,13 @@ window.__ctf = (function(){
       en:'<b class="hl">Year 2018...</b> I was only 10. While other kids played video games, one question kept haunting me: <b>"How do people hack these games?! And how do I stop them?"</b><br><br>From that day the fire never went out 🔥 — 8 full years of self-learning: long nights in front of the screen, experiments, failures, and lessons no school would ever teach me. I grew up on the Terminal more than on PlayStation, memorizing Linux commands the way poets memorize their verses.<br><br>Today at only 18, I see the world differently: every system hides a flaw, every network has a weak spot... and my job is to <b class="hl">reach them before the bad guys do</b>. The age is just a number — the experience inside is not, and the road ahead is even longer.<br><br><b>"Walking a path few dare to know... the path of the ethical hacker" 😈🛡️</b>'
     },
     titles:[
-      ['aboutTitle','الحكاية من <span>الآخر</span>','The Story From <span>Scratch</span>'],
-      [null,'مهاراتـ<span>ي</span>','My <span>Arsenal</span>'],
-      [null,'ساحة الـ<span>هاكرز</span> 🕹️','The <span>Hacker</span> Playground 🕹️'],
-      [null,'تواصل <span>معايا</span>','Contact <span>Me</span>'],
-      [null,'سجل <span>الزوار</span> ✍️','Visitor <span>Log</span> ✍️']
+      ['#aboutTitle','الحكاية من <span>الآخر</span>','The Story From <span>Scratch</span>'],
+      ['#skillsTitle','مهاراتـ<span>ي</span>','My <span>Arsenal</span>'],
+      ['#pgTitle','ساحة الـ<span>هاكرز</span> 🕹️','The <span>Hacker</span> Playground 🕹️'],
+      ['#contactTitle','تواصل <span>معايا</span>','Contact <span>Me</span>'],
+      ['#gbTitle','سجل <span>الزوار</span> ✍️','Visitor <span>Log</span> ✍️'],
+      ['#arcadeTitle','أركيد الـ<span>هاكرز</span> 🎮','Hacker <span>Arcade</span> 🎮'],
+      ['#faqTitle','أسئلة <span>شائعة</span> ❓','FAQ ❓']
     ]
   };
   let en=false, originals=null;
@@ -1824,18 +2735,17 @@ window.__ctf = (function(){
       document.querySelectorAll('#heroDesc,#aboutCard').forEach(el=>{
         el.__orig=el.innerHTML;
       });
-      SPECIAL.titles.forEach((t,i)=>{
-        const els=document.querySelectorAll('.sec-title');
-        if(els[i]) els[i].__orig=els[i].innerHTML;
-      });
     }
     document.querySelectorAll('#heroDesc,#aboutCard').forEach(el=>{
       if(el.id==='heroDesc') el.innerHTML=en?SPECIAL.heroDesc.en:el.__orig;
       else el.innerHTML=en?SPECIAL.aboutCard.en:el.__orig;
     });
-    SPECIAL.titles.forEach((t,i)=>{
-      const els=document.querySelectorAll('.sec-title');
-      if(els[i]) els[i].innerHTML=en?t[2]:els[i].__orig;
+    SPECIAL.titles.forEach(t=>{
+      const el=document.querySelector(t[0]);
+      if(el){
+        if(!el.__orig) el.__orig=el.innerHTML;
+        el.innerHTML=en?t[2]:el.__orig;
+      }
     });
     if(en){
       walk(document.body);
@@ -1890,6 +2800,7 @@ window.__ctf = (function(){
     });
   }
   document.getElementById('cipEnc').onclick=()=>{
+    window.__ach && window.__ach.unlock('spy');
     sfx.ok();
     outp.value=mode.value==='b64'?b64enc(inp.value):caesar(inp.value,+shift.value||3);
   };
@@ -1942,6 +2853,7 @@ window.__ctf = (function(){
     running=false;
     input.disabled=true; input.value='';
     const wpm=Math.round((charsOk/5)/elapsedMin());
+    if(wpm>=40&&window.__ach) window.__ach.unlock('speedster');
     target.textContent='✔ خلاص! نتيجتك: '+wpm+' WPM — دقة '+accEl.textContent;
     sfx.win();
     if(wpm>best){ best=wpm; try{ localStorage.setItem('wpm_best',best); }catch(e){} showBest(); }
@@ -2049,6 +2961,7 @@ window.__ctf = (function(){
   gen.onclick=()=>{
     const n=nameIn.value.trim()||'ANONYMOUS';
     draw(n); dl.disabled=false; sfx.win();
+    window.__ach && window.__ach.unlock('forgery');
   };
   dl.onclick=()=>{
     const a=document.createElement('a');
@@ -2076,6 +2989,29 @@ window.__ctf = (function(){
     d.innerHTML = html;
     out.appendChild(d);
     out.scrollTop = out.scrollHeight;
+  }
+
+  let voiceOn = false;
+  try{ voiceOn = localStorage.getItem('casemiro_voice')==='1'; }catch(e){}
+  const _print = print;
+  print = function(txt, cls){
+    _print(txt, cls);
+    if(voiceOn && typeof txt==='string' && txt.trim().length>1 && txt.trim().length<200 && !txt.startsWith(' '))
+      window.__speak(txt);
+  };
+  const voiceBtn=document.getElementById('voiceBtn');
+  if(voiceBtn){
+    voiceBtn.classList.toggle('on',voiceOn);
+    voiceBtn.textContent=voiceOn?'🔊':'🔈';
+    voiceBtn.onclick=()=>{
+      voiceOn=!voiceOn;
+      voiceBtn.classList.toggle('on',voiceOn);
+      voiceBtn.textContent=voiceOn?'🔊':'🔈';
+      try{ localStorage.setItem('casemiro_voice',voiceOn?'1':'0'); }catch(e){}
+      if(voiceOn) window.__speak('voice activated');
+      else if('speechSynthesis' in window) speechSynthesis.cancel();
+      sfx.key();
+    };
   }
 
   print('CASEMIRO TERMINAL v1.0 😈','t-acc');
@@ -2137,6 +3073,7 @@ window.__ctf = (function(){
       if(!window.__ctf.s2){ print('sudo: unlock-vault: command not found 🤔','t-err'); return; }
       print('[sudo] password for guest: ********');
       print('[+] VAULT UNLOCKED ✔','t-ok');
+      window.__ach && window.__ach.unlock('ctf');
       print(''); 
       print('  ██████████████████████████████████','t-acc');
       print('  FLAG: ' + window.__ctf.FLAG,'t-acc');
@@ -2160,6 +3097,7 @@ window.__ctf = (function(){
       document.getElementById('guestbook').scrollIntoView({behavior:'smooth'});
     },
     redalert(){
+      window.__ach && window.__ach.unlock('redalert');
       const on=window.__emergency.toggle();
       if(on) print('🚨 RED ALERT ENGAGED — الواقع في وضع الطوارئ! اكتب redalert تاني للإلغاء','t-err');
       else print('الوضع رجع طبيعي ✔ ... تقريبًا','t-ok');
@@ -2168,6 +3106,7 @@ window.__ctf = (function(){
     'sudo hire-me'(){ print('[sudo] password for guest: ********\nتم القبول على طول — CASEMIRO مستني رسالتك على الواتساب ✔','t-ok'); },
     visit(){ print('زياراتك (على الجهاز ده): '+(document.getElementById('visCount')?.textContent ?? '0')+' 👁️'); },
     matrix(){
+      window.__ach && window.__ach.unlock('neo');
       const on = matrixFX.toggle();
       if(on) print('🌧️ MATRIX ACTIVATED — اكتب matrix تاني لإيقافه (أو هيقفل لوحده بعد 25 ثانية)','t-ok');
       else print('MATRIX DEACTIVATED ✔','t-ok');
@@ -2218,6 +3157,7 @@ window.__ctf = (function(){
     printHTML('<span class="t-in">guest@casemiro:~$</span> ' + esc(raw));
     if(!cmd) return;
     hist.push(cmd); hi = hist.length;
+    window.__ach && window.__ach.unlock('first_cmd');
     const sp = cmd.indexOf(' ');
     const name = (sp === -1 ? cmd : cmd.slice(0, sp)).toLowerCase();
     const arg = sp === -1 ? '' : cmd.slice(sp+1).trim();
