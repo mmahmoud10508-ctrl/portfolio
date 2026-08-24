@@ -1082,6 +1082,214 @@
       </div>
     </div>
 
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./jwt-decode</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🎫 فك تشفير JWT</h3>
+        <textarea class="mono-out" id="jwtIn" style="color:var(--text);min-height:60px;" placeholder="eyJhbGciOi..."></textarea>
+        <button class="btn-mini" id="jwtGo" type="button">🔓 افك الشفرة</button>
+        <textarea class="mono-out" id="jwtOut" readonly style="min-height:110px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./sha-family</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🧬 عائلة SHA كاملة</h3>
+        <textarea class="mono-out" id="mhIn" style="color:var(--text);" placeholder="النص..."></textarea>
+        <button class="btn-mini" id="mhGo" type="button">⚡ SHA-1/256/384/512</button>
+        <textarea class="mono-out" id="mhOut" readonly style="min-height:120px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./hmac-gen</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔏 موقّع HMAC</h3>
+        <input class="tool-inp" id="hmKey" placeholder="المفتاح السري">
+        <textarea class="mono-out" id="hmMsg" style="color:var(--text);" placeholder="الرسالة..."></textarea>
+        <button class="btn-mini" id="hmGo" type="button">✍️ وقّع HMAC-SHA256</button>
+        <textarea class="mono-out" id="hmOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./http-status</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">📡 أكواد HTTP</h3>
+        <input class="tool-inp" id="hsIn" placeholder="404 أو 301...">
+        <button class="btn-mini" id="hsGo" type="button">🔎 معنى الكود</button>
+        <p class="qz-out" id="hsOut" style="min-height:56px;"></p>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./port-lookup</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔌 قاموس البورتات</h3>
+        <input class="tool-inp" id="poIn" placeholder="22 أو 443...">
+        <button class="btn-mini" id="poGo" type="button">🔎 مين بيتكلم هنا؟</button>
+        <p class="qz-out" id="poOut" style="min-height:56px;"></p>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./ua-parser</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🕵️ محلل User-Agent</h3>
+        <textarea class="mono-out" id="uaIn" style="color:var(--text);min-height:52px;"></textarea>
+        <div class="tool-row">
+          <button class="btn-mini" id="uaMine" type="button">🙋 بتاعي</button>
+          <button class="btn-mini" id="uaGo" type="button">🔍 حلّل</button>
+        </div>
+        <textarea class="mono-out" id="uaOut" readonly style="min-height:96px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./ip-inspect</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🧾 فاحص IP</h3>
+        <input class="tool-inp" id="ipIn" placeholder="192.168.1.1">
+        <button class="btn-mini" id="ipGo" type="button">🔬 افحص</button>
+        <textarea class="mono-out" id="ipOut" readonly style="min-height:100px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./char-freq</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">📊 تحليل تكرار الحروف</h3>
+        <textarea class="mono-out" id="cfIn" style="color:var(--text);min-height:60px;" placeholder="الصق أي نص لتحليله جنائياً..."></textarea>
+        <button class="btn-mini" id="cfGo" type="button">🧮 حلّل</button>
+        <textarea class="mono-out" id="cfOut" readonly style="min-height:110px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./url-codec</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔗 ترميز الروابط</h3>
+        <textarea class="mono-out" id="urIn" style="color:var(--text);" placeholder="نص أو رابط فيه مسافات..."></textarea>
+        <div class="tool-row">
+          <button class="btn-mini" id="urEnc" type="button">🔒 Encode</button>
+          <button class="btn-mini" id="urDec" type="button">🔓 Decode</button>
+        </div>
+        <textarea class="mono-out" id="urOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./html-entities</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🏷️ كيانات HTML</h3>
+        <textarea class="mono-out" id="heIn" style="color:var(--text);" placeholder="&lt;div class=&quot;box&quot;&gt; &amp; more..."></textarea>
+        <div class="tool-row">
+          <button class="btn-mini" id="heEnc" type="button">🔒 Escape</button>
+          <button class="btn-mini" id="heDec" type="button">🔓 Unescape</button>
+        </div>
+        <textarea class="mono-out" id="heOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./case-convert</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔤 صيغ التسمية</h3>
+        <input class="tool-inp" id="ccIn" placeholder="my variable name">
+        <button class="btn-mini" id="ccGo" type="button">🔄 حوّل الكل</button>
+        <textarea class="mono-out" id="ccOut" readonly style="min-height:120px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./word-count</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔢 عدّاد النصوص</h3>
+        <textarea class="mono-out" id="wcIn" style="color:var(--text);min-height:80px;" placeholder="اكتب أو الصق نصك..."></textarea>
+        <textarea class="mono-out" id="wcOut" readonly style="min-height:104px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./binary-text</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">💾 نص ⇄ ثنائي</h3>
+        <textarea class="mono-out" id="btIn" style="color:var(--text);" placeholder="Hi أو 01001000..."></textarea>
+        <div class="tool-row">
+          <button class="btn-mini" id="btEnc" type="button">→ ثنائي</button>
+          <button class="btn-mini" id="btDec" type="button">ثنائي →</button>
+        </div>
+        <textarea class="mono-out" id="btOut" readonly style="min-height:70px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./roman-numerals</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🏛️ الأرقام الرومانية</h3>
+        <input class="tool-inp" id="roIn" placeholder="2026 أو MMXXVI">
+        <button class="btn-mini" id="roGo" type="button">🔄 ترجم</button>
+        <textarea class="mono-out" id="roOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./color-convert</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🎨 محول الألوان</h3>
+        <div class="tool-row">
+          <input class="tool-inp" id="clHex" value="#00e5ff" style="width:110px;">
+          <input type="color" id="clPick" value="#00e5ff" style="width:42px;height:36px;border:none;background:none;cursor:pointer;">
+        </div>
+        <button class="btn-mini" id="clGo" type="button">🔄 حوّل</button>
+        <div id="clPrev" style="height:26px;border-radius:8px;background:#00e5ff;"></div>
+        <textarea class="mono-out" id="clOut" readonly style="min-height:74px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./gradient-maker</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🌈 مولد التدرجات</h3>
+        <div class="tool-row">
+          <input type="color" id="grA" value="#00e5ff" style="width:42px;height:36px;border:none;background:none;cursor:pointer;">
+          <input type="color" id="grB" value="#7b5cff" style="width:42px;height:36px;border:none;background:none;cursor:pointer;">
+          <span style="font-size:12px;color:var(--muted);">زاوية</span>
+          <input type="range" id="grAng" min="0" max="360" value="135" style="flex:1;">
+        </div>
+        <div id="grPrev" style="height:64px;border-radius:10px;"></div>
+        <button class="btn-mini" id="grCopy" type="button">📋 انسخ الـ CSS</button>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./unit-convert</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">📐 محول الوحدات</h3>
+        <select id="unPair" style="background:#0d0d18;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;">
+          <option value="km_mi">كم ← ميل</option><option value="mi_km">ميل ← كم</option>
+          <option value="kg_lb">كجم ← رطل</option><option value="lb_kg">رطل ← كجم</option>
+          <option value="c_f">مئوي ← فهرنهايت</option><option value="f_c">فهرنهايت ← مئوي</option>
+          <option value="m_ft">متر ← قدم</option><option value="gb_mb">جيجا ← ميجا</option>
+        </select>
+        <input class="tool-inp" id="unVal" type="number" placeholder="القيمة...">
+        <button class="btn-mini" id="unGo" type="button">🔄 حوّل</button>
+        <textarea class="mono-out" id="unOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./age-calc</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🎂 حاسبة العمر</h3>
+        <input class="tool-inp" id="agIn" type="date" dir="ltr">
+        <button class="btn-mini" id="agGo" type="button">🧮 احسب</button>
+        <textarea class="mono-out" id="agOut" readonly style="min-height:96px;" dir="rtl" style="direction:rtl;text-align:right;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./bill-split</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">💰 تقسيم الحساب</h3>
+        <input class="tool-inp" id="blTotal" type="number" placeholder="إجمالي الفاتورة">
+        <input class="tool-inp" id="blPpl" type="number" placeholder="عدد الأشخاص" value="2">
+        <label class="pw-row"><span>البقشيش:</span><b id="blTipVal">10%</b><input type="range" id="blTip" min="0" max="30" value="10"></label>
+        <button class="btn-mini" id="blGo" type="button">🧮 قسّم</button>
+        <textarea class="mono-out" id="blOut" readonly dir="rtl" style="direction:rtl;text-align:right;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./quick-notes</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">📝 مذكرات سريعة</h3>
+        <textarea class="mono-out" id="ntArea" style="color:var(--text);min-height:130px;" placeholder="اكتب ملاحظاتك... بتتحفظ لوحدها على جهازك"></textarea>
+        <div class="tt-stats"><span id="ntStatus">محفوظة تلقائياً 💾</span><button class="ms-btn" id="ntClear" type="button">🗑️ امسح</button></div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -3030,6 +3238,333 @@ window.__speak=function(text){
       'HEX : '+n.toString(16).toUpperCase();
     sfx.ok();
   };
+})();
+
+// ===== 3.13b) أدوات المختبر التانية =====
+(function(){
+  const $=id=>document.getElementById(id);
+  if(!$('jwtIn')) return;
+  const hex=b=>[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+
+  // JWT
+  $('jwtGo').onclick=()=>{
+    try{
+      const parts=$('jwtIn').value.trim().split('.');
+      if(parts.length<2) throw new Error('التوكن لازم يكون header.payload');
+      const dec=s=>new TextDecoder().decode(Uint8Array.from(atob(s.replace(/-/g,'+').replace(/_/g,'/')),c=>c.charCodeAt(0)));
+      $('jwtOut').value='HEADER:\n'+JSON.stringify(JSON.parse(dec(parts[0])),null,2)+
+        '\n\nPAYLOAD:\n'+JSON.stringify(JSON.parse(dec(parts[1])),null,2);
+      sfx.ok();
+    }catch(e){ $('jwtOut').value='⚠️ JWT غير صالح: '+e.message; sfx.err(); }
+  };
+
+  // SHA family
+  $('mhGo').onclick=async ()=>{
+    const data=new TextEncoder().encode($('mhIn').value);
+    const out=[];
+    for(const alg of ['SHA-1','SHA-256','SHA-384','SHA-512']){
+      const d=await crypto.subtle.digest(alg,data);
+      out.push(alg+': '+hex(d));
+    }
+    $('mhOut').value=out.join('\n'); sfx.ok();
+  };
+
+  // HMAC
+  $('hmGo').onclick=async ()=>{
+    try{
+      const key=await crypto.subtle.importKey('raw',
+        new TextEncoder().encode($('hmKey').value),
+        {name:'HMAC',hash:'SHA-256'},false,['sign']);
+      const sig=await crypto.subtle.sign('HMAC',key,new TextEncoder().encode($('hmMsg').value));
+      $('hmOut').value=hex(sig); sfx.ok();
+    }catch(e){ $('hmOut').value='⚠️ '+e.message; sfx.err(); }
+  };
+
+  // HTTP status
+  const HTTP={100:'Continue — كمّل',101:'Switching Protocols',200:'OK — تمام ✔',201:'Created — اتعملت',
+    204:'No Content — مفيش محتوى',301:'Moved Permanently — اتنقلت للأبد',302:'Found — مؤقتاً',
+    304:'Not Modified — استخدم الكاش',400:'Bad Request — طلب غلط',401:'Unauthorized — متصادش',
+    403:'Forbidden — ممنوع نهائياً',404:'Not Found — مش موجود 😅',405:'Method Not Allowed',
+    408:'Request Timeout — اتأخرت',410:'Gone — راحت وخلاص',418:"I'm a teapot 🫖 (مزحة رسمية!)",
+    429:'Too Many Requests — بطّئ شوية',451:'Unavailable For Legal Reasons ⚖️',
+    500:'Internal Server Error — السيرفر زعلان',502:'Bad Gateway',503:'Service Unavailable — صيانة',
+    504:'Gateway Timeout',511:'Network Authentication Required'};
+  $('hsGo').onclick=()=>{
+    const c=parseInt($('hsIn').value);
+    const info=HTTP[c];
+    const cls=c<200?'ℹ️ معلوماتي':c<300?'✅ نجاح':c<400?'↪️ تحويل':c<500?'⚠️ خطأ منك':'🔥 خطأ من السيرفر';
+    $('hsOut').textContent=info?(cls+'\n'+c+' → '+info):'كود مش معروف أو غلط';
+    sfx.key();
+  };
+
+  // Ports
+  const PORTS={20:'FTP Data',21:'FTP Control',22:'SSH 🔐',23:'Telnet (قديم وخطير!)',25:'SMTP Mail',
+    53:'DNS',67:'DHCP Server',68:'DHCP Client',80:'HTTP 🌐',110:'POP3',143:'IMAP',
+    443:'HTTPS 🔒',445:'SMB (بيحبه الـ ransomware 😈)',465:'SMTPS',587:'SMTP Submission',
+    993:'IMAPS',995:'POP3S',1433:'SQL Server',1521:'Oracle DB',3306:'MySQL 🗄️',
+    3389:'RDP سطح المكتب البعيد',5432:'PostgreSQL',5900:'VNC',6379:'Redis',
+    8080:'HTTP Alt (بروكسيات غالباً)',8443:'HTTPS Alt',27017:'MongoDB',9200:'Elasticsearch'};
+  $('poGo').onclick=()=>{
+    const p=parseInt($('poIn').value);
+    $('poOut').textContent=PORTS[p]?('🔌 Port '+p+' = '+PORTS[p]):(p>=1024&&p<=49151?'بورت مسجل — ممكن أي تطبيق يستخدمه':'مش معروف أو بره المدى الشائع');
+    sfx.key();
+  };
+
+  // UA parser
+  function parseUA(ua){
+    let br='غير معروف',os='غير معروف';
+    if(/Edg\//.test(ua))br='Edge '+ua.match(/Edg\/([\d.]+)/)[1];
+    else if(/OPR\//.test(ua))br='Opera';
+    else if(/SamsungBrowser/.test(ua))br='Samsung Internet';
+    else if(/Chrome\//.test(ua))br='Chrome '+ua.match(/Chrome\/([\d.]+)/)?.[1];
+    else if(/Firefox\//.test(ua))br='Firefox';
+    else if(/Safari\//.test(ua))br='Safari';
+    if(/Windows NT ([\d.]+)/.test(ua)){const v={'10.0':'10/11','6.3':'8.1','6.2':'8','6.1':'7'}[RegExp.$1]||RegExp.$1;os='Windows '+v;}
+    else if(/Android ([\d.]+)/.test(ua))os='Android '+RegExp.$1;
+    else if(/iPhone OS ([\d_]+)/.test(ua))os='iOS '+RegExp.$1.replace(/_/g,'.');
+    else if(/Mac OS X/.test(ua))os='macOS';
+    else if(/Linux/.test(ua))os='Linux';
+    const mobile=/Mobile|iPhone|Android/.test(ua);
+    return 'المتصفح : '+br+'\nالنظام   : '+os+'\nالنوع    : '+(mobile?'📱 موبايل':'🖥️ ديسكتوب')+
+      '\nالمحرك   : '+(/Gecko\/$|Firefox/.test(ua)&&!/like Gecko/.test(ua)?'Gecko':/AppleWebKit/.test(ua)?'Blink/WebKit':'أخرى');
+  }
+  $('uaMine').onclick=()=>{ $('uaIn').value=navigator.userAgent; };
+  $('uaGo').onclick=()=>{
+    $('uaOut').value=$('uaIn').value.trim()?parseUA($('uaIn').value):'الصق UA string الأول';
+    sfx.key();
+  };
+
+  // IP inspect
+  $('ipGo').onclick=()=>{
+    const m=$('ipIn').value.trim().match(/^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$/);
+    if(!m){ $('ipOut').value='⚠️ مش IPv4 صحيح'; sfx.err(); return; }
+    const o=m.slice(1).map(Number);
+    if(o.some(x=>x>255)){ $('ipOut').value='⚠️ فيه رقم أكبر من 255'; sfx.err(); return; }
+    let type='🌐 عامة (Public)';
+    if(o[0]===10||(o[0]===172&&o[1]>=16&&o[1]<=31)||(o[0]===192&&o[1]===168)) type='🏠 خاصة (Private)';
+    else if(o[0]===127) type='🔄 Loopback (انت نفسك)';
+    else if(o[0]===169&&o[1]===254) type='⚠️ APIPA (مفيش DHCP)';
+    const cls=o[0]<128?'A':o[0]<192?'B':o[0]<224?'C':o[0]<240?'D (multicast)':'E (محجوز)';
+    const bin=o.map(x=>x.toString(2).padStart(8,'0')).join('.');
+    $('ipOut').value='النوع     : '+type+'\nالكلاس    : '+cls+'\nثنائي     : '+bin+'\nعدد الأجزاء: 4 أوكتيت ✔';
+    sfx.ok();
+  };
+
+  // char freq
+  $('cfGo').onclick=()=>{
+    const txt=$('cfIn').value;
+    if(!txt.trim()){ $('cfOut').value='اكتب حاجة الأول'; return; }
+    const freq={};
+    for(const ch of txt.toLowerCase()){
+      if(/[\u0600-\u06FFa-z0-9]/.test(ch)) freq[ch]=(freq[ch]||0)+1;
+    }
+    const sorted=Object.entries(freq).sort((a,b)=>b[1]-a[1]).slice(0,14);
+    const max=sorted[0]?.[1]||1;
+    $('cfOut').value=sorted.map(([ch,n])=>
+      ch.padEnd(3)+' '+n+' '.repeat(Math.max(1,4-String(n).length))+'█'.repeat(Math.max(1,Math.round(n/max*18)))
+    ).join('\n');
+    sfx.key();
+  };
+
+  // URL codec
+  $('urEnc').onclick=()=>{ try{ $('urOut').value=encodeURIComponent($('urIn').value); sfx.ok(); }catch(e){} };
+  $('urDec').onclick=()=>{
+    try{ $('urOut').value=decodeURIComponent($('urIn').value.replace(/\+/g,' ')); sfx.ok(); }
+    catch(e){ $('urOut').value='⚠️ ترميز تالف'; sfx.err(); }
+  };
+
+  // HTML entities
+  const ENT={'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'};
+  const ENT_REV={'&amp;':'&','&lt;':'<','&gt;':'>','&quot;':'"','&#39;':"'"};
+  $('heEnc').onclick=()=>{ $('heOut').value=$('heIn').value.replace(/[&<>"']/g,m=>ENT[m]); sfx.key(); };
+  $('heDec').onclick=()=>{ $('heOut').value=$('heIn').value.replace(/&amp;|&lt;|&gt;|&quot;|&#39;/g,m=>ENT_REV[m]); sfx.key(); };
+
+  // case convert
+  $('ccGo').onclick=()=>{
+    const v=$('ccIn').value.trim();
+    if(!v) return;
+    const words=v.split(/[\s_-]+/).map(w=>w.toLowerCase()).filter(Boolean);
+    const cap=w=>w.charAt(0).toUpperCase()+w.slice(1);
+    $('ccOut').value=
+      'UPPER : '+words.join(' ').toUpperCase()+
+      '\nlower : '+words.join(' ')+
+      '\nTitle : '+words.map(cap).join(' ')+
+      '\ncamel : '+words.map((w,i)=>i?cap(w):w).join('')+
+      '\nsnake : '+words.join('_')+
+      '\nkebab : '+words.join('-');
+    sfx.key();
+  };
+
+  // word counter
+  const wcUpdate=()=>{
+    const t=$('wcIn').value;
+    if(t===undefined) return;
+    const chars=t.length, noSpace=t.replace(/\s/g,'').length,
+      words=t.trim()?(t.trim().match(/\S+/g)||[]).length:0,
+      lines=t?t.split('\n').length:0,
+      sentences=(t.match(/[.!؟?]+/g)||[]).length,
+      mins=Math.max(1,Math.round(words/200));
+    $('wcOut').value=
+      'الحروف       : '+chars+
+      '\nبدون مسافات  : '+noSpace+
+      '\nالكلمات      : '+words+
+      '\nالأسطر       : '+lines+
+      '\nالجمل        : '+sentences+
+      '\nزمن القراءة  : ~'+mins+' دقيقة';
+  };
+  $('wcIn').addEventListener('input',wcUpdate);
+
+  // binary text
+  $('btEnc').onclick=()=>{
+    $('btOut').value=[...new TextEncoder().encode($('btIn').value)]
+      .map(b=>b.toString(2).padStart(8,'0')).join(' ');
+    sfx.key();
+  };
+  $('btDec').onclick=()=>{
+    try{
+      const bytes=$('btIn').value.trim().split(/\s+/).map(b=>parseInt(b,2));
+      if(bytes.some(isNaN)) throw 0;
+      $('btOut').value=new TextDecoder().decode(new Uint8Array(bytes));
+      sfx.ok();
+    }catch(e){ $('btOut').value='⚠️ ثنائي غير صالح'; sfx.err(); }
+  };
+
+  // roman
+  const ROMAN=[[1000,'M'],[900,'CM'],[500,'D'],[400,'CD'],[100,'C'],[90,'XC'],
+    [50,'L'],[40,'XL'],[10,'X'],[9,'IX'],[5,'V'],[4,'IV'],[1,'I']];
+  $('roGo').onclick=()=>{
+    const v=$('roIn').value.trim().toUpperCase();
+    if(/^\d+$/.test(v)){
+      let n=parseInt(v),out='';
+      if(n<1||n>3999){ $('roOut').value='⚠️ من 1 لـ 3999 بس'; sfx.err(); return; }
+      for(const[val,sym]of ROMAN){ while(n>=val){ out+=sym; n-=val; } }
+      $('roOut').value=out;
+    } else {
+      let total=0,ok=true;
+      for(let i=0;i<v.length;i++){
+        const cur=ROMAN.find(r=>r[1]===v[i]);
+        const next=ROMAN.find(r=>r[1]===v[i+1]);
+        if(!cur){ ok=false; break; }
+        if(next&&next[0]>cur[0]){ total+=next[0]-cur[0]; i++; }
+        else total+=cur[0];
+      }
+      $('roOut').value=ok?('الرقم: '+total):'⚠️ حروف رومانية غير صحيحة';
+    }
+    sfx.key();
+  };
+
+  // color converter
+  function hexToRgb(h){
+    const m=h.replace('#','');
+    const full=m.length===3?m.split('').map(c=>c+c).join(''):m;
+    if(!/^[0-9a-f]{6}$/i.test(full)) return null;
+    return [0,2,4].map(i=>parseInt(full.substr(i,2),16));
+  }
+  function rgbToHsl([r,g,b]){
+    r/=255;g/=255;b/=255;
+    const mx=Math.max(r,g,b),mn=Math.min(r,g,b),l=(mx+mn)/2;
+    let h=0,s=0;
+    if(mx!==mn){
+      const d=mx-mn;
+      s=l>.5?d/(2-mx-mn):d/(mx+mn);
+      h=mx===r?(g-b)/d+(g<b?6:0):mx===g?(b-r)/d+2:(r-g)/d+4;
+      h*=60;
+    }
+    return [Math.round(h),Math.round(s*100),Math.round(l*100)];
+  }
+  function clPaint(){
+    const rgb=hexToRgb($('clHex').value);
+    if(!rgb){ $('clOut').value='⚠️ HEX غير صحيح'; return; }
+    const [r,g,b]=rgb,[h,s,l]=rgbToHsl(rgb);
+    $('clPrev').style.background=$('clHex').value;
+    $('clOut').value='HEX : '+$('clHex').value.toUpperCase()+'\nRGB : rgb('+r+', '+g+', '+b+')\nHSL : hsl('+h+', '+s+'%, '+l+'%)';
+    $('clPick').value=$('clHex').value;
+  }
+  $('clGo').onclick=()=>{ clPaint(); sfx.key(); };
+  $('clPick').oninput=e=>{ $('clHex').value=e.target.value; clPaint(); };
+
+  // gradient maker
+  function grPaint(){
+    const css='linear-gradient('+$('grAng').value+'deg, '+$('grA').value+', '+$('grB').value+')';
+    $('grPrev').style.background=css;
+    $('grPrev').dataset.css=css;
+  }
+  ['grA','grB'].forEach(id=>$(id).oninput=grPaint);
+  $('grAng').oninput=grPaint;
+  $('grCopy').onclick=()=>{
+    navigator.clipboard.writeText('background: '+($('grPrev').dataset.css||'')+';');
+    sfx.pop();
+  };
+  grPaint();
+
+  // units
+  const UNITS={
+    km_mi:[.621371,v=>v+' كم = '+(v*.621371).toFixed(3)+' ميل'],
+    mi_km:[1.60934,v=>v+' ميل = '+(v*1.60934).toFixed(3)+' كم'],
+    kg_lb:[2.20462,v=>v+' كجم = '+(v*2.20462).toFixed(2)+' رطل'],
+    lb_kg:[.453592,v=>v+' رطل = '+(v*.453592).toFixed(2)+' كجم'],
+    c_f:null,f_c:null,m_ft:[3.28084,v=>v+' متر = '+(v*3.28084).toFixed(2)+' قدم'],
+    gb_mb:[1024,v=>v+' جيجا = '+(v*1024)+' ميجا']
+  };
+  $('unGo').onclick=()=>{
+    const p=$('unPair').value,v=parseFloat($('unVal').value);
+    if(isNaN(v)){ $('unOut').value='اكتب رقم يا بطل'; return; }
+    if(p==='c_f'){ $('unOut').value=v+'°C = '+(v*9/5+32).toFixed(1)+'°F'; }
+    else if(p==='f_c'){ $('unOut').value=v+'°F = '+((v-32)*5/9).toFixed(1)+'°C'; }
+    else $('unOut').value=UNITS[p][1](v);
+    sfx.key();
+  };
+
+  // age calc
+  $('agGo').onclick=()=>{
+    const b=new Date($('agIn').value);
+    if(isNaN(b)){ $('agOut').value='اختار تاريخ الميلاد الأول'; return; }
+    const now=new Date();
+    let y=now.getFullYear()-b.getFullYear(),
+        m=now.getMonth()-b.getMonth(),
+        d=now.getDate()-b.getDate();
+    if(d<0){ m--; d+=new Date(now.getFullYear(),now.getMonth(),0).getDate(); }
+    if(m<0){ y--; m+=12; }
+    const days=Math.floor((now-b)/864e5);
+    let nb=new Date(now.getFullYear(),b.getMonth(),b.getDate());
+    if(nb<now) nb.setFullYear(nb.getFullYear()+1);
+    const toNb=Math.ceil((nb-now)/864e5);
+    $('agOut').value=
+      'عمرك: '+y+' سنة و'+m+' شهر و'+d+' يوم'+
+      '\nعشت: '+days.toLocaleString('ar-EG')+' يوم على الأرض'+
+      '\nاتولدت يوم: '+b.toLocaleDateString('ar-EG',{weekday:'long'})+
+      '\nعيد ميلادك الجاي بعد: '+toNb+' يوم 🎂';
+    sfx.pop();
+  };
+
+  // bill split
+  $('blTip').oninput=e=>$('blTipVal').textContent=e.target.value+'%';
+  $('blGo').onclick=()=>{
+    const tot=parseFloat($('blTotal').value), ppl=parseInt($('blPpl').value)||1,
+          tipP=+$('blTip').value;
+    if(isNaN(tot)||tot<=0){ $('blOut').value='اكتب فاتورة صحيحة'; return; }
+    const tip=tot*tipP/100, grand=tot+tip;
+    $('blOut').value=
+      'الفاتورة   : '+tot.toFixed(2)+
+      '\nالبقشيش('+tipP+'%): '+tip.toFixed(2)+
+      '\nالإجمالي   : '+grand.toFixed(2)+
+      '\nللشخص الواحد ('+ppl+'): '+ (grand/ppl).toFixed(2)+' 💸';
+    sfx.key();
+  };
+
+  // notes
+  let savedN=''; try{ savedN=localStorage.getItem('casemiro_notes')||''; }catch(e){}
+  $('ntArea').value=savedN;
+  let ntT=null;
+  $('ntArea').addEventListener('input',()=>{
+    clearTimeout(ntT);
+    $('ntStatus').textContent='...بيتحفظ';
+    ntT=setTimeout(()=>{
+      try{ localStorage.setItem('casemiro_notes',$('ntArea').value); }catch(e){}
+      $('ntStatus').textContent='اتحفظت 💾 '+new Date().toLocaleTimeString('ar-EG');
+    },600);
+  });
+  $('ntClear').onclick=()=>{ $('ntArea').value=''; localStorage.removeItem('casemiro_notes'); $('ntStatus').textContent='تم المسح 🗑️'; sfx.err(); };
 })();
 
 // ===== 3.14) ألعاب الدفعة الجديدة 🎮 =====
