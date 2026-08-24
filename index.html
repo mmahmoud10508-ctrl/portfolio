@@ -363,6 +363,7 @@
     gap:8px; text-align:center; padding:20px;
     background:rgba(8,8,16,.42); backdrop-filter:blur(3px);
   }
+  .g-center[hidden]{ display:none; }
   .g-title { font-weight:900; font-size:23px; letter-spacing:1px; }
   .g-sub { color:var(--muted); font-size:14px; max-width:270px; line-height:1.9; }
   .g-best { color:var(--type); font-size:13px; font-weight:700; min-height:18px; }
@@ -463,6 +464,45 @@
   .pw-row input[type=range] { flex:1; accent-color:#00e5ff; cursor:pointer; }
   .pw-btn { margin-top:18px; border:none; cursor:pointer; width:100%; }
 
+  /* نصيحة الأمن اليومية */
+  .tip-card {
+    margin-top:22px; padding:20px 24px;
+    background:linear-gradient(135deg, rgba(var(--accRGB),.08), rgba(41,121,255,.04));
+    border:1px solid rgba(var(--accRGB),.3);
+    border-radius:16px; display:flex; gap:16px; align-items:flex-start;
+  }
+  .tip-card .t-icon { font-size:32px; flex:none; }
+  .tip-card h3 { font-size:14px; color:var(--acc); font-weight:900; margin-bottom:6px; }
+  .tip-card p { color:var(--card-text); line-height:2; font-size:15px; }
+
+  /* خريطة الهجمات + لعبة الدفاع */
+  .duo-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:22px; margin-top:22px; align-items:stretch; }
+  @media(max-width:860px){ .duo-grid { grid-template-columns:1fr; } }
+  .ops-card {
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:16px; overflow:hidden; display:flex; flex-direction:column;
+  }
+  .ops-card .term-bar { padding:14px 16px 12px; margin-bottom:0; }
+  #atkMap { width:100%; height:270px; display:block; background:#07070f; }
+  .atk-log {
+    height:132px; overflow-y:auto; padding:8px 14px;
+    border-top:1px solid var(--border);
+    font-family:'Consolas',monospace; font-size:11.5px; line-height:2;
+    color:#ff8a8a; background:rgba(0,0,0,.3);
+  }
+  .atk-log div:first-child { color:#ffd6d6; }
+  #defArea { position:relative; flex:1; min-height:350px; background:#07070f; cursor:crosshair; }
+  #defCv { display:block; width:100%; height:100%; }
+  .def-hud {
+    position:absolute; top:0; right:0; left:0; z-index:6;
+    display:flex; justify-content:space-between; align-items:center;
+    padding:9px 14px; font-weight:800; font-size:13px;
+    background:rgba(8,8,16,.68); backdrop-filter:blur(4px);
+    border-bottom:1px solid var(--border); direction:ltr;
+  }
+  .def-hud span { color:#e8e8f0; }
+  .def-hud b { color:var(--acc); }
+
   @media(max-width:860px){ .pg-grid { grid-template-columns:1fr; } }
 
   @media(max-width:640px){
@@ -493,6 +533,7 @@
     <li><a href="#guestbook">الزوار</a></li>
   </ul>
   <div class="nav-actions">
+    <button class="theme-btn" id="soundBtn" title="الصوت" aria-label="الصوت">🔊</button>
     <button class="theme-btn" id="themeBtn" title="تبديل الوضع الليلي / النهاري" aria-label="تبديل الثيم">☀️</button>
     <button class="menu-btn" id="menuBtn">☰</button>
   </div>
@@ -638,6 +679,54 @@
         </div>
 
       </div>
+    </div>
+
+    <!-- نصيحة الأمن اليومية -->
+    <div class="tip-card reveal">
+      <span class="t-icon">🔐</span>
+      <div>
+        <h3>نصيحة الأمن بتاع اليوم</h3>
+        <p id="dailyTip">…</p>
+      </div>
+    </div>
+
+    <!-- خريطة الهجمات + لعبة الدفاع عن السيرفر -->
+    <div class="duo-grid reveal">
+
+      <div class="ops-card">
+        <div class="term-bar">
+          <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+          <em>root@soc-casemiro: ./threat-map --live</em>
+        </div>
+        <canvas id="atkMap"></canvas>
+        <div class="atk-log" id="atkLog"><div>[--:--:--] initializing threat feed...</div></div>
+      </div>
+
+      <div class="ops-card">
+        <div class="term-bar">
+          <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+          <em>root@casemiro: ./defend-server</em>
+        </div>
+        <div id="defArea">
+          <canvas id="defCv"></canvas>
+          <div id="defIdle" class="g-center">
+            <p class="g-title">DEFEND THE SERVER 🛡️</p>
+            <p class="g-sub">دوس على الباكدجات الضارة قبل ما توصل للسيرفر — معاك 3 حمايات بس!</p>
+            <button id="defStart" class="btn btn-main" type="button">▶ ابدأ الدفاع</button>
+            <p class="g-best" id="defBest"></p>
+          </div>
+          <div id="defEnd" class="g-center" hidden>
+            <p class="g-title" id="defEndTitle"></p>
+            <p class="g-sub" id="defEndSub"></p>
+            <button id="defAgain" class="btn btn-ghost" type="button">🔁 تاني</button>
+          </div>
+          <div class="def-hud" id="defHud" hidden>
+            <span>SCORE: <b id="defScore">0</b></span>
+            <span id="defLives">🛡️🛡️🛡️</span>
+          </div>
+        </div>
+      </div>
+
     </div>
 
   </div>
@@ -917,6 +1006,7 @@ const TELEGRAM_CONFIG = {
       endSub.textContent = 'وصلت لـ '+score+' من '+TARGET+'... الزرار كسبانك المرة دي 😏';
     }
     if(score > best){ best = score; try{ localStorage.setItem('htb_best', best); }catch(e){} showBest(); }
+    if(win) sfx.win(); else sfx.lose();
   }
 
   function start(){
@@ -937,6 +1027,7 @@ const TELEGRAM_CONFIG = {
     scoreEl.textContent = score+'/'+TARGET;
     prog.style.width = Math.min(100, score/TARGET*100)+'%';
     btn.classList.remove('hit'); void btn.offsetWidth; btn.classList.add('hit');
+    sfx.pop();
     if(score >= TARGET){ finish(true); return; }
     clearTimeout(jumper); place();
     jumper = setTimeout(jump, Math.max(330, 950 - score*45));
@@ -1034,6 +1125,316 @@ const TELEGRAM_CONFIG = {
     }catch(e){}
   });
   generate();
+})();
+
+// ===== 7) المؤثرات الصوتية (Web Audio - من غير ملفات) =====
+const sfx = (function(){
+  let actx=null, muted=false;
+  try{ muted = localStorage.getItem('casemiro_mute')==='1'; }catch(e){}
+  function ac(){
+    if(!ctx()){
+      const AC = window.AudioContext || window.webkitAudioContext;
+      if(!AC) return null;
+      actx = new AC();
+    }
+    if(actx.state==='suspended') actx.resume();
+    return actx;
+  }
+  function ctx(){ return actx; }
+  function tone(f, dur, type='square', vol=0.04, when=0){
+    if(muted) return;
+    const c=ac(); if(!c) return;
+    const o=c.createOscillator(), g=c.createGain();
+    o.type=type; o.frequency.value=f;
+    g.gain.setValueAtTime(vol, c.currentTime+when);
+    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime+when+dur);
+    o.connect(g); g.connect(c.destination);
+    o.start(c.currentTime+when); o.stop(c.currentTime+when+dur+0.03);
+  }
+  function keyClick(vol){
+    if(muted) return;
+    const c=ac(); if(!c) return;
+    const len=Math.floor(c.sampleRate*0.03);
+    const buf=c.createBuffer(1, len, c.sampleRate);
+    const d=buf.getChannelData(0);
+    for(let i=0;i<len;i++) d[i]=(Math.random()*2-1)*Math.pow(1-i/len,2.2);
+    const src=c.createBufferSource(); src.buffer=buf;
+    const bp=c.createBiquadFilter(); bp.type='bandpass';
+    bp.frequency.value=1600+Math.random()*1400; bp.Q.value=1.1;
+    const g=c.createGain(); g.gain.value=vol;
+    src.connect(bp); bp.connect(g); g.connect(c.destination);
+    src.start();
+    const o=c.createOscillator(), og=c.createGain();
+    o.type='sine';
+    o.frequency.setValueAtTime(180+Math.random()*70, c.currentTime);
+    o.frequency.exponentialRampToValueAtTime(85, c.currentTime+0.05);
+    og.gain.setValueAtTime(vol*0.8, c.currentTime);
+    og.gain.exponentialRampToValueAtTime(0.0001, c.currentTime+0.06);
+    o.connect(og); og.connect(c.destination);
+    o.start(); o.stop(c.currentTime+0.09);
+  }
+  return {
+    get muted(){ return muted; },
+    toggle(){ muted=!muted; try{ localStorage.setItem('casemiro_mute', muted?'1':'0'); }catch(e){} return muted; },
+    key(){ keyClick(0.05); },
+    ok(){ tone(660,.07,'square',.03); tone(990,.1,'square',.03,.07); },
+    err(){ tone(170,.18,'sawtooth',.05); },
+    pop(){ tone(320,.06,'triangle',.06); tone(540,.05,'triangle',.04,.05); },
+    shoot(){ tone(950,.04,'square',.03); },
+    win(){ [523,659,784,1047].forEach((f,i)=>tone(f,.13,'square',.045,i*.09)); },
+    lose(){ [420,300,220,150].forEach((f,i)=>tone(f,.15,'sawtooth',.05,i*.11)); }
+  };
+})();
+(function(){
+  const btn=document.getElementById('soundBtn');
+  if(!btn) return;
+  btn.textContent = sfx.muted ? '🔇' : '🔊';
+  btn.onclick = ()=>{ btn.textContent = sfx.toggle() ? '🔇' : '🔊'; };
+})();
+
+// ===== 8) نصيحة الأمن اليومية =====
+(function(){
+  const el=document.getElementById('dailyTip');
+  if(!el) return;
+  const TIPS=[
+    'الباسورد القوي طول مش تعقيد: 4 كلمات عشوائية أأمن من رموز معقدة قصيرة.',
+    'مفعّل التحقق بخطوتين (2FA) على كل حساب مهم... خصوصاً الإيميل الأول.',
+    'متفتحش لينكات في رسايل مجهولة حتى لو شكلها من بنكك — افتح الموقع بنفسك.',
+    'حدّث نظام تشغيلك وتطبيقاتك — التحديثات بتسد الثغرات اللي المخترقين عارفينها.',
+    'الواي فاي العام مكان خطير: استخدم VPN لو مضطر تشتغل منه.',
+    'عمل نسخة احتياطية مش رفاهية: قاعدة 3-2-1 (3 نسخ، على نوعين وسائط، واحدة خارج المكان).',
+    'متستخدمش نفس الباسورد في أكتر من مكان — تسريب واحد يوقع كل حياتك.',
+    'المدير بتاع الكاميرات أو الراوتر بباسورد المصنع؟ ده أول حاجة لازم تتغير.',
+    'اقفل الشاشة كل ما تقوم من مكانك — Win+L ثانية واحدة وتحفظ كتير.',
+    'الرسايل اللي بتستعجلك ("حسابك هيتقفل اليوم!") هي غالباً تصيّد — خُذ نفس وامسك.',
+    'راجع صلاحيات تطبيقات موبايلك: مش كل app محتاج يعرف مكانك ودفتر تلفوناتك.',
+    'التشفير صاحبك: فعّل BitLocker أو FileVault على الأجهزة المحمولة.',
+    'متشاركش رقم تذكرتك أو الباركود في ستوريات — فيه ناس بتسرقهما وبتنقل الحساب.',
+    'قبل ما تحمل أي برنامج اسأل نفسك: الموقع الرسمي هو ده فعلاً؟',
+    'الفيشة الذكية (Smart Plug) كمان جهاز مخترق — غيّر باسوردها الافتراضي.',
+    'راجع الجلسات المفتوحة لحساباتك كل فترة وسجل خروج من الأجهزة اللي مش بتاعتك.',
+    'الأمانة الأولى للحماية: متعتمدش على الأنتي فايرس بس — عقلك أفضل برنامج حماية.',
+    'USB لقيته في الشارع؟ متدخلوش في جهازشغل أبداً — دي حيلة معروفة اسمها USB Drop.',
+    'افصل كاميرا اللابتوب أو حط عليها ستيكر لو مش بتستخدمها.',
+    'في الشغل: مبدأ أقل صلاحية ممكنة — كل حساب ياخد الصلاحيات اللي محتاجها وبس.',
+    'استخدم DNS آمن زي Quad9 أو Cloudflare Family عشان يحجب المواقع الخبيثة تلقائياً.',
+    'رسائل SMS برضه بتصيد — اللينك جوه رسالة من "شركة شحن" مش ضمان إنه آمن.',
+    'فعّل خاصية Find My Device — فقدان الجهاز أسوأ من اختراقه ساعات.',
+    'متكتبش بيانات حساسة في شبكة مطعم المفتوحة حتى للتصفح الخفيف.',
+    'راجع كشوف حساباتك بانتظام — الهجمات الصغيرة المتكررة بتعدي على البال.',
+    'البريد المجهول: استخدم alias إيميل لكل موقع عشان تعرف مين اللي سرّب بياناتك.',
+    'التحديثات الأوتوماتيك مش عدو — هو صديقك الوحيد اللي بيشتغل وانت نايم.',
+    'اختبر نسخك الاحتياطية فعلاً — نسخة مش متجربة معناها مش موجودة.',
+    'متقولش لأحد كلمة السر حتى لو أقرب الناس... ولا في مكالمة بيقولوك "الدعم الفني".',
+    'لو جهازك اتسرق عن بعد وبدأ يبطئ ويولد حرارة من غير سبب — افصله عن النت فوراً.',
+    'الأمن عملية مش منتج: راجع إعداداتك كل شهر، والمخترقين بيفكروا كل يوم.'
+  ];
+  const d=new Date();
+  el.textContent = TIPS[(d.getDate()-1) % TIPS.length];
+})();
+
+// ===== 9) خريطة الهجمات المباشرة =====
+(function(){
+  const cv=document.getElementById('atkMap'), logEl=document.getElementById('atkLog');
+  if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const CITIES=[
+    ['Cairo',31,30,1],['New York',-74,40],['London',-0.1,51],['Tokyo',139,35],
+    ['Shanghai',121,31],['Moscow',37,55],['Sao Paulo',-46,-23],['Los Angeles',-118,34],
+    ['Dubai',55,25],['Singapore',103,1],['Berlin',13,52],['Mumbai',72,19],
+    ['Lagos',3,6],['Sydney',151,-33],['Paris',2,48],['Johannesburg',28,-26],
+    ['Seoul',126,37],['Toronto',-79,43],['Mexico City',-99,19],['Istanbul',28,41]
+  ];
+  const TYPES=['DDoS','Phishing','Brute Force','SQL Injection','XSS','Malware','Ransomware','Port Scan'];
+  let pts=[];
+  function size(){
+    cv.width=cv.clientWidth; cv.height=cv.clientHeight;
+    const latTop=72, latBot=-58;
+    pts=CITIES.map(c=>({
+      name:c[0], home:!!c[3],
+      x:(c[1]+180)/360*cv.width,
+      y:(latTop-c[2])/(latTop-latBot)*cv.height
+    }));
+  }
+  size(); addEventListener('resize',size);
+
+  const attacks=[];
+  function fire(){
+    let b=pts[Math.floor(Math.random()*pts.length)];
+    while(b.home) b=pts[Math.floor(Math.random()*pts.length)];
+    let a=pts[Math.floor(Math.random()*pts.length)];
+    while(a===b || a.home && Math.random()<0.7) a=pts[Math.floor(Math.random()*pts.length)];
+    attacks.push({a,b,t:0});
+    const now=new Date().toTimeString().slice(0,8);
+    const div=document.createElement('div');
+    div.textContent='['+now+'] '+TYPES[Math.floor(Math.random()*TYPES.length)]+' :: '+a.name+' >> '+b.name;
+    logEl.prepend(div);
+    while(logEl.children.length>10) logEl.lastChild.remove();
+  }
+  setInterval(()=>{ if(document.visibilityState==='visible') fire(); }, 1300);
+
+  (function draw(){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.strokeStyle='rgba(0,229,255,.055)'; ctx.lineWidth=1;
+    for(let x=0.5;x<cv.width;x+=36){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,cv.height); ctx.stroke(); }
+    for(let y=0.5;y<cv.height;y+=36){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(cv.width,y); ctx.stroke(); }
+    pts.forEach(p=>{
+      ctx.fillStyle=p.home?'#00e5ff':'#8892a8';
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.home?4:2.5,0,6.29); ctx.fill();
+      if(p.home){
+        const ph=(Date.now()/600)%1;
+        ctx.strokeStyle='rgba(0,229,255,'+(0.55*(1-ph))+')';
+        ctx.lineWidth=1.6;
+        ctx.beginPath(); ctx.arc(p.x,p.y,5+ph*14,0,6.29); ctx.stroke();
+      }
+    });
+    for(let i=attacks.length-1;i>=0;i--){
+      const k=attacks[i]; k.t+=0.013;
+      const a=k.a,b=k.b;
+      const mx=(a.x+b.x)/2, my=Math.min(a.y,b.y)-Math.abs(a.x-b.x)*0.22-22;
+      const tt=Math.min(k.t,1);
+      ctx.strokeStyle='rgba(255,80,80,.6)'; ctx.lineWidth=1.4;
+      ctx.beginPath(); ctx.moveTo(a.x,a.y);
+      const steps=Math.max(2,Math.ceil(42*tt));
+      for(let s=1;s<=steps;s++){
+        const u=(s/steps)*tt;
+        ctx.lineTo((1-u)*(1-u)*a.x+2*(1-u)*u*mx+u*u*b.x,(1-u)*(1-u)*a.y+2*(1-u)*u*my+u*u*b.y);
+      }
+      ctx.stroke();
+      const hx=(1-tt)*(1-tt)*a.x+2*(1-tt)*tt*mx+tt*tt*b.x;
+      const hy=(1-tt)*(1-tt)*a.y+2*(1-tt)*tt*my+tt*tt*b.y;
+      ctx.fillStyle='#ff5f57';
+      ctx.beginPath(); ctx.arc(hx,hy,2.6,0,6.29); ctx.fill();
+      if(k.t>=1){
+        ctx.strokeStyle='rgba(255,95,87,'+Math.max(0,0.7-(k.t-1)*1.5)+')';
+        ctx.lineWidth=2;
+        ctx.beginPath(); ctx.arc(b.x,b.y,3+(k.t-1)*26,0,6.29); ctx.stroke();
+        if(k.t>1.45) attacks.splice(i,1);
+      }
+    }
+    requestAnimationFrame(draw);
+  })();
+})();
+
+// ===== 10) لعبة الدفاع عن السيرفر =====
+(function(){
+  const area=document.getElementById('defArea'), cv=document.getElementById('defCv'),
+        idle=document.getElementById('defIdle'), endP=document.getElementById('defEnd'),
+        hud=document.getElementById('defHud'), scoreEl=document.getElementById('defScore'),
+        livesEl=document.getElementById('defLives'), bestEl=document.getElementById('defBest'),
+        endTitle=document.getElementById('defEndTitle'), endSub=document.getElementById('defEndSub');
+  if(!area) return;
+  const ctx=cv.getContext('2d');
+  let running=false, packets=[], booms=[], score=0, lives=3,
+      rafId=null, prevTs=0, spawnAcc=0;
+
+  let best=0; try{ best=+(localStorage.getItem('dts_best')||0); }catch(e){}
+  const showBest=()=> bestEl.textContent = best ? ('🏆 أفضل نتيجة: '+best) : '';
+  showBest();
+
+  function size(){
+    cv.width=area.clientWidth; cv.height=area.clientHeight;
+    if(!running) drawFrame(0);
+  }
+  addEventListener('resize',size);
+
+  function drawFrame(dt){
+    ctx.clearRect(0,0,cv.width,cv.height);
+    ctx.strokeStyle='rgba(0,229,255,.05)'; ctx.lineWidth=1;
+    for(let x=0.5;x<cv.width;x+=30){ ctx.beginPath(); ctx.moveTo(x,0); ctx.lineTo(x,cv.height); ctx.stroke(); }
+    for(let y=0.5;y<cv.height;y+=30){ ctx.beginPath(); ctx.moveTo(0,y); ctx.lineTo(cv.width,y); ctx.stroke(); }
+    ctx.strokeStyle='rgba(0,229,255,.3)';
+    ctx.setLineDash([7,7]);
+    ctx.beginPath(); ctx.moveTo(0,cv.height-56); ctx.lineTo(cv.width,cv.height-56); ctx.stroke();
+    ctx.setLineDash([]);
+    ctx.font='30px serif'; ctx.textAlign='center'; ctx.textBaseline='alphabetic';
+    ctx.fillText('🖥️', cv.width/2, cv.height-16);
+  }
+
+  function spawn(){
+    const types=['💀','🐛','☠️','👾','🦠'];
+    packets.push({
+      x: 24+Math.random()*(cv.width-48),
+      y: -16,
+      em: types[Math.floor(Math.random()*types.length)],
+      rot: Math.random()*6.28
+    });
+  }
+  function spawnEvery(){ return Math.max(380, 1150-score*14); }
+
+  function loop(ts){
+    if(!running) return;
+    const dt=Math.min(40, ts-(prevTs||ts)); prevTs=ts;
+    ctx.clearRect(0,0,cv.width,cv.height);
+    drawFrame(dt);
+    spawnAcc+=dt;
+    if(spawnAcc>=spawnEvery()){ spawnAcc=0; spawn(); }
+    const speedF=0.055 + score*0.0011;
+    for(let i=packets.length-1;i>=0;i--){
+      const p=packets[i];
+      p.y += speedF*dt*1.5;
+      p.rot+=0.002*dt;
+      ctx.save(); ctx.translate(p.x,p.y); ctx.rotate(p.rot);
+      ctx.font='21px serif'; ctx.textAlign='center';
+      ctx.fillText(p.em,0,7);
+      ctx.restore();
+      if(p.y>=cv.height-60){
+        packets.splice(i,1);
+        lives--; updateLives(); sfx.err();
+        if(lives<=0){ gameOver(false); return; }
+      }
+    }
+    for(let i=booms.length-1;i>=0;i--){
+      const bm=booms[i]; bm.t+=dt/400;
+      if(bm.t>1){ booms.splice(i,1); continue; }
+      ctx.strokeStyle='rgba(0,229,255,'+(1-bm.t)+')';
+      ctx.lineWidth=2;
+      ctx.beginPath(); ctx.arc(bm.x,bm.y,4+bm.t*20,0,6.29); ctx.stroke();
+    }
+    rafId=requestAnimationFrame(loop);
+  }
+
+  function updateLives(){ livesEl.textContent='🛡️'.repeat(Math.max(0,lives)) || '💥'; }
+
+  function gameOver(win){
+    running=false;
+    cancelAnimationFrame(rafId);
+    hud.hidden=true; endP.hidden=false;
+    if(score>best){ best=score; try{ localStorage.setItem('dts_best',best); }catch(e){} showBest(); sfx.win(); }
+    else sfx.lose();
+    endTitle.innerHTML='<span style="color:#ff5f57">✘ SERVER BREACHED</span>';
+    endSub.textContent='صدّيت '+score+' هجمة قبل ما يكسروا الحماية 💪';
+  }
+
+  function start(){
+    idle.hidden=true; endP.hidden=true; hud.hidden=false;
+    packets=[]; booms=[]; score=0; lives=3; prevTs=0; spawnAcc=500;
+    scoreEl.textContent='0'; updateLives();
+    size();
+    running=true;
+    rafId=requestAnimationFrame(loop);
+    sfx.ok();
+  }
+
+  cv.addEventListener('pointerdown', e=>{
+    if(!running) return;
+    const r=cv.getBoundingClientRect();
+    const mx=e.clientX-r.left, my=e.clientY-r.top;
+    for(let i=packets.length-1;i>=0;i--){
+      const p=packets[i];
+      if(Math.hypot(p.x-mx, p.y-my)<27){
+        packets.splice(i,1);
+        booms.push({x:p.x,y:p.y,t:0});
+        score++; scoreEl.textContent=score;
+        sfx.shoot();
+        break;
+      }
+    }
+  });
+
+  document.getElementById('defStart').addEventListener('click', start);
+  document.getElementById('defAgain').addEventListener('click', start);
+  size();
 })();
 
 // ===== 6) مطر الماتريكس =====
@@ -1206,8 +1607,8 @@ const matrixFX = (function(){
     const name = (sp === -1 ? cmd : cmd.slice(0, sp)).toLowerCase();
     const arg = sp === -1 ? '' : cmd.slice(sp+1).trim();
     const fn = CMDS[name];
-    if(fn) fn(arg);
-    else print(name + ": command not found — جرّب help", 't-err');
+    if(fn){ fn(arg); sfx.ok(); }
+    else { print(name + ": command not found — جرّب help", 't-err'); sfx.err(); }
   }
   inp.addEventListener('keydown', e=>{
     if(e.key === 'Enter'){ run(inp.value); inp.value=''; }
@@ -1218,6 +1619,7 @@ const matrixFX = (function(){
       e.preventDefault();
     }
   });
+  inp.addEventListener('input', ()=> sfx.key());
   document.getElementById('termGo').addEventListener('click', ()=>{
     run(inp.value);
     inp.value='';
