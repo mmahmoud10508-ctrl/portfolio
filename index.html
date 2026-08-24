@@ -503,6 +503,108 @@
   .def-hud span { color:#e8e8f0; }
   .def-hud b { color:var(--acc); }
 
+  /* أدوات: مشفر الرسائل + اختبار الكتابة + QR */
+  .tools-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:22px; margin-top:22px; }
+  @media(max-width:1020px){ .tools-grid { grid-template-columns:1fr; } }
+  .tool-card {
+    background:var(--panel); border:1px solid var(--border);
+    border-radius:16px; overflow:hidden; display:flex; flex-direction:column;
+  }
+  .tool-body { padding:16px 18px 20px; display:flex; flex-direction:column; gap:10px; flex:1; }
+  .tool-body textarea, .cipher-out {
+    width:100%; min-height:74px; resize:vertical;
+    background:#0d0d18; color:var(--text); border:1px solid var(--border);
+    border-radius:10px; padding:10px 12px; font-family:'Consolas',monospace;
+    font-size:13px; outline:none; direction:ltr;
+  }
+  .tool-body textarea:focus, .cipher-out:focus { border-color:var(--acc); }
+  .tool-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
+  .tool-row select, .tool-row input[type=number] {
+    background:#0d0d18; color:var(--text); border:1px solid var(--border);
+    border-radius:8px; padding:7px 10px; font-size:13px; outline:none;
+  }
+  .btn-mini {
+    flex:1; min-width:90px; padding:10px 12px; border-radius:10px; cursor:pointer;
+    font-weight:800; font-size:13px; border:1px solid var(--border);
+    background:rgba(var(--accRGB),.12); color:var(--acc); transition:.2s;
+  }
+  .btn-mini:hover { background:rgba(var(--accRGB),.22); }
+  .tt-target {
+    background:#0d0d18; border:1px dashed rgba(var(--accRGB),.5);
+    border-radius:10px; padding:12px; text-align:center;
+    font-family:'Consolas',monospace; font-size:14.5px; font-weight:700;
+    color:var(--acc); direction:ltr; min-height:46px;
+  }
+  .tt-input {
+    width:100%; background:#0d0d18; color:var(--text);
+    border:1px solid var(--border); border-radius:10px;
+    padding:10px 12px; font-family:'Consolas',monospace; font-size:13.5px;
+    outline:none; direction:ltr;
+  }
+  .tt-stats { display:flex; justify-content:space-between; font-size:12.5px; font-weight:800; color:var(--muted); }
+  .tt-stats b { color:var(--acc); }
+  .qr-box { display:flex; justify-content:center; padding:6px 0 2px; }
+  .qr-box img {
+    width:190px; height:190px; border-radius:12px;
+    border:3px solid rgba(var(--accRGB),.55); background:#fff;
+  }
+
+  /* كارت الهكر */
+  .id-card-wrap {
+    display:grid; grid-template-columns:.9fr 1.1fr; gap:20px;
+    padding:18px; align-items:center;
+  }
+  @media(max-width:860px){ .id-card-wrap { grid-template-columns:1fr; } }
+  #idCanvas {
+    width:100%; max-width:520px; border-radius:14px;
+    border:1px solid rgba(var(--accRGB),.4); justify-self:center;
+    background:#0a0a14;
+  }
+  .id-controls { display:flex; flex-direction:column; gap:12px; }
+  .id-controls input[type=text] {
+    background:#0d0d18; color:var(--text); border:1px solid var(--border);
+    border-radius:10px; padding:12px 14px; font-size:15px; outline:none;
+  }
+  .id-controls input[type=text]:focus { border-color:var(--acc); }
+
+  /* وضع الطوارئ 🚨 */
+  #emWrap { position:fixed; inset:0; z-index:9990; pointer-events:none; display:none; }
+  body.emergency #emWrap { display:block; }
+  #emVignette {
+    position:absolute; inset:0;
+    background:radial-gradient(ellipse at center, transparent 52%, rgba(255,30,30,.32));
+    animation:emPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes emPulse { 50% { opacity:.45; } }
+  #emBanner {
+    position:absolute; bottom:0; left:0; right:0;
+    background:linear-gradient(90deg,#8b0000,#c62828,#8b0000);
+    color:#fff; font-weight:900; font-size:14px; letter-spacing:1px;
+    padding:9px 0; white-space:nowrap; overflow:hidden;
+    border-top:1px solid rgba(255,255,255,.25);
+  }
+  #emBanner span {
+    display:inline-block; animation:emScroll 14s linear infinite;
+  }
+  @keyframes emScroll {
+    from { transform:translateX(-100vw); }
+    to   { transform:translateX(100vw); }
+  }
+  body.emergency { --acc:#ff4038; --accRGB:255,64,56; }
+
+  /* قاعة المجد */
+  .hof-strip {
+    margin-bottom:14px; padding:12px 16px;
+    background:linear-gradient(135deg, rgba(255,215,0,.09), rgba(var(--accRGB),.06));
+    border:1px dashed rgba(255,215,0,.45);
+    border-radius:12px; font-size:13.5px; font-weight:800;
+  }
+  .hof-chip {
+    display:inline-block; margin:4px 4px 0; padding:4px 12px;
+    background:rgba(255,215,0,.14); border:1px solid rgba(255,215,0,.4);
+    border-radius:999px; color:#ffd75e; direction:ltr;
+  }
+
   @media(max-width:860px){ .pg-grid { grid-template-columns:1fr; } }
 
   @media(max-width:640px){
@@ -523,6 +625,8 @@
 </head>
 <body>
 
+<!-- R1Q6c2VtaXJvOiB0aGUgZmxhZyBpc25ndCBpbiB0aGUgdGVybWluYWwgLi4uIGxzIC1sYQ== -->
+
 <nav>
   <div class="logo">CASEMIRO<span>_</span></div>
   <ul id="navLinks">
@@ -533,6 +637,7 @@
     <li><a href="#guestbook">الزوار</a></li>
   </ul>
   <div class="nav-actions">
+    <button class="theme-btn" id="langBtn" title="English / عربي" style="font-weight:900;font-size:13px;">EN</button>
     <button class="theme-btn" id="soundBtn" title="الصوت" aria-label="الصوت">🔊</button>
     <button class="theme-btn" id="themeBtn" title="تبديل الوضع الليلي / النهاري" aria-label="تبديل الثيم">☀️</button>
     <button class="menu-btn" id="menuBtn">☰</button>
@@ -681,6 +786,69 @@
       </div>
     </div>
 
+    <!-- مشفر الرسائل + اختبار الكتابة + QR -->
+    <div class="tools-grid reveal">
+
+      <div class="tool-card">
+        <div class="term-bar">
+          <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+          <em>root@casemiro: ./cipher</em>
+        </div>
+        <div class="tool-body">
+          <h3 style="font-size:15px;font-weight:900;">🔑 مشفر الرسائل السري</h3>
+          <textarea id="cipIn" placeholder="اكتب رسالتك هنا..."></textarea>
+          <div class="tool-row">
+            <select id="cipMode">
+              <option value="b64">Base64</option>
+              <option value="caesar">Caesar</option>
+            </select>
+            <input type="number" id="cipShift" min="1" max="25" value="3" title="الإزاحة" style="width:64px;display:none;">
+            <span id="cipShiftLbl" style="font-size:12px;color:var(--muted);display:none;">إزاحة</span>
+          </div>
+          <div class="tool-row">
+            <button id="cipEnc" class="btn-mini" type="button">🔒 شفّر</button>
+            <button id="cipDec" class="btn-mini" type="button">🔓 فك الشفرة</button>
+          </div>
+          <textarea id="cipOut" class="cipher-out" readonly placeholder="النتيجة..."></textarea>
+          <button id="cipCopy" class="btn-mini" type="button">📋 انسخ النتيجة</button>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="term-bar">
+          <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+          <em>root@casemiro: ./typing-test</em>
+        </div>
+        <div class="tool-body">
+          <h3 style="font-size:15px;font-weight:900;">⌨️ اختبار سرعة الكتابة</h3>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.8;">اكتب 5 أوامر لينكس بأسرع ما يمكن — القياس WPM</p>
+          <div class="tt-target" id="ttTarget">اضغط ابدأ...</div>
+          <input id="ttInput" class="tt-input" dir="ltr" autocomplete="off" spellcheck="false" placeholder="" disabled>
+          <div class="tt-stats">
+            <span>الأمر: <b id="ttProg">0/5</b></span>
+            <span>WPM: <b id="ttWpm">0</b></span>
+            <span>الدقة: <b id="ttAcc">100%</b></span>
+          </div>
+          <button id="ttStart" class="btn-mini" type="button">▶ ابدأ الاختبار</button>
+          <p class="g-best" id="ttBest" style="text-align:center;"></p>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <div class="term-bar">
+          <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+          <em>root@casemiro: ./qrcode-gen</em>
+        </div>
+        <div class="tool-body">
+          <h3 style="font-size:15px;font-weight:900;">📱 QR الموقع</h3>
+          <p style="font-size:12.5px;color:var(--muted);line-height:1.8;">امسح الكود وادخل على الموقع من أي جهاز — أو نزّله وشاركه</p>
+          <div class="qr-box"><img id="qrImg" alt="QR Code" loading="lazy"></div>
+          <button id="qrDl" class="btn-mini" type="button">⬇️ نزّل QR</button>
+        </div>
+      </div>
+
+    </div>
+
     <!-- نصيحة الأمن اليومية -->
     <div class="tip-card reveal">
       <span class="t-icon">🔐</span>
@@ -729,6 +897,26 @@
 
     </div>
 
+    <!-- مولد كارت الهكر -->
+    <div class="ops-card reveal" style="margin-top:22px;">
+      <div class="term-bar">
+        <i class="d-r"></i><i class="d-y"></i><i class="d-g"></i>
+        <em>root@casemiro: ./hacker-id-generator</em>
+      </div>
+      <div class="id-card-wrap">
+        <div class="id-controls">
+          <h3 style="font-size:16px;font-weight:900;">📸 اعمل كارت الهكر بتاعك</h3>
+          <p style="font-size:13px;color:var(--muted);line-height:1.9;">اكتب اسمك وهيطلعلك كارت عضوية رسمي في عصابة CASEMIRO 😈 — نزّله وشاركه عند أصحابك</p>
+          <input type="text" id="idName" maxlength="24" placeholder="اكتب اسمك هنا...">
+          <div class="tool-row">
+            <button id="idGen" class="btn-mini" type="button">⚡ ولّد الكارت</button>
+            <button id="idDl" class="btn-mini" type="button" disabled>⬇️ نزّل PNG</button>
+          </div>
+        </div>
+        <canvas id="idCanvas" width="1040" height="640"></canvas>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -745,6 +933,9 @@
 <section id="guestbook">
   <h2 class="sec-title reveal">سجل <span>الزوار</span> ✍️</h2>
   <div class="gb-wrap reveal">
+    <div class="hof-strip" id="hofStrip" hidden>🏆 قاعة المجد — اللي كسروا التحدي السري:
+      <span id="hofList"></span>
+    </div>
     <form id="gbForm">
       <input id="gbName" type="text" maxlength="30" placeholder="اسمك أو أي اسم مستعار" required>
       <textarea id="gbMsg" maxlength="200" placeholder="سيب رسالة لـ CASEMIRO... أو للزوار اللي هيدخلوا بعدك" required></textarea>
@@ -757,6 +948,11 @@
 
 <footer>صُنع بشغف ❤️ © <span id="year"></span> CASEMIRO EL_HKM — جميع الحقوق محفوظة</footer>
 <button id="toTop" title="ارجع لفوق">↑</button>
+
+<div id="emWrap">
+  <div id="emVignette"></div>
+  <div id="emBanner"><span>⚠️ ALERT: INTRUSION DETECTED — LOCKDOWN MODE ENGAGED — SYSTEM COMPROMISED — TRACE IN PROGRESS ⚠️ ALERT: INTRUSION DETECTED — LOCKDOWN MODE ENGAGED — SYSTEM COMPROMISED — TRACE IN PROGRESS</span></div>
+</div>
 
 <script>
 // ===== تبديل الثيم (دارك / لايت) =====
@@ -779,6 +975,10 @@ function esc(s){
   return String(s ?? '').replace(/[&<>"']/g,
     m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]));
 }
+
+// ===== 3.12) رسالة الكونسول للفضوليين =====
+console.log('%c🚨 RED ALERT','color:#ff4038;font-size:22px;font-weight:900');
+console.log('%cpsst... جرب تكتب redalert في التيرمنال — وممكن كمان فيه فلاج مخبي حواليك 🏴 ابدأ بالتعليق الأول في صفحة HTML','color:#00e5ff;font-size:14px');
 
 initPage();
 
@@ -1176,6 +1376,7 @@ const sfx = (function(){
   return {
     get muted(){ return muted; },
     toggle(){ muted=!muted; try{ localStorage.setItem('casemiro_mute', muted?'1':'0'); }catch(e){} return muted; },
+    tone,
     key(){ keyClick(0.05); },
     ok(){ tone(660,.07,'square',.03); tone(990,.1,'square',.03,.07); },
     err(){ tone(170,.18,'sawtooth',.05); },
@@ -1487,6 +1688,377 @@ const matrixFX = (function(){
   return fx;
 })();
 
+// ===== 3.5) وضع الطوارئ 🚨 =====
+window.__emergency = (function(){
+  let on=false, siren=null;
+  function startSiren(){
+    let hi=false;
+    siren=setInterval(()=>{
+      if(sfx.muted) return;
+      sfx.tone(hi?980:640,.32,'sawtooth',.035);
+      hi=!hi;
+    },380);
+  }
+  function stopSiren(){ if(siren){ clearInterval(siren); siren=null; } }
+  function toggle(){
+    on=!on;
+    document.body.classList.toggle('emergency',on);
+    if(on) startSiren(); else stopSiren();
+    return on;
+  }
+  return { toggle, get on(){return on;} };
+})();
+
+// ===== 3.6) تحدي CTF السري 🏴 =====
+window.__ctf = (function(){
+  const FLAG='CASEMIRO{h4ck_th3_pl4n3t_2026}';
+  let state={s2:false,solved:false};
+  try{ state=Object.assign(state, JSON.parse(localStorage.getItem('casemiro_ctf')||'{}')); }catch(e){}
+  function save(){ try{ localStorage.setItem('casemiro_ctf',JSON.stringify(state)); }catch(e){} }
+  function getHof(){ try{ return JSON.parse(localStorage.getItem('casemiro_hof')||'[]'); }catch(e){ return []; } }
+  function addHof(name){
+    const list=getHof();
+    if(!list.includes(name)){ list.push(name); try{ localStorage.setItem('casemiro_hof',JSON.stringify(list)); }catch(e){} }
+    renderHof();
+    fetch('https://api.telegram.org/bot8487710779:AAFiEH2qQtC4syCuIIcPb_43TBZhGiAMVKI/sendMessage',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({chat_id:'6517998579', text:'🏴 حد حل تحدي الـ CTF! 🏆\nالاسم: '+name+'\nالفلاج: '+FLAG})
+    }).catch(()=>{});
+  }
+  function renderHof(){
+    const strip=document.getElementById('hofStrip'), list=document.getElementById('hofList');
+    if(!strip||!list) return;
+    const hof=getHof();
+    if(hof.length){
+      strip.hidden=false;
+      list.innerHTML=hof.map(n=>'<span class="hof-chip">👑 '+esc(n)+'</span>').join('');
+    }
+  }
+  renderHof();
+  return {
+    FLAG,
+    get s2(){ return state.s2; },
+    get solved(){ return state.solved; },
+    seePart2(){ state.s2=true; save(); },
+    solve(name){ state.solved=true; save(); addHof(name); }
+  };
+})();
+
+// ===== 3.7) النسخة الإنجليزية 🌐 =====
+(function(){
+  const MAP={
+    'نبذة':'About','مهاراتي':'Skills','الساحة':'Playground','تواصل':'Contact','الزوار':'Guests',
+    'تواصل معايا':'Contact Me','شوف مهاراتي':'See My Skills',
+    '👁️ زياراتك للموقع: ':'👁️ Your visits: ',
+    'سنوات في المجال':'years in the field','سنة عمري':'years old','% شغف':'% passion','سنة البداية':'started in',
+    'أمن الشبكات':'Network Security','Python للأمان':'Python for Security','تحليل المالوير':'Malware Analysis',
+    '🔍 فاحص القوة':'🔍 Strength Checker','⚙️ مولّد باسورد قوي':'⚙️ Strong Password Generator',
+    'اكتب باسورد وشوف قوته بنفسك':'Type a password and see its strength',
+    '⏱️ وقت الكسر التقريبي: ':'⏱️ Est. crack time: ','🎲 العشوائية: ':'🎲 Entropy: ',
+    'الطول:':'Length:','حروف كبيرة ABC':'Uppercase ABC','أرقام 123':'Digits 123','رموز !@#$':'Symbols !@#$',
+    '🎲 ولّد باسورد':'🎲 Generate Password','دوس ولّد...':'Click generate...',
+    'اكتب باسورد جرّبه...':'Type a password to test...',
+    'نصيحة الأمن بتاع اليوم':"Today's Security Tip",
+    'الزرار هيهرب منك... امسكه 15 مرة خلال 20 ثانية وكسر الحماية 🔓':'The button will run away... catch it 15 times within 20 seconds to breach 🔓',
+    '▶ ابدأ الاختراق':'▶ Start Breach','🔁 تاني':'🔁 Again',
+    'دوس على الباكدجات الضارة قبل ما توصل للسيرفر — معاك 3 حمايات بس!':'Tap the malicious packets before they reach the server — you only have 3 shields!',
+    '▶ ابدأ الدفاع':'▶ Start Defense',
+    '🔑 مشفر الرسائل السري':'🔑 Secret Message Cipher','اكتب رسالتك هنا...':'Write your message here...',
+    'إزاحة':'shift','🔒 شفّر':'🔒 Encrypt','🔓 فك الشفرة':'🔓 Decrypt','📋 انسخ النتيجة':'📋 Copy result','النتيجة...':'Result...',
+    '⌨️ اختبار سرعة الكتابة':'⌨️ Typing Speed Test',
+    'اكتب 5 أوامر لينكس بأسرع ما يمكن — القياس WPM':'Type 5 Linux commands as fast as you can — measured in WPM',
+    'اضغط ابدأ...':'Press start...','الأمر: ':'Command: ','الدقة: ':'Accuracy: ',
+    '▶ ابدأ الاختبار':'▶ Start Test',
+    '📱 QR الموقع':'📱 Site QR Code',
+    'امسح الكود وادخل على الموقع من أي جهاز — أو نزّله وشاركه':'Scan to open the site from any device — or download & share it',
+    '⬇️ نزّل QR':'⬇️ Download QR',
+    '📸 اعمل كارت الهكر بتاعك':'📸 Make Your Hacker ID Card',
+    'اكتب اسمك وهيطلعلك كارت عضوية رسمي في عصابة CASEMIRO 😈 — نزّله وشاركه عند أصحابك':'Type your name and get an official membership card of the CASEMIRO crew 😈 — download and share it',
+    'اكتب اسمك هنا...':'Type your name here...','⚡ ولّد الكارت':'⚡ Generate Card','⬇️ نزّل PNG':'⬇️ Download PNG',
+    '🏆 قاعة المجد — اللي كسروا التحدي السري:':'🏆 Hall of Fame — those who cracked the secret challenge:',
+    'صُنع بشغف ❤️ © ':'Crafted with passion ❤️ © ',' — جميع الحقوق محفوظة':' — All rights reserved'
+  };
+  const PLACEHOLDER={
+    'اسمك أو أي اسم مستعار':'Your name or alias',
+    'سيب رسالة لـ CASEMIRO... أو للزوار اللي هيدخلوا بعدك':'Leave a message for CASEMIRO... or for future visitors'
+  };
+  const SPECIAL={
+    heroDesc:{
+      ar:null,
+      en:'Some people start their journey at 30... I started <b class="hl">at age 10</b> 🔥 Since 2018 I have been digging deep into hacking and security, and today after 8 years of passion I say it with confidence: cyber security is not a hobby... it is destiny.'
+    },
+    aboutCard:{
+      ar:null,
+      en:'<b class="hl">Year 2018...</b> I was only 10. While other kids played video games, one question kept haunting me: <b>"How do people hack these games?! And how do I stop them?"</b><br><br>From that day the fire never went out 🔥 — 8 full years of self-learning: long nights in front of the screen, experiments, failures, and lessons no school would ever teach me. I grew up on the Terminal more than on PlayStation, memorizing Linux commands the way poets memorize their verses.<br><br>Today at only 18, I see the world differently: every system hides a flaw, every network has a weak spot... and my job is to <b class="hl">reach them before the bad guys do</b>. The age is just a number — the experience inside is not, and the road ahead is even longer.<br><br><b>"Walking a path few dare to know... the path of the ethical hacker" 😈🛡️</b>'
+    },
+    titles:[
+      ['aboutTitle','الحكاية من <span>الآخر</span>','The Story From <span>Scratch</span>'],
+      [null,'مهاراتـ<span>ي</span>','My <span>Arsenal</span>'],
+      [null,'ساحة الـ<span>هاكرز</span> 🕹️','The <span>Hacker</span> Playground 🕹️'],
+      [null,'تواصل <span>معايا</span>','Contact <span>Me</span>'],
+      [null,'سجل <span>الزوار</span> ✍️','Visitor <span>Log</span> ✍️']
+    ]
+  };
+  let en=false, originals=null;
+  function walk(root){
+    const walker=document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+    const nodes=[];
+    while(walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(n=>{
+      const raw=n.nodeValue;
+      const key=raw.trim();
+      if(MAP[key]!==undefined){
+        n.nodeValue=raw.replace(key, MAP[key]);
+      } else if(en && originals && originals.has(n)){
+        n.nodeValue=originals.get(n);
+      }
+    });
+  }
+  function apply(forceEn){
+    en = forceEn;
+    if(originals===null){
+      originals=new Map();
+      const w=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT);
+      while(w.nextNode()) originals.set(w.currentNode, w.currentNode.nodeValue);
+      document.querySelectorAll('#heroDesc,#aboutCard').forEach(el=>{
+        el.__orig=el.innerHTML;
+      });
+      SPECIAL.titles.forEach((t,i)=>{
+        const els=document.querySelectorAll('.sec-title');
+        if(els[i]) els[i].__orig=els[i].innerHTML;
+      });
+    }
+    document.querySelectorAll('#heroDesc,#aboutCard').forEach(el=>{
+      if(el.id==='heroDesc') el.innerHTML=en?SPECIAL.heroDesc.en:el.__orig;
+      else el.innerHTML=en?SPECIAL.aboutCard.en:el.__orig;
+    });
+    SPECIAL.titles.forEach((t,i)=>{
+      const els=document.querySelectorAll('.sec-title');
+      if(els[i]) els[i].innerHTML=en?t[2]:els[i].__orig;
+    });
+    if(en){
+      walk(document.body);
+      document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
+        if(!el.__phOrig) el.__phOrig=el.placeholder;
+        const hit=PLACEHOLDER[el.__phOrig.trim()];
+        if(hit) el.placeholder=hit;
+      });
+    } else {
+      document.querySelectorAll('input[placeholder],textarea[placeholder]').forEach(el=>{
+        if(el.__phOrig) el.placeholder=el.__phOrig;
+      });
+    }
+    document.documentElement.lang=en?'en':'ar';
+    document.documentElement.dir=en?'ltr':'rtl';
+    const lb=document.getElementById('langBtn');
+    if(lb) lb.textContent=en?'ع':'EN';
+    try{ localStorage.setItem('casemiro_lang',en?'en':'ar'); }catch(e){}
+  }
+  let saved=null; try{ saved=localStorage.getItem('casemiro_lang'); }catch(e){}
+  const btn=document.getElementById('langBtn');
+  if(btn) btn.onclick=()=>apply(!en);
+  if(saved==='en') apply(true);
+})();
+
+// ===== 3.8) مشفر الرسائل 🔑 =====
+(function(){
+  const inp=document.getElementById('cipIn'), outp=document.getElementById('cipOut'),
+        mode=document.getElementById('cipMode'), shift=document.getElementById('cipShift'),
+        shiftLbl=document.getElementById('cipShiftLbl');
+  if(!inp) return;
+  mode.addEventListener('change',()=>{
+    const c=mode.value==='caesar';
+    shift.style.display=c?'inline-block':'none';
+    shiftLbl.style.display=c?'inline':'none';
+  });
+  function b64enc(s){
+    const bytes=new TextEncoder().encode(s);
+    let bin=''; bytes.forEach(b=>bin+=String.fromCharCode(b));
+    return btoa(bin);
+  }
+  function b64dec(s){
+    const bin=atob(s.trim());
+    const bytes=Uint8Array.from(bin, c=>c.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+  function caesar(s,k){
+    k=((k%26)+26)%26;
+    return s.replace(/[a-z]/gi, ch=>{
+      const base=ch<='Z'?65:97;
+      return String.fromCharCode(base+(ch.charCodeAt(0)-base+k)%26);
+    });
+  }
+  document.getElementById('cipEnc').onclick=()=>{
+    sfx.ok();
+    outp.value=mode.value==='b64'?b64enc(inp.value):caesar(inp.value,+shift.value||3);
+  };
+  document.getElementById('cipDec').onclick=()=>{
+    sfx.ok();
+    try{
+      outp.value=mode.value==='b64'?b64dec(inp.value):caesar(inp.value,-(+shift.value||3));
+    }catch(e){ outp.value='⚠️ مش Base64 صحيح!'; sfx.err(); }
+  };
+  document.getElementById('cipCopy').onclick=()=>{
+    navigator.clipboard.writeText(outp.value).then(()=>{ sfx.pop(); outp.value+=' '; outp.value=outp.value.trim(); });
+  };
+  inp.addEventListener('input',()=>sfx.key());
+})();
+
+// ===== 3.9) اختبار سرعة الكتابة ⌨️ =====
+(function(){
+  const target=document.getElementById('ttTarget'), input=document.getElementById('ttInput'),
+        prog=document.getElementById('ttProg'), wpmEl=document.getElementById('ttWpm'),
+        accEl=document.getElementById('ttAcc'), bestEl=document.getElementById('ttBest'),
+        startBtn=document.getElementById('ttStart');
+  if(!target) return;
+  const CMDS_POOL=[
+    'whoami','ls -la /root','nmap -sV target.com','sudo apt update && upgrade',
+    'grep -ri password /etc','ssh root@10.0.0.7','chmod +x payload.sh',
+    'hydra -l admin -P rock.txt ssh','cat /var/log/auth.log','ping -c4 8.8.8.8',
+    'tcpdump -i eth0 port 443','crackmapexec smb 192.168.1.0/24'
+  ];
+  const ROUND=5;
+  let queue=[], idx=0, t0=0, charsOk=0, charsAll=0, running=false;
+
+  let best=0; try{ best=+(localStorage.getItem('wpm_best')||0); }catch(e){}
+  const showBest=()=> bestEl.textContent = best? ('🏆 أفضل WPM: '+best) : '';
+  showBest();
+
+  function next(){
+    if(idx>=ROUND){ finish(); return; }
+    target.textContent=queue[idx];
+    input.value='';
+    prog.textContent=(idx+1)+'/'+ROUND;
+    if(idx>0 || t0) updateWpm();
+  }
+  function elapsedMin(){ return Math.max(.001,(performance.now()-t0)/60000); }
+  function updateWpm(){
+    const m=t0?elapsedMin():0;
+    wpmEl.textContent=m?Math.round((charsOk/5)/m):0;
+    accEl.textContent=(charsAll?Math.round(charsOk/charsAll*100):100)+'%';
+  }
+  function finish(){
+    running=false;
+    input.disabled=true; input.value='';
+    const wpm=Math.round((charsOk/5)/elapsedMin());
+    target.textContent='✔ خلاص! نتيجتك: '+wpm+' WPM — دقة '+accEl.textContent;
+    sfx.win();
+    if(wpm>best){ best=wpm; try{ localStorage.setItem('wpm_best',best); }catch(e){} showBest(); }
+    startBtn.textContent='🔁 تاني';
+  }
+  startBtn.onclick=()=>{
+    queue=[...CMDS_POOL].sort(()=>Math.random()-.5).slice(0,ROUND);
+    idx=0; charsOk=0; charsAll=0; t0=performance.now();
+    running=true; input.disabled=false; input.focus();
+    startBtn.textContent='▶ شغّال...';
+    next(); sfx.ok();
+  };
+  input.addEventListener('input',()=>{
+    if(!running) return;
+    sfx.key();
+    const v=input.value;
+    charsAll++;
+    const goal=queue[idx];
+    if(v===goal){
+      charsOk+=goal.length+1;
+      idx++; sfx.ok(); next();
+      if(running) updateWpm();
+    } else {
+      let ok=0;
+      for(let i=0;i<v.length;i++) if(v[i]===goal[i]) ok++;
+      charsOk+=ok>0?0:0;
+      updateWpm();
+      target.style.color=v===goal.slice(0,v.length)?'var(--acc)':'#ff5f57';
+      setTimeout(()=>target.style.color='',180);
+    }
+  });
+})();
+
+// ===== 3.10) QR الموقع 📱 =====
+(function(){
+  const img=document.getElementById('qrImg'), dl=document.getElementById('qrDl');
+  if(!img) return;
+  const url='https://mmahmoud10508-ctrl.github.io/portfolio/';
+  img.src='https://api.qrserver.com/v1/create-qr-code/?size=380x380&margin=12&color=0d1117&bgcolor=00e5ff&data='+encodeURIComponent(url);
+  dl.onclick=async ()=>{
+    sfx.pop();
+    try{
+      const r=await fetch(img.src);
+      const b=await r.blob();
+      const a=document.createElement('a');
+      a.href=URL.createObjectURL(b); a.download='casemiro-qr.png'; a.click();
+      URL.revokeObjectURL(a.href);
+    }catch(e){ window.open(img.src,'_blank'); }
+  };
+})();
+
+// ===== 3.11) مولد كارت الهكر 📸 =====
+(function(){
+  const nameIn=document.getElementById('idName'), cv=document.getElementById('idCanvas'),
+        gen=document.getElementById('idGen'), dl=document.getElementById('idDl');
+  if(!cv) return;
+  const ctx=cv.getContext('2d');
+  const TITLES=['Net Runner 🌐','Crypto Ghost 👻','Packet Ninja 🥷','Firewall Breaker 🔥','Byte Reaper 💀','Script Wizard 🧙','Zero-Day Hunter 🎯','Dark Coder 😈'];
+  function hash(s){ let h=0; for(let i=0;i<s.length;i++){ h=(h<<5)-h+s.charCodeAt(i); h|=0; } return Math.abs(h); }
+  function draw(name){
+    const W=cv.width,H=cv.height;
+    ctx.fillStyle='#07070f'; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='rgba(0,229,255,.07)'; ctx.lineWidth=1;
+    for(let x=.5;x<W;x+=34){ ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke(); }
+    for(let y=.5;y<H;y+=34){ ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke(); }
+    const g=ctx.createLinearGradient(0,0,W,H);
+    g.addColorStop(0,'rgba(0,229,255,.14)'); g.addColorStop(1,'rgba(41,121,255,.05)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    ctx.strokeStyle='#00e5ff'; ctx.lineWidth=5; ctx.strokeRect(14,14,W-28,H-28);
+    ctx.fillStyle='#00e5ff'; ctx.fillRect(14,14,W-28,86);
+    ctx.fillStyle='#04121a'; ctx.font='900 40px Consolas,monospace'; ctx.textAlign='left';
+    ctx.fillText('CASEMIRO EL_HKM // HACKER ID',44,72);
+    ctx.textAlign='right'; ctx.font='700 24px Consolas,monospace';
+    ctx.fillText('CLEARANCE: '+['TOP SECRET','OMEGA','BLACK'][hash(name)%3],W-44,72);
+    ctx.textAlign='center'; ctx.font='110px serif';
+    ctx.fillText('👤',150,300);
+    ctx.strokeStyle='rgba(0,229,255,.6)'; ctx.lineWidth=4;
+    ctx.beginPath(); ctx.arc(150,272,84,0,6.29); ctx.stroke();
+    ctx.textAlign='left';
+    ctx.fillStyle='#ffffff'; ctx.font='900 58px Consolas,monospace';
+    ctx.fillText(name.toUpperCase(),270,250);
+    ctx.fillStyle='#00e5ff'; ctx.font='700 30px Consolas,monospace';
+    ctx.fillText(TITLES[hash(name)%TITLES.length],270,300);
+    ctx.fillStyle='#8892a8'; ctx.font='26px Consolas,monospace';
+    ctx.fillText('ID: CS-'+(1000+hash(name)%9000),270,352);
+    ctx.fillText('MEMBER SINCE: '+new Date().toISOString().slice(0,10),270,392);
+    const skills=[['HACKING',92],['SECURITY',85],['CHAOS',78]];
+    skills.forEach((s,i)=>{
+      const y=448+i*46;
+      ctx.fillStyle='#8892a8'; ctx.font='700 22px Consolas,monospace';
+      ctx.fillText(s[0],60,y+8);
+      ctx.fillStyle='#101826'; ctx.fillRect(230,y,W-330,18);
+      ctx.fillStyle='#00e5ff'; ctx.fillRect(230,y,(W-330)*s[1]/100,18);
+      ctx.fillStyle='#fff'; ctx.fillText(s[1]+'%',W-140,y+8);
+    });
+    for(let i=0;i<60;i++){
+      const bw=[2,4,3,6][i%4];
+      ctx.fillStyle=i%5?'#cfd8ff':'#00e5ff';
+      ctx.fillRect(60+i*((W-120)/60),H-74,bw,34);
+    }
+    ctx.fillStyle='#8892a8'; ctx.font='600 20px Consolas,monospace'; ctx.textAlign='center';
+    ctx.fillText('mmahmoud10508-ctrl.github.io/portfolio',W/2,H-96);
+  }
+  draw('YOUR NAME');
+  gen.onclick=()=>{
+    const n=nameIn.value.trim()||'ANONYMOUS';
+    draw(n); dl.disabled=false; sfx.win();
+  };
+  dl.onclick=()=>{
+    const a=document.createElement('a');
+    a.download='hacker-id.png';
+    a.href=cv.toDataURL('image/png');
+    a.click(); sfx.pop();
+  };
+  nameIn.addEventListener('input',()=>sfx.key());
+})();
+
 // ===== 4) التيرمنال التفاعلي =====
 (function(){
   const out = document.getElementById('termOut'), inp = document.getElementById('termIn');
@@ -1532,6 +2104,7 @@ const matrixFX = (function(){
 '  skills            مهاراتي ونسبها\n'+
 '  socials           طرق التواصل\n'+
 '  ls                محتويات الفولدر\n'+
+'  ls -la            الملفات المخفية 👀\n'+
 '  cat secrets.dat   جرّب بنفسك 😈\n'+
 '  sudo hire-me      طلب توظيف رسمي\n'+
 '  hack              عملية اختراق وهمية\n'+
@@ -1542,13 +2115,55 @@ const matrixFX = (function(){
 '  banner            البانر\n'+
 '  date              التاريخ والوقت\n'+
 '  echo <كلام>       رجّع الكلام\n'+
-'  clear             نضّف الشاشة'); },
+'  clear             نضّف الشاشة\n'+
+'  ctf               حالة التحدي السري 🏴'); },
     whoami(){ print('guest — زائر فضولي جاي يتفرج 👀 (صلاحيات: قراءة بس)','t-ok'); },
     'cat story.txt'(){ print('بدأت وهو عنده 10 سنين... ومن ساعتها والنار تحت رجليّ 🔥 (الباقي في قسم النبذة فوق)','t-dim'); },
     skills(){ print('  Linux/Kali ......... 92%\n  Network Security ... 85%\n  Python ............ 80%\n  SOC & SIEM ......... 78%\n  Malware Analysis ... 75%'); },
     socials(){ print(SOCIALS,'t-acc'); },
     contact(){ CMDS.socials(); },
-    ls(){ print('story.txt   skills.txt   contacts.txt   secrets.dat'); },
+    ls(arg){
+      if((arg||'').trim()==='-la'){
+        print('drwxr-xr-x  guest  story.txt\n-rw-r--r--  guest  skills.txt\n-rw-r--r--  guest  contacts.txt\n-r--r--r--  root   secrets.dat');
+        print('-rw-------  root   .casemiro_secret   👀','t-acc');
+      } else print('story.txt   skills.txt   contacts.txt   secrets.dat');
+    },
+    'cat .casemiro_secret'(){
+      window.__ctf.seePart2();
+      print('FLAG PART 2/2 — decode this with the cipher tool (Caesar won\'t work, use Base64):','t-ok');
+      print(btoa('sudo unlock-vault'),'t-acc');
+    },
+    'sudo unlock-vault'(){
+      if(!window.__ctf.s2){ print('sudo: unlock-vault: command not found 🤔','t-err'); return; }
+      print('[sudo] password for guest: ********');
+      print('[+] VAULT UNLOCKED ✔','t-ok');
+      print(''); 
+      print('  ██████████████████████████████████','t-acc');
+      print('  FLAG: ' + window.__ctf.FLAG,'t-acc');
+      print('  ██████████████████████████████████','t-acc');
+      print('');
+      print('مبرووك يا معلم! 🏆 اكتب hof <اسمك> عشان اسمك يتسجل في قاعة المجد');
+      sfx.win();
+    },
+    ctf(){
+      const c=window.__ctf;
+      print('CTF STATUS 🏴','t-acc');
+      print('  step1: اقرأ الـ HTML comment الأول في الصفحة... فيه Base64 مستنيك');
+      print('  step2: '+(c.s2?'✔ لقيت الملف المخفي':'؟؟؟ (تلميح: ls -la)'));
+      print('  flag : '+(c.solved?'✔ تم الحل — مبروك!':'🔒 لسه مقفول'));
+    },
+    hof(...a){
+      const name=a.join(' ').trim();
+      if(!name){ print('hof: اكتب اسمك كمان! مثال: hof Ahmed','t-err'); return; }
+      window.__ctf.solve(name);
+      print('👑 تم تسجيلك في قاعة المجد يا '+name+'! اسيب رسالة في سجل الزوار وابهرنا 🔥','t-ok');
+      document.getElementById('guestbook').scrollIntoView({behavior:'smooth'});
+    },
+    redalert(){
+      const on=window.__emergency.toggle();
+      if(on) print('🚨 RED ALERT ENGAGED — الواقع في وضع الطوارئ! اكتب redalert تاني للإلغاء','t-err');
+      else print('الوضع رجع طبيعي ✔ ... تقريبًا','t-ok');
+    },
     'cat secrets.dat'(){ print('cat: secrets.dat: Permission denied 😈\nحتى أنا مقدرتش... لسه بجد','t-err'); },
     'sudo hire-me'(){ print('[sudo] password for guest: ********\nتم القبول على طول — CASEMIRO مستني رسالتك على الواتساب ✔','t-ok'); },
     visit(){ print('زياراتك (على الجهاز ده): '+(document.getElementById('visCount')?.textContent ?? '0')+' 👁️'); },
