@@ -99,7 +99,8 @@
   }
   .logo { font-weight:900; font-size:22px; }
   .logo span { color:var(--acc); }
-  nav ul { display:flex; gap:28px; list-style:none; }
+  nav ul { display:flex; gap:16px; list-style:none; }
+  nav ul a { font-size:14px; }
   nav a { color:var(--link); text-decoration:none; font-weight:600; transition:.3s; }
   nav a:hover { color:var(--acc); }
 
@@ -898,6 +899,13 @@
   @media(max-width:860px){ .pg-grid { grid-template-columns:1fr; } }
 
 
+  @media(max-width:1150px){
+    nav { padding:14px 3%; }
+    nav ul { gap:10px; }
+    nav ul a { font-size:12.5px; }
+    .nav-actions { gap:6px; }
+  }
+
   @media(max-width:640px){
     .menu-btn { display:block; }
     nav ul {
@@ -923,9 +931,13 @@
   <ul id="navLinks">
     <li><a href="#about">نبذة</a></li>
     <li><a href="#skills">مهاراتي</a></li>
+    <li><a href="#lab">المختبر</a></li>
     <li><a href="#playground">الساحة</a></li>
+    <li><a href="#arcade">الأركيد</a></li>
+    <li><a href="#dash">العمليات</a></li>
     <li><a href="#contact">تواصل</a></li>
     <li><a href="#guestbook">الزوار</a></li>
+    <li><a href="#faq">أسئلة</a></li>
   </ul>
   <div class="nav-actions">
     <button class="theme-btn" id="langBtn" title="English / عربي" style="font-weight:900;font-size:13px;">EN</button>
@@ -1267,7 +1279,7 @@
         <h3 style="font-size:14px;font-weight:900;">🎂 حاسبة العمر</h3>
         <input class="tool-inp" id="agIn" type="date" dir="ltr">
         <button class="btn-mini" id="agGo" type="button">🧮 احسب</button>
-        <textarea class="mono-out" id="agOut" readonly style="min-height:96px;" dir="rtl" style="direction:rtl;text-align:right;"></textarea>
+        <textarea class="mono-out" id="agOut" readonly style="min-height:96px;direction:rtl;text-align:right;"></textarea>
       </div>
     </div>
 
@@ -1278,7 +1290,7 @@
         <input class="tool-inp" id="blPpl" type="number" placeholder="عدد الأشخاص" value="2">
         <label class="pw-row"><span>البقشيش:</span><b id="blTipVal">10%</b><input type="range" id="blTip" min="0" max="30" value="10"></label>
         <button class="btn-mini" id="blGo" type="button">🧮 قسّم</button>
-        <textarea class="mono-out" id="blOut" readonly dir="rtl" style="direction:rtl;text-align:right;"></textarea>
+        <textarea class="mono-out" id="blOut" readonly style="direction:rtl;text-align:right;"></textarea>
       </div>
     </div>
 
@@ -4372,7 +4384,8 @@ window.__ctf = (function(){
 // ===== 3.7) النسخة الإنجليزية 🌐 =====
 (function(){
   const MAP={
-    'نبذة':'About','مهاراتي':'Skills','الساحة':'Playground','تواصل':'Contact','الزوار':'Guests',
+    'نبذة':'About','مهاراتي':'Skills','المختبر':'The Lab','الساحة':'Playground','الأركيد':'Arcade',
+    'العمليات':'Ops Room','تواصل':'Contact','الزوار':'Guests','أسئلة':'FAQ',
     'تواصل معايا':'Contact Me','شوف مهاراتي':'See My Skills',
     '👁️ زياراتك للموقع: ':'👁️ Your visits: ',
     'سنوات في المجال':'years in the field','سنة عمري':'years old','% شغف':'% passion','سنة البداية':'started in',
