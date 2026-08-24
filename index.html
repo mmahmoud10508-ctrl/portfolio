@@ -771,7 +771,132 @@
   .voice-btn.on { color:var(--acc); }
   #trailCv { position:fixed; inset:0; z-index:9989; pointer-events:none; }
 
+  /* ===== دفعة الـ 30 ميزة ===== */
+  .lab-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(230px,1fr)); gap:18px; }
+  .mono-out {
+    width:100%; min-height:44px; resize:vertical;
+    background:#0d0d18; color:var(--acc); border:1px solid var(--border);
+    border-radius:10px; padding:9px 12px; font-family:'Consolas',monospace;
+    font-size:12.5px; outline:none; direction:ltr; word-break:break-all;
+  }
+  .tool-inp {
+    width:100%; background:#0d0d18; color:var(--text);
+    border:1px solid var(--border); border-radius:10px;
+    padding:9px 12px; font-family:'Consolas',monospace; font-size:13px;
+    outline:none; direction:ltr;
+  }
+  .tool-inp:focus, .mono-out:focus { border-color:var(--acc); }
+  .dash-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:18px; }
+  .dash-card { background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:18px 20px; }
+  .dash-card h3 { font-size:14.5px; font-weight:900; margin-bottom:12px; color:var(--acc); }
+  .big-clock {
+    font-family:'Consolas',monospace; font-size:clamp(30px,6vw,44px);
+    font-weight:900; color:var(--text); text-align:center; direction:ltr;
+    letter-spacing:2px; text-shadow:0 0 22px rgba(var(--accRGB),.4);
+  }
+  .clock-date { text-align:center; color:var(--muted); font-size:13px; margin-top:6px; }
+  .cd-boxes { display:flex; justify-content:center; gap:10px; direction:ltr; }
+  .cd-box { background:#0d0d18; border:1px solid var(--border); border-radius:10px; padding:10px 6px; min-width:62px; text-align:center; }
+  .cd-box b { display:block; font-family:'Consolas',monospace; font-size:24px; color:var(--acc); }
+  .cd-box small { color:var(--muted); font-size:11px; }
+  .price-row { display:flex; justify-content:space-between; align-items:center; padding:10px 4px; border-bottom:1px dashed var(--border); direction:ltr; }
+  .price-row:last-child { border:none; }
+  .price-row b { font-family:'Consolas',monospace; color:var(--acc); font-size:17px; }
+  .qz-out { font-size:14.5px; line-height:2; min-height:52px; }
+  .pom-wrap { display:flex; align-items:center; gap:16px; }
+  .pom-ring {
+    --p:0; width:96px; height:96px; border-radius:50%; flex:none;
+    background:conic-gradient(var(--acc) calc(var(--p)*1%), #101826 0);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .pom-ring::before { content:''; position:absolute; width:76px; height:76px; border-radius:50%; background:var(--panel); }
+  .pom-ring span { position:relative; font-family:'Consolas',monospace; font-weight:900; font-size:19px; }
+  .pom-side { display:flex; flex-direction:column; gap:8px; flex:1; }
+  #progressBar {
+    position:fixed; top:0; right:0; height:3px; width:0; z-index:9995;
+    background:linear-gradient(90deg,var(--acc),#7b5cff);
+  }
+  .float-stack {
+    position:fixed; bottom:92px; inset-inline-start:18px; z-index:900;
+    display:flex; flex-direction:column; gap:10px;
+  }
+  .float-btn {
+    width:47px; height:47px; border-radius:50%;
+    border:1px solid var(--border); background:var(--panel); color:var(--text);
+    font-size:19px; cursor:pointer; box-shadow:0 6px 20px rgba(0,0,0,.5); transition:.2s;
+  }
+  .float-btn:hover { border-color:var(--acc); color:var(--acc); }
+  .modal-ov {
+    position:fixed; inset:0; z-index:10005; background:rgba(0,0,0,.65);
+    backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; padding:18px;
+  }
+  .modal-ov.open { display:flex; }
+  .modal-box {
+    background:var(--panel); border:1px solid var(--border); border-radius:18px;
+    width:min(430px,94vw); max-height:84vh; overflow-y:auto; padding:22px 24px;
+  }
+  .modal-box h3 { color:var(--acc); font-size:16px; font-weight:900; margin-bottom:14px; display:flex; justify-content:space-between; }
+  .modal-x { background:none; border:none; color:var(--muted); font-size:20px; cursor:pointer; }
+  .set-row { display:flex; justify-content:space-between; align-items:center; gap:12px; padding:11px 0; border-bottom:1px dashed var(--border); font-size:13.5px; font-weight:700; }
+  .set-row:last-child { border:none; }
+  .swatches { display:flex; gap:9px; }
+  .swatch { width:26px; height:26px; border-radius:50%; cursor:pointer; border:2px solid transparent; }
+  .swatch.sel { border-color:#fff; transform:scale(1.12); }
+  .kb-row { display:flex; justify-content:space-between; padding:8px 0; font-size:13.5px; border-bottom:1px dashed var(--border); }
+  kbd { background:#101826; border:1px solid var(--border); border-radius:6px; padding:2px 9px; font-family:'Consolas',monospace; font-size:12px; color:var(--acc); }
+  #greetLine { margin-top:10px; font-size:14px; color:var(--muted); }
+  #greetLine b { color:var(--acc); }
+  .radar-cv { display:block; margin:26px auto 0; max-width:340px; width:100%; }
+  body.konami .logo { animation:hueSpin 3s linear infinite; }
+  @keyframes hueSpin { to { filter:hue-rotate(360deg); } }
+  body.reduced * { animation-duration:.01ms !important; transition-duration:.01ms !important; }
+
+  /* ألعاب الدفعة */
+  .game-canvas { display:block; width:100%; background:#07070f; touch-action:none; }
+  .snake-pads { display:grid; grid-template-columns:repeat(3,54px); gap:6px; justify-content:center; padding:12px 0 16px; }
+  .snake-pads button { height:44px; border-radius:9px; border:1px solid #1e4d33; background:#12261a; color:#00ff66; font-size:17px; cursor:pointer; }
+  .ms2-top { composes:ms-top; }
+  .simon-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:14px 18px 8px; max-width:280px; margin:0 auto; }
+  .simon-pad { aspect-ratio:1; border-radius:14px; border:none; cursor:pointer; opacity:.45; transition:.12s; }
+  .simon-pad.lit { opacity:1; box-shadow:0 0 24px currentColor; }
+  .simon-g { background:#00c853; } .simon-r { background:#e53935; }
+  .simon-y { background:#fdd835; } .simon-b { background:#00b0ff; }
+  .hg-word { display:flex; gap:7px; justify-content:center; flex-wrap:wrap; direction:ltr; margin:10px 0; }
+  .hg-word i {
+    width:30px; height:38px; border-bottom:3px solid var(--acc);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'Consolas',monospace; font-size:21px; font-weight:900; color:var(--text); font-style:normal;
+  }
+  .hg-keys { display:grid; grid-template-columns:repeat(7,1fr); gap:5px; padding:0 14px 12px; }
+  .hg-keys button {
+    height:34px; border-radius:7px; border:1px solid var(--border);
+    background:#0d0d18; color:var(--text); font-family:'Consolas',monospace;
+    font-weight:800; cursor:pointer; font-size:13px;
+  }
+  .hg-keys button.used { opacity:.25; pointer-events:none; }
+  .hg-keys button.hit { border-color:#28c840; color:#28c840; }
+  .hg-keys button.miss { border-color:#ff5f57; color:#ff5f57; }
+  .bug-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; padding:14px 18px 18px; }
+  .hole {
+    aspect-ratio:1.15; border-radius:14px; border:1px solid var(--border);
+    background:radial-gradient(circle at 50% 30%, #131a26, #0a0e16);
+    font-size:34px; cursor:pointer; display:flex; align-items:flex-end; justify-content:center;
+    overflow:hidden; transition:.1s;
+  }
+  .hole.up { border-color:var(--acc); }
+  .xo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; padding:14px 18px 18px; max-width:290px; margin:0 auto; }
+  .xo-cell {
+    aspect-ratio:1; border-radius:12px; border:1px solid var(--border);
+    background:#0d0d18; color:var(--text); font-size:32px; font-weight:900; cursor:pointer;
+  }
+  .rps-btns { display:flex; gap:12px; justify-content:center; padding:8px 0 16px; }
+  .rps-btns button { font-size:36px; background:#0d0d18; border:1px solid var(--border); border-radius:14px; width:74px; height:64px; cursor:pointer; transition:.15s; }
+  .rps-btns button:hover { border-color:var(--acc); transform:translateY(-3px); }
+  .score-line { text-align:center; font-weight:800; font-size:13.5px; color:var(--muted); padding-bottom:12px; }
+  .score-line b { color:var(--acc); }
+
   @media(max-width:860px){ .pg-grid { grid-template-columns:1fr; } }
+
 
   @media(max-width:640px){
     .menu-btn { display:block; }
@@ -826,6 +951,7 @@
   <div class="live-bar reveal">
     👁️ زياراتك للموقع: <b id="visCount">…</b> · ⏱️ أنت هنا من: <b id="sessMin">0:00</b>
   </div>
+  <p id="greetLine" hidden>👋</p>
 </header>
 
 <section id="about">
@@ -866,6 +992,96 @@
     <div class="skill"><div class="icon">🐍</div><h3>Python للأمان</h3><div class="lvl"><i data-w="80%"></i></div></div>
     <div class="skill"><div class="icon">🦠</div><h3>تحليل المالوير</h3><div class="lvl"><i data-w="75%"></i></div></div>
     <div class="skill"><div class="icon">🛡️</div><h3>SOC & SIEM</h3><div class="lvl"><i data-w="78%"></i></div></div>
+  </div>
+  <canvas id="radarCv" class="radar-cv" width="680" height="600"></canvas>
+</section>
+
+<section id="lab">
+  <h2 class="sec-title reveal" id="labTitle">مختبر الـ<span>أدوات</span> 🔬</h2>
+  <div class="lab-grid reveal">
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./sha256</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔐 بصمة SHA-256</h3>
+        <textarea class="mono-out" id="hashIn" style="color:var(--text)" placeholder="اكتب أي نص..."></textarea>
+        <button class="btn-mini" id="hashGo" type="button">⚡ احسب البصمة</button>
+        <textarea class="mono-out" id="hashOut" readonly placeholder="64 hex chars..."></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./uuid-gen</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🆔 مولد UUID</h3>
+        <textarea class="mono-out" id="uuidOut" readonly placeholder="xxxxxxxx-xxxx-..."></textarea>
+        <div class="tool-row">
+          <button class="btn-mini" id="uuidGo" type="button">🎲 ولّد</button>
+          <button class="btn-mini" id="uuidCopy" type="button">📋 نسخ</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./timestamp</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">⏰ محول التوقيت</h3>
+        <input class="tool-inp" id="tsUnix" placeholder="Unix: 1735689600">
+        <button class="btn-mini" id="tsTo_date" type="button">📅 Unix ← تاريخ</button>
+        <input class="tool-inp" id="tsDate" placeholder="2026-08-24 12:00">
+        <button class="btn-mini" id="tsTo_unix" type="button">⚙️ تاريخ ← Unix</button>
+        <textarea class="mono-out" id="tsOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./json-format</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">📋 منسق JSON</h3>
+        <textarea class="mono-out" id="jsonIn" style="color:var(--text);min-height:70px;" placeholder='{"a":1,"b":[2,3]}'></textarea>
+        <button class="btn-mini" id="jsonGo" type="button">✨ تنسيق</button>
+        <textarea class="mono-out" id="jsonOut" readonly style="min-height:90px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./regex-test</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔍 اختبار Regex</h3>
+        <input class="tool-inp" id="rePat" placeholder="pattern: ^[a-z]+$">
+        <input class="tool-inp" id="reFlags" placeholder="flags: g,i" value="g" style="width:80px;">
+        <textarea class="mono-out" id="reText" style="color:var(--text);min-height:56px;" placeholder="النص المطلوب فحصه..."></textarea>
+        <button class="btn-mini" id="reGo" type="button">🧪 اختبر</button>
+        <textarea class="mono-out" id="reOut" readonly style="min-height:60px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./subnet-calc</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🌐 حاسبة الشبكات</h3>
+        <input class="tool-inp" id="subIp" placeholder="192.168.1.130/26">
+        <button class="btn-mini" id="subGo" type="button">🧮 احسب</button>
+        <textarea class="mono-out" id="subOut" readonly style="min-height:96px;"></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./morse-code</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">📻 شفرة مورس</h3>
+        <textarea class="mono-out" id="moIn" style="color:var(--text);" placeholder="SOS أو ... --- ..."></textarea>
+        <button class="btn-mini" id="moGo" type="button">🔄 ترجم</button>
+        <textarea class="mono-out" id="moOut" readonly></textarea>
+      </div>
+    </div>
+
+    <div class="tool-card"><div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./base-convert</em></div>
+      <div class="tool-body">
+        <h3 style="font-size:14px;font-weight:900;">🔢 محول الأنظمة</h3>
+        <input class="tool-inp" id="bcIn" placeholder="255">
+        <select id="bcBase" style="background:#0d0d18;color:var(--text);border:1px solid var(--border);border-radius:8px;padding:7px 10px;">
+          <option value="10">Decimal</option><option value="2">Binary</option>
+          <option value="8">Octal</option><option value="16">Hex</option>
+        </select>
+        <button class="btn-mini" id="bcGo" type="button">🔄 حوّل</button>
+        <textarea class="mono-out" id="bcOut" readonly style="min-height:84px;"></textarea>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -1184,6 +1400,166 @@
     </div>
 
   </div>
+
+  <!-- ألعاب الدفعة الجديدة -->
+  <div class="arcade-grid reveal" style="margin-top:22px;">
+
+    <!-- الثعبان -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./snake.exe</em></div>
+      <div class="ms-top"><span>🍎 <b id="snScore">0</b></span><button class="ms-btn" id="snReset" type="button">↻</button><span>🏆 <b id="snBest">0</b></span></div>
+      <canvas id="snCv" class="game-canvas" width="300" height="300" style="height:auto;"></canvas>
+      <div class="snake-pads">
+        <span></span><button id="snU" type="button">▲</button><span></span>
+        <button id="snL" type="button">◀</button><button id="snD" type="button">▼</button><button id="snR" type="button">▶</button>
+      </div>
+    </div>
+
+    <!-- سيمون سي -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./simon-says</em></div>
+      <div class="ms-top"><span>Level: <b id="siLvl">0</b></span><button class="ms-btn" id="siStart" type="button">▶ START</button><span>🏆 <b id="siBest">0</b></span></div>
+      <div class="simon-grid">
+        <button class="simon-pad simon-g" data-i="0" type="button"></button>
+        <button class="simon-pad simon-r" data-i="1" type="button"></button>
+        <button class="simon-pad simon-y" data-i="2" type="button"></button>
+        <button class="simon-pad simon-b" data-i="3" type="button"></button>
+      </div>
+      <p class="score-line" id="siMsg">شغّل وكرر التسلسل 🧠</p>
+    </div>
+
+    <!-- كسر الباسورد (Hangman) -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./crack-the-password</em></div>
+      <div class="ms-top"><span id="hgHint" style="direction:rtl;">تلميح يظهر هنا</span><button class="ms-btn" id="hgNew" type="button">↻ NEW</button><span id="hgHearts">❤️❤️❤️❤️❤️❤️</span></div>
+      <div class="hg-word" id="hgWord"></div>
+      <div class="hg-keys" id="hgKeys"></div>
+      <p class="score-line" id="hgMsg"></p>
+    </div>
+
+  </div>
+
+  <div class="arcade-grid reveal" style="margin-top:22px;">
+
+    <!-- سحق الباجات -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./bug-squasher</em></div>
+      <div class="ms-top"><span>🐞 <b id="bsScore">0</b></span><button class="ms-btn" id="bsStart" type="button">▶ START</button><span>⏱️ <b id="bsTime">45</b>s</span></div>
+      <div class="bug-grid" id="bsGrid"></div>
+    </div>
+
+    <!-- بونج -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./pong-vs-ai</em></div>
+      <div class="ms-top"><span>You <b id="pgYou">0</b></span><button class="ms-btn" id="pgStart" type="button">▶ START</button><span><b id="pgAi">0</b> AI</span></div>
+      <canvas id="pgCv" class="game-canvas" width="320" height="380" style="height:auto;"></canvas>
+    </div>
+
+    <!-- كسر الجدار الناري -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./firewall-breaker</em></div>
+      <div class="ms-top"><span>🧱 <b id="bkLeft">30</b></span><button class="ms-btn" id="bkStart" type="button">▶ START</button><span id="bkMsg">حطم الجدار!</span></div>
+      <canvas id="bkCv" class="game-canvas" width="320" height="400" style="height:auto;"></canvas>
+    </div>
+
+  </div>
+
+  <div class="arcade-grid reveal" style="margin-top:22px;">
+
+    <!-- XO -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./tic-tac-toe --ai</em></div>
+      <div class="ms-top"><span>You ✕</span><button class="ms-btn" id="xoReset" type="button">↻</button><span>AI ⭕</span></div>
+      <div class="xo-grid" id="xoGrid"></div>
+      <p class="score-line" id="xoMsg">ابدأ اللعب — انت ✕</p>
+    </div>
+
+    <!-- حجر ورقة مقص -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./rps-terminal</em></div>
+      <div class="qz-body" style="padding-bottom:0;">
+        <h3 style="font-size:14.5px;font-weight:900;text-align:center;">✊✋✌️ ضد الآلة</h3>
+        <div class="rps-btns">
+          <button id="rpsR" type="button" title="حجر">✊</button>
+          <button id="rpsP" type="button" title="ورقة">✋</button>
+          <button id="rpsS" type="button" title="مقص">✌️</button>
+        </div>
+        <p class="score-line" id="rpsMsg">اختار سلاحك!</p>
+        <div class="tt-stats" style="justify-content:center;gap:18px;">
+          <span>انت: <b id="rpsW">0</b></span><span>تعادل: <b id="rpsT">0</b></span><span>آلة: <b id="rpsL">0</b></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- مؤقت بومودورو -->
+    <div class="ops-card">
+      <div class="term-bar"><i class="d-r"></i><i class="d-y"></i><i class="d-g"></i><em>./pomodoro --study</em></div>
+      <div class="tool-body" style="align-items:center;">
+        <h3 style="font-size:14px;font-weight:900;">🍅 مذاكرة بومودورو</h3>
+        <div class="pom-wrap">
+          <div class="pom-ring" id="pomRing" style="position:relative;"><span id="pomTime">25:00</span></div>
+          <div class="pom-side">
+            <button class="btn-mini" id="pomToggle" type="button">▶ ابدأ</button>
+            <button class="btn-mini" id="pomResetB" type="button">↻ صفّر</button>
+          </div>
+        </div>
+        <p class="score-line" id="pomPhase" style="padding:0;">وضع العمل — 25 دقيقة تركيز 💪</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="dash">
+  <h2 class="sec-title reveal" id="dashTitle">غرفة <span>العمليات</span> 📡</h2>
+  <div class="dash-grid reveal">
+
+    <div class="dash-card">
+      <h3>🕐 ساعة الهاكر</h3>
+      <div class="big-clock" id="bigClock">--:--:--</div>
+      <p class="clock-date" id="clockDate"></p>
+    </div>
+
+    <div class="dash-card">
+      <h3>⏳ العد التنازلي لرأس السنة 🎆</h3>
+      <div class="cd-boxes">
+        <div class="cd-box"><b id="cdD">0</b><small>يوم</small></div>
+        <div class="cd-box"><b id="cdH">00</b><small>ساعة</small></div>
+        <div class="cd-box"><b id="cdM">00</b><small>دقيقة</small></div>
+        <div class="cd-box"><b id="cdS">00</b><small>ثانية</small></div>
+      </div>
+    </div>
+
+    <div class="dash-card">
+      <h3>₿ أسعار العملات (مباشر)</h3>
+      <div id="cryptoBox"><p style="color:var(--muted);font-size:13px;">بيحمّل الأسعار...</p></div>
+    </div>
+
+    <div class="dash-card">
+      <h3>🔮 كرة التنبؤ</h3>
+      <p class="qz-out" id="orbAns">اسألني أي سؤال... لو تقدر 😏</p>
+      <button class="btn-mini" id="orbBtn" type="button">🎱 اسأل الكرة</button>
+    </div>
+
+    <div class="dash-card">
+      <h3>😂 مولد الأعذار التقنية</h3>
+      <p class="qz-out" id="excuseOut">اضغط وحوّل المسؤولية باحتراف</p>
+      <button class="btn-mini" id="excuseBtn" type="button">🤫 ولّد عذر</button>
+    </div>
+
+    <div class="dash-card">
+      <h3>🤣 نكتة البرمجة</h3>
+      <p class="qz-out" id="jokeOut">...</p>
+      <button class="btn-mini" id="jokeBtn" type="button">😄 نكتة تانية</button>
+    </div>
+
+    <div class="dash-card">
+      <h3>📜 حكمة الهاكرز</h3>
+      <p class="qz-out" id="quoteOut" style="font-style:italic;"></p>
+      <button class="btn-mini" id="quoteBtn" type="button">🔄 حكمة جديدة</button>
+    </div>
+
+  </div>
 </section>
 
 <section id="contact">
@@ -1304,6 +1680,40 @@
 </div>
 <div id="toastZone"></div>
 <canvas id="trailCv"></canvas>
+<div id="progressBar"></div>
+<div class="float-stack">
+  <button class="float-btn" id="settingsBtn" title="الإعدادات">⚙️</button>
+  <button class="float-btn" id="keysBtn" title="اختصارات الكيبورد">⌨️</button>
+</div>
+
+<div class="modal-ov" id="setModal">
+  <div class="modal-box">
+    <h3>⚙️ إعدادات الموقع <button class="modal-x" data-close="setModal" type="button">✕</button></h3>
+    <div class="set-row"><span>لون التمييز</span>
+      <span class="swatches">
+        <span class="swatch sel" data-c="0,229,255" style="background:#00e5ff"></span>
+        <span class="swatch" data-c="124,92,255" style="background:#7c5cff"></span>
+        <span class="swatch" data-c="40,200,64" style="background:#28c840"></span>
+        <span class="swatch" data-c="255,152,0" style="background:#ff9800"></span>
+        <span class="swatch" data-c="255,64,129" style="background:#ff4081"></span>
+      </span>
+    </div>
+    <div class="set-row"><span>حجم الخط</span><input type="range" id="fsRange" min="14" max="19" value="16" style="width:130px;"></div>
+    <div class="set-row"><span>تقليل الحركة ♿</span><input type="checkbox" id="rmChk"></div>
+  </div>
+</div>
+
+<div class="modal-ov" id="keyModal">
+  <div class="modal-box">
+    <h3>⌨️ اختصارات الكيبورد <button class="modal-x" data-close="keyModal" type="button">✕</button></h3>
+    <div class="kb-row"><span>كتم / تشغيل الصوت</span><kbd>M</kbd></div>
+    <div class="kb-row"><span>تبديل الوضع الليلي/النهاري</span><kbd>T</kbd></div>
+    <div class="kb-row"><span>وضع الطوارئ 🚨</span><kbd>Shift + R</kbd></div>
+    <div class="kb-row"><span>إعادة شاشة الإقلاع 💻</span><kbd>Shift + B</kbd></div>
+    <div class="kb-row"><span>عرض الاختصارات دي</span><kbd>?</kbd></div>
+    <div class="kb-row"><span>إغلاق النوافذ</span><kbd>Esc</kbd></div>
+  </div>
+</div>
 
 <div id="emWrap">
   <div id="emVignette"></div>
@@ -2527,7 +2937,836 @@ window.__speak=function(text){
   })();
 })();
 
-// ===== عداد الجلسة ⏱️ =====
+// ===== 3.13) مختبر الأدوات 🔬 =====
+(function(){
+  const $=id=>document.getElementById(id);
+  if(!$('hashIn')) return;
+
+  $('hashGo').onclick=async ()=>{
+    const bytes=new TextEncoder().encode($('hashIn').value);
+    const buf=await crypto.subtle.digest('SHA-256',bytes);
+    $('hashOut').value=[...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,'0')).join('');
+    sfx.ok();
+  };
+
+  function newUuid(){
+    if(crypto.randomUUID) return crypto.randomUUID();
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g,c=>
+      (c^crypto.getRandomValues(new Uint8Array(1))[0]&15>>c/4).toString(16));
+  }
+  $('uuidGo').onclick=()=>{ $('uuidOut').value=newUuid(); sfx.key(); };
+  $('uuidCopy').onclick=()=>{ navigator.clipboard.writeText($('uuidOut').value); sfx.pop(); };
+  $('uuidGo').click();
+
+  $('tsTo_date').onclick=()=>{
+    const n=parseInt($('tsUnix').value);
+    $('tsOut').value=isNaN(n)?'⚠️ رقم غير صحيح':new Date(n*1000).toLocaleString('ar-EG');
+    sfx.key();
+  };
+  $('tsTo_unix').onclick=()=>{
+    const d=new Date($('tsDate').value);
+    $('tsOut').value=isNaN(d)?'⚠️ تاريخ غير صحيح':Math.floor(d.getTime()/1000)+'';
+    sfx.key();
+  };
+
+  $('jsonGo').onclick=()=>{
+    try{
+      const o=JSON.parse($('jsonIn').value);
+      $('jsonOut').value=JSON.stringify(o,null,2);
+      sfx.ok();
+    }catch(e){ $('jsonOut').value='⚠️ JSON غلط: '+e.message; sfx.err(); }
+  };
+
+  $('reGo').onclick=()=>{
+    try{
+      const re=new RegExp($('rePat').value, $('reFlags').value||'');
+      const m=$('reText').value.match(new RegExp(re.source,re.flags.includes('g')?re.flags:re.flags+'g'));
+      $('reOut').value=m?('✔ '+m.length+' مطابقة: '+JSON.stringify(m.slice(0,10))):'✘ مفيش مطابقات';
+      sfx.key();
+    }catch(e){ $('reOut').value='⚠️ '+e.message; sfx.err(); }
+  };
+
+  $('subGo').onclick=()=>{
+    const m=$('subIp').value.trim().match(/^(\d+)\.(\d+)\.(\d+)\.(\d+)\/(\d+)$/);
+    if(!m){ $('subOut').value='⚠️ صيغة غلط! مثال: 192.168.1.130/26'; sfx.err(); return; }
+    const ip=m.slice(1,5).map(Number), cidr=+m[5];
+    if(ip.some(o=>o>255)||cidr>32){ $('subOut').value='⚠️ قيم برة المدى'; sfx.err(); return; }
+    const ipInt=(ip[0]<<24|ip[1]<<16|ip[2]<<8|ip[3])>>>0;
+    const mask=cidr===0?0:(0xFFFFFFFF<<(32-cidr))>>>0;
+    const net=(ipInt&mask)>>>0, bc=(net|(~mask>>>0))>>>0;
+    const toIp=n=>[n>>>24,n>>>16&255,n>>>8&255,n&255].join('.');
+    const hosts=cidr>=31?(cidr===32?1:2):(Math.pow(2,32-cidr)-2);
+    $('subOut').value=
+      'Network   : '+toIp(net)+'/'+cidr+'\n'+
+      'Broadcast : '+toIp(bc)+'\n'+
+      'Mask      : '+toIp(mask)+'\n'+
+      'First Host: '+toIp(net+(cidr<31?1:0))+'\n'+
+      'Last Host : '+toIp(bc-(cidr<31?1:0))+'\n'+
+      'Hosts     : '+hosts;
+    sfx.ok();
+  };
+
+  const MORSE={'.-':'A','-...':'B','-.-.':'C','-..':'D','.':'E','..-.':'F','--.':'G','....':'H','..':'I','.---':'J','-.-':'K','.-..':'L','--':'M','-.':'N','---':'O','.--.':'P','--.-':'Q','.-.':'R','...':'S','-':'T','..-':'U','...-':'V','.--':'W','-..-':'X','-.--':'Y','--..':'Z','-----':'0','.----':'1','..---':'2','...--':'3','....-':'4','.....':'5','-....':'6','--...':'7','---..':'8','----.':'9'};
+  const REV={}; Object.keys(MORSE).forEach(k=>REV[MORSE[k]]=k);
+  $('moGo').onclick=()=>{
+    const v=$('moIn').value.trim();
+    if(!v){ return; }
+    if(/^[.\-\/ ]+$/.test(v)){
+      $('moOut').value=v.split('/').map(w=>w.trim().split(/\s+/).map(c=>MORSE[c]||'?').join('')).join(' ');
+    } else {
+      $('moOut').value=v.toUpperCase().split('').map(ch=>ch===' '?'/':(REV[ch]||'')).join(' ');
+    }
+    sfx.key();
+  };
+
+  $('bcGo').onclick=()=>{
+    const v=$('bcIn').value.trim(), b=+$('bcBase').value;
+    const n=parseInt(v,b);
+    if(isNaN(n)){ $('bcOut').value='⚠️ رقم غير صحيح في الأساس '+b; sfx.err(); return; }
+    $('bcOut').value=
+      'DEC : '+n.toString(10)+'\n'+
+      'BIN : '+n.toString(2)+'\n'+
+      'OCT : '+n.toString(8)+'\n'+
+      'HEX : '+n.toString(16).toUpperCase();
+    sfx.ok();
+  };
+})();
+
+// ===== 3.14) ألعاب الدفعة الجديدة 🎮 =====
+(function(){
+  const $=id=>document.getElementById(id);
+
+  // الثعبان
+  (function(){
+    const cv=$('snCv'); if(!cv) return;
+    const ctx=cv.getContext('2d'), G=20, N=15;
+    let snake,dir,food,score,dead,timer,speed;
+    let best=0; try{ best=+(localStorage.getItem('snake_best')||0); }catch(e){}
+    $('snBest').textContent=best;
+    function reset(){
+      snake=[{x:7,y:7},{x:6,y:7}]; dir={x:1,y:0};
+      score=0; dead=false; speed=140;
+      $('snScore').textContent='0';
+      placeFood();
+      clearInterval(timer); timer=setInterval(tick,speed);
+    }
+    function placeFood(){
+      do{ food={x:Math.floor(Math.random()*N),y:Math.floor(Math.random()*N)}; }
+      while(snake.some(s=>s.x===food.x&&s.y===food.y));
+    }
+    function tick(){
+      if(dead) return;
+      const h={x:snake[0].x+dir.x, y:snake[0].y+dir.y};
+      if(h.x<0||h.y<0||h.x>=N||h.y>=N||snake.some(s=>s.x===h.x&&s.y===h.y)){ die(); return; }
+      snake.unshift(h);
+      if(h.x===food.x&&h.y===food.y){
+        score++; $('snScore').textContent=score; sfx.pop(); placeFood();
+        if(score%5===0&&speed>70){ speed-=12; clearInterval(timer); timer=setInterval(tick,speed); }
+      } else snake.pop();
+      draw();
+    }
+    function die(){
+      dead=true; clearInterval(timer); sfx.lose();
+      if(score>best){ best=score; try{ localStorage.setItem('snake_best',best); }catch(e){} }
+      $('snBest').textContent=best;
+      draw();
+    }
+    function draw(){
+      ctx.fillStyle='#07070f'; ctx.fillRect(0,0,cv.width,cv.height);
+      ctx.strokeStyle='rgba(0,229,255,.06)';
+      for(let i=0;i<=N;i++){ ctx.beginPath();ctx.moveTo(i*G,0);ctx.lineTo(i*G,cv.height);ctx.stroke();
+        ctx.beginPath();ctx.moveTo(0,i*G);ctx.lineTo(cv.width,i*G);ctx.stroke(); }
+      if(dead){
+        ctx.fillStyle='#ff5f57'; ctx.font='900 26px Consolas'; ctx.textAlign='center';
+        ctx.fillText('GAME OVER',cv.width/2,cv.height/2);
+      }
+      ctx.font='16px serif'; ctx.textAlign='center';
+      ctx.fillText('🍎',food.x*G+G/2,food.y*G+G-3);
+      snake.forEach((s,i)=>{
+        ctx.fillStyle=i?'#00ff66':'#d8ffe9';
+        ctx.fillRect(s.x*G+1,s.y*G+1,G-2,G-2);
+      });
+    }
+    const set=(x,y)=>{ if(x===-dir.x&&y===-dir.y) return; dir={x,y}; };
+    $('snU').onclick=()=>set(0,-1); $('snD').onclick=()=>set(0,1);
+    $('snL').onclick=()=>set(-1,0); $('snR').onclick=()=>set(1,0);
+    document.addEventListener('keydown',e=>{
+      if(/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||'')) return;
+      if(e.key==='ArrowUp'){ set(0,-1); e.preventDefault(); }
+      else if(e.key==='ArrowDown'){ set(0,1); e.preventDefault(); }
+      else if(e.key==='ArrowLeft'){ set(-1,0); e.preventDefault(); }
+      else if(e.key==='ArrowRight'){ set(1,0); e.preventDefault(); }
+    });
+    $('snReset').onclick=reset;
+    reset();
+  })();
+
+  // سيمون سي
+  (function(){
+    const pads=document.querySelectorAll('.simon-pad'); if(!pads.length) return;
+    const FREQS=[330,392,494,587];
+    let seq=[],pos=0,best=0,playing=false;
+    try{ best=+(localStorage.getItem('simon_best')||0); }catch(e){}
+    $('siBest').textContent=best;
+    function lit(i,d=380){
+      pads[i].classList.add('lit');
+      if(!sfx.muted) sfx.tone(FREQS[i],.28,'sine',.06);
+      setTimeout(()=>pads[i].classList.remove('lit'),d);
+    }
+    function playSeq(){
+      playing=true; pos=0;
+      $('siMsg').textContent='استنى التسلسل 👀';
+      seq.forEach((s,idx)=>setTimeout(()=>lit(s),600*(idx+1)));
+      setTimeout(()=>{ playing=false; $('siMsg').textContent='دورك! كرر التسلسل'; },600*(seq.length+1));
+    }
+    function next(){
+      seq.push(Math.floor(Math.random()*4));
+      $('siLvl').textContent=seq.length;
+      playSeq();
+    }
+    $('siStart').onclick=()=>{ seq=[]; next(); sfx.ok(); };
+    pads.forEach(p=>{
+      p.onclick=()=>{
+        if(playing||!seq.length) return;
+        const i=+p.dataset.i;
+        lit(i,220);
+        if(i===seq[pos]){
+          pos++;
+          if(pos===seq.length){
+            if(seq.length>best){ best=seq.length; try{ localStorage.setItem('simon_best',best); }catch(e){} $('siBest').textContent=best; }
+            $('siMsg').textContent='✔ صح! المستوى '+seq.length+' خلص... جهّز نفسك';
+            sfx.ok(); setTimeout(next,1100);
+          }
+        } else {
+          $('siMsg').textContent='✘ غلط! وصلت للمستوى '+seq.length+'. جرّب تاني';
+          [0,1,2,3].forEach(k=>lit(k,500));
+          seq=[]; $('siLvl').textContent='0'; sfx.lose();
+        }
+      };
+    });
+  })();
+
+  // كسر الباسورد Hangman
+  (function(){
+    const list=[['FIREWALL','جدار حماية'],['PAYLOAD','حمولة هجوم'],['EXPLOIT','ثغرة مستغلة'],
+      ['SNIFFER','متنصت شبكات'],['KERNEL','نواة النظام'],['PROXY','وسيط اتصال'],
+      ['BOTNET','شبكة أجهزة مخترقة'],['ENCRYPT','تشفير'],['ROOTKIT','برنامج تسلل جذري'],
+      ['PHISHING','تصيّد إلكتروني'],['BACKDOOR','باب خلفي'],['MALWARE','برمجية خبيثة']];
+    const wordEl=$('hgWord'), keysEl=$('hgKeys'), hearts=$('hgHearts'),
+          hint=$('hgHint'), msg=$('hgMsg');
+    if(!wordEl) return;
+    let word,hintTxt,guessed,wrong,over;
+    for(let i=65;i<91;i++){
+      const b=document.createElement('button');
+      b.textContent=String.fromCharCode(i); b.dataset.ch=String.fromCharCode(i);
+      keysEl.appendChild(b);
+    }
+    function start(){
+      const [w,h]=list[Math.floor(Math.random()*list.length)];
+      word=w; hintTxt=h; guessed=new Set(); wrong=0; over=false;
+      hearts.textContent='❤️❤️❤️❤️❤️❤️';
+      hint.textContent='تلميح: '+h;
+      msg.textContent='';
+      render();
+    }
+    function render(){
+      wordEl.innerHTML='';
+      [...word].forEach(c=>{
+        const i=document.createElement('i');
+        i.textContent=guessed.has(c)?c:'';
+        wordEl.appendChild(i);
+      });
+    }
+    keysEl.addEventListener('click',e=>{
+      const b=e.target.closest('button');
+      if(!b||over) return;
+      const ch=b.dataset.ch;
+      b.classList.add('used');
+      if(word.includes(ch)){
+        b.classList.add('hit'); guessed.add(ch); sfx.ok(); render();
+        if([...word].every(c=>guessed.has(c))){
+          over=true; msg.innerHTML='<b style="color:#28c840">✔ PASSWORD CRACKED!</b>'; sfx.win();
+        }
+      } else {
+        b.classList.add('miss'); wrong++; sfx.err();
+        hearts.textContent='❤️'.repeat(6-wrong)||'💀';
+        if(wrong>=6){
+          over=true;
+          [...word].forEach(c=>guessed.add(c)); render();
+          msg.innerHTML='<b style="color:#ff5f57">✘ LOCKED OUT! الكلمة كانت '+word+'</b>';
+          sfx.lose();
+        }
+      }
+    });
+    $('hgNew').onclick=start;
+    start();
+  })();
+
+  // سحق الباجات
+  (function(){
+    const grid=$('bsGrid'); if(!grid) return;
+    for(let i=0;i<9;i++){
+      const d=document.createElement('button');
+      d.className='hole'; d.type='button';
+      grid.appendChild(d);
+    }
+    const holes=[...grid.children];
+    let score=0,time=45,timer=null,active=-1,spawnT=null;
+    function end(){
+      clearInterval(timer); clearTimeout(spawnT);
+      holes.forEach(h=>h.textContent='');
+      msg0('خلص الوقت! نتيجتك: '+score+' 🐞');
+      sfx.win();
+      time=45; $('bsTime').textContent='45';
+      $('bsStart').disabled=false; $('bsStart').textContent='↻ تاني';
+    }
+    function msg0(t){ }
+    function spawn(){
+      holes.forEach(h=>{ h.textContent=''; h.classList.remove('up'); });
+      active=Math.floor(Math.random()*9);
+      const kinds=['🐛','🦠','👾'];
+      holes[active].textContent=kinds[Math.floor(Math.random()*kinds.length)];
+      holes[active].classList.add('up');
+      spawnT=setTimeout(spawn,Math.max(420,950-score*14));
+    }
+    grid.addEventListener('pointerdown',e=>{
+      const h=e.target.closest('.hole');
+      if(!h||time>=45&&!timer) return;
+      if(h.classList.contains('up')){
+        score++; $('bsScore').textContent=score;
+        h.textContent='💥'; h.classList.remove('up');
+        sfx.shoot();
+      }
+    });
+    $('bsStart').onclick=()=>{
+      score=0; $('bsScore').textContent='0';
+      $('bsStart').disabled=true; $('bsStart').textContent='⏳';
+      sfx.ok();
+      timer=setInterval(()=>{
+        time--; $('bsTime').textContent=time;
+        if(time<=0) end();
+      },1000);
+      spawn();
+    };
+  })();
+
+  // بونج ضد AI
+  (function(){
+    const cv=$('pgCv'); if(!cv) return;
+    const ctx=cv.getContext('2d');
+    const PW=9,PH=70,BS=8;
+    let py,ay,ball,you=0,ai=0,running=false,raf=null;
+    function reset(dirS){
+      ball={x:cv.width/2,y:cv.height/2,vx:3.4*dirS,vy:(Math.random()*3-1.5)};
+      py=cv.height/2-PH/2; ay=py;
+    }
+    function start(){
+      you=0; ai=0; running=true;
+      $('pgYou').textContent='0'; $('pgAi').textContent='0';
+      reset(Math.random()<.5?1:-1);
+      cancelAnimationFrame(raf); loop();
+      sfx.ok();
+    }
+    function loop(){
+      if(!running) return;
+      ay+=((ball.y-PH/2)-ay)*.055;
+      ball.x+=ball.vx; ball.y+=ball.vy;
+      if(ball.y<BS||ball.y>cv.height-BS) ball.vy*=-1;
+      if(ball.x<24+PW&&ball.y>py&&ball.y<py+PH&&ball.vx<0){ ball.vx=Math.abs(ball.vx)*1.04; ball.vy+=(ball.y-(py+PH/2))*.06; sfx.key(); }
+      if(ball.x>cv.width-24-PW&&ball.y>ay&&ball.y<ay+PH&&ball.vx>0){ ball.vx=-Math.abs(ball.vx)*1.04; ball.vy+=(ball.y-(ay+PH/2))*.06; sfx.key(); }
+      if(ball.x<-10){ you++; $('pgYou').textContent=you; point(1); }
+      if(ball.x>cv.width+10){ ai++; $('pgAi').textContent=ai; point(-1); }
+      draw();
+      raf=requestAnimationFrame(loop);
+    }
+    function point(w){
+      sfx.tone(w>0?880:220,.25,'square',.05);
+      if(you>=5||ai>=5){
+        running=false;
+        draw();
+        ctx.fillStyle=you>ai?'#28c840':'#ff5f57';
+        ctx.font='900 30px Consolas'; ctx.textAlign='center';
+        ctx.fillText(you>ai?'YOU WIN!':'AI WINS',cv.width/2,cv.height/2-20);
+        ctx.font='700 15px Consolas';
+        ctx.fillText('اضغط START للريمانش',cv.width/2,cv.height/2+14);
+      } else reset(w);
+    }
+    function movePlayer(y){
+      py=Math.max(0,Math.min(cv.height-PH,y-PH/2));
+    }
+    cv.addEventListener('pointermove',e=>{
+      const r=cv.getBoundingClientRect();
+      movePlayer((e.clientY-r.top)*(cv.height/r.height));
+    });
+    cv.addEventListener('touchmove',e=>{
+      e.preventDefault();
+      const r=cv.getBoundingClientRect();
+      movePlayer((e.touches[0].clientY-r.top)*(cv.height/r.height));
+    },{passive:false});
+    function draw(){
+      ctx.fillStyle='#07070f'; ctx.fillRect(0,0,cv.width,cv.height);
+      ctx.strokeStyle='rgba(255,255,255,.15)'; ctx.setLineDash([6,8]);
+      ctx.beginPath(); ctx.moveTo(cv.width/2,0); ctx.lineTo(cv.width/2,cv.height); ctx.stroke();
+      ctx.setLineDash([]);
+      ctx.fillStyle='#00e5ff'; ctx.fillRect(24,py,PW,PH);
+      ctx.fillStyle='#ff5f57'; ctx.fillRect(cv.width-24-PW,ay,PW,PH);
+      ctx.fillStyle='#fff'; ctx.fillRect(ball.x-BS/2,ball.y-BS/2,BS,BS);
+    }
+    $('pgStart').onclick=start;
+    reset(1); draw();
+  })();
+
+  // كسر الجدار الناري Breakout
+  (function(){
+    const cv=$('bkCv'); if(!cv) return;
+    const ctx=cv.getContext('2d');
+    const COLS=6,ROWS=5,BW=46,BH=18,GAP=5,OFFX=17,OFFY=52;
+    let bricks,ball,paddle,lives,running=false,raf=null,stuck=true;
+    function build(){
+      bricks=[];
+      const colors=['#ff5f57','#ff9800','#fdd835','#28c840','#00b0ff'];
+      for(let r=0;r<ROWS;r++)for(let c=0;c<COLS;c++)
+        bricks.push({x:OFFX+c*(BW+GAP),y:OFFY+r*(BH+GAP),alive:true,color:colors[r]});
+      paddle={x:cv.width/2-34,w:68};
+      ball={x:0,y:0,vx:3,vy:-3.2,r:6};
+      stuck=true;
+      $('bkLeft').textContent=COLS*ROWS;
+    }
+    function start(){
+      lives=3; running=true; build();
+      $('bkMsg').textContent='حطم الجدار!';
+      cancelAnimationFrame(raf); loop();
+      sfx.ok();
+    }
+    function loop(){
+      if(!running) return;
+      if(stuck){ ball.x=paddle.x+paddle.w/2; ball.y=cv.height-38-ball.r; }
+      else{
+        ball.x+=ball.vx; ball.y+=ball.vy;
+        if(ball.x<ball.r||ball.x>cv.width-ball.r) ball.vx*=-1;
+        if(ball.y<ball.r) ball.vy=Math.abs(ball.vy);
+        if(ball.y>cv.height-30-ball.r&&ball.x>paddle.x&&ball.x<paddle.x+paddle.w&&ball.vy>0){
+          ball.vy=-Math.abs(ball.vy);
+          ball.vx+=((ball.x-(paddle.x+paddle.w/2))/paddle.w)*3;
+          sfx.key();
+        }
+        bricks.forEach(b=>{
+          if(b.alive&&ball.x>b.x-ball.r&&ball.x<b.x+BW+ball.r&&ball.y>b.y-ball.r&&ball.y<b.y+BH+ball.r){
+            b.alive=false; ball.vy*=-1; sfx.shoot();
+            const left=bricks.filter(x=>x.alive).length;
+            $('bkLeft').textContent=left;
+            if(!left){
+              running=false; draw();
+              ctx.fillStyle='#28c840'; ctx.font='900 26px Consolas'; ctx.textAlign='center';
+              ctx.fillText('FIREWALL DESTROYED ✔',cv.width/2,200);
+              sfx.win();
+            }
+          }
+        });
+        if(ball.y>cv.height+20){
+          lives--;
+          if(lives<=0){
+            running=false; draw();
+            ctx.fillStyle='#ff5f57'; ctx.font='900 26px Consolas'; ctx.textAlign='center';
+            ctx.fillText('GAME OVER',cv.width/2,200);
+            sfx.lose(); return;
+          }
+          stuck=true; sfx.err();
+        }
+      }
+      draw();
+      raf=requestAnimationFrame(loop);
+    }
+    function launch(){ if(stuck&&running){ stuck=false; ball.vy=-3.2; ball.vx=2.4; } }
+    function movePad(clientX){
+      const r=cv.getBoundingClientRect();
+      const x=(clientX-r.left)*(cv.width/r.width);
+      paddle.x=Math.max(0,Math.min(cv.width-paddle.w,x-paddle.w/2));
+    }
+    cv.addEventListener('pointermove',e=>movePad(e.clientX));
+    cv.addEventListener('pointerdown',launch);
+    function draw(){
+      ctx.fillStyle='#07070f'; ctx.fillRect(0,0,cv.width,cv.height);
+      bricks.forEach(b=>{
+        if(b.alive){ ctx.fillStyle=b.color; ctx.fillRect(b.x,b.y,BW,BH);
+          ctx.fillStyle='rgba(255,255,255,.25)'; ctx.fillRect(b.x,b.y,BW,4); }
+      });
+      ctx.fillStyle='#00e5ff'; ctx.fillRect(paddle.x,cv.height-30,paddle.w,10);
+      ctx.beginPath(); ctx.arc(ball.x,ball.y,ball.r,0,6.29);
+      ctx.fillStyle='#fff'; ctx.fill();
+      if(stuck&&running){
+        ctx.fillStyle='#8892a8'; ctx.font='12px Consolas'; ctx.textAlign='center';
+        ctx.fillText('دوس عشان تطلق الكرة ▲',cv.width/2,cv.height-60);
+      }
+    }
+    $('bkStart').onclick=start;
+    build(); draw();
+  })();
+
+  // XO ضد AI
+  (function(){
+    const grid=$('xoGrid'); if(!grid) return;
+    const cells=[],msg=$('xoMsg');
+    let board,over;
+    for(let i=0;i<9;i++){
+      const b=document.createElement('button');
+      b.className='xo-cell'; b.type='button';
+      grid.appendChild(b); cells.push(b);
+    }
+    function reset(){
+      board=Array(9).fill(''); over=false;
+      cells.forEach(c=>c.textContent='');
+      msg.textContent='ابدأ اللعب — انت ✕';
+    }
+    const WINS=[[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+    function winner(bd,p){ return WINS.some(w=>w.every(i=>bd[i]===p)); }
+    function endGame(txt,colr){
+      over=true; msg.innerHTML='<b style="color:'+colr+'">'+txt+'</b>';
+      sfx.tone(colr==='#28c840'?880:colr==='#ff5f57'?220:440,.4,'square',.05);
+    }
+    function aiMove(){
+      const empty=board.map((v,i)=>v?null:i).filter(v=>v!==null);
+      for(const p of ['O','X']){
+        for(const i of empty){
+          board[i]=p;
+          if(winner(board,p)){ board[i]=''; return i; }
+          board[i]='';
+        }
+      }
+      if(!board[4]) return 4;
+      const corners=[0,2,6,8].filter(i=>!board[i]);
+      if(corners.length) return corners[Math.floor(Math.random()*corners.length)];
+      return empty[Math.floor(Math.random()*empty.length)];
+    }
+    grid.addEventListener('click',e=>{
+      const c=e.target.closest('.xo-cell');
+      if(!c||over) return;
+      const i=cells.indexOf(c);
+      if(board[i]) return;
+      board[i]='X'; c.textContent='✕'; c.style.color='var(--acc)'; sfx.key();
+      if(winner(board,'X')){ endGame('🎉 كسبت الآلة البشرية!','#28c840'); return; }
+      if(board.every(Boolean)){ endGame('تعادل 🤝','#8892a8'); return; }
+      const m=aiMove();
+      board[m]='O'; cells[m].textContent='⭕'; cells[m].style.color='#ff5f57'; sfx.pop();
+      if(winner(board,'O')){ endGame('🤖 AI كسبك المرة دي!','#ff5f57'); return; }
+      if(board.every(Boolean)) endGame('تعادل 🤝','#8892a8');
+    });
+    $('xoReset').onclick=reset;
+    reset();
+  })();
+
+  // حجر ورقة مقص
+  (function(){
+    if(!$('rpsR')) return;
+    const EMO=['✊','✋','✌️'], NAMES=['حجر','ورقة','مقص'];
+    let w=0,t=0,l=0;
+    [['rpsR',0],['rpsP',1],['rpsS',2]].forEach(([id,mine])=>{
+      $(id).onclick=()=>{
+        const cpu=Math.floor(Math.random()*3);
+        const res=(mine-cpu+3)%3;
+        let m;
+        if(res===0){ t++; m='🤝 تعادل — الاتنين '+NAMES[mine]; sfx.key(); }
+        else if(res===1){ w++; m='🎉 كسبت! '+EMO[mine]+' تغلب '+EMO[cpu]; sfx.ok(); }
+        else { l++; m='😈 الآلة كسبت — '+EMO[cpu]+' كسرت '+EMO[mine]; sfx.err(); }
+        $('rpsMsg').textContent=m;
+        $('rpsW').textContent=w; $('rpsT').textContent=t; $('rpsL').textContent=l;
+      };
+    });
+  })();
+
+})();
+
+// ===== 3.15) غرفة العمليات 📡 =====
+(function(){
+  const $=id=>document.getElementById(id);
+
+  // الساعة
+  setInterval(()=>{
+    const n=new Date();
+    const el=$('bigClock');
+    if(el) el.textContent=[n.getHours(),n.getMinutes(),n.getSeconds()].map(x=>String(x).padStart(2,'0')).join(':');
+    const d=$('clockDate');
+    if(d) d.textContent=n.toLocaleDateString('ar-EG',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+  },1000);
+
+  // العد التنازلي
+  setInterval(()=>{
+    const now=new Date();
+    const ny=new Date(now.getFullYear()+1,0,1);
+    const diff=Math.max(0,ny-now);
+    const el=id=>$(id); if(!el('cdD')) return;
+    $('cdD').textContent=Math.floor(diff/864e5);
+    $('cdH').textContent=String(Math.floor(diff%864e5/36e5)).padStart(2,'0');
+    $('cdM').textContent=String(Math.floor(diff%36e5/6e4)).padStart(2,'0');
+    $('cdS').textContent=String(Math.floor(diff%6e4/1e3)).padStart(2,'0');
+  },1000);
+
+  // العملات
+  async function loadCrypto(){
+    const box=$('cryptoBox'); if(!box) return;
+    try{
+      const r=await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd&include_24hr_change=true');
+      const j=await r.json();
+      box.innerHTML=['bitcoin,BTC 🟠','ethereum,ETH 🔷'].map(pair=>{
+        const [id,label]=pair.split(',');
+        const p=j[id];
+        const ch=p.usd_24h_change>=0;
+        return '<div class="price-row"><span>'+label+'</span><span><b>$'+p.usd.toLocaleString()+'</b> <small style="color:'+(ch?'#28c840':'#ff5f57')+'">'+(ch?'▲':'▼')+Math.abs(p.usd_24h_change).toFixed(1)+'%</small></span></div>';
+      }).join('');
+    }catch(e){
+      box.innerHTML='<p style="color:var(--muted);font-size:13px;">📡 مش متاح دلوقتي (النت أو الـ API)</p>';
+    }
+  }
+  loadCrypto(); setInterval(loadCrypto,6e4);
+
+  // كرة التنبؤ
+  const ORB=[
+    'أكيد يا معلم 💪','مستحيل... بس جرب كمان 😏','المصادر بتقول آه',
+    'اسأل تاني بعد القهوة ☕','الـ firewall عندنا يقول لأ','404 Answer Not Found',
+    'لو اشتغلت على النتايج، آه','السيرفر بيقول استنى شوية ⏳','ده سر مهني 🤐',
+    'بعد ما تقرأ نصايح الأمن؟ أكيد','الـ logs مش بتكدب... لأ','خطر سيبراني على القرار ده ⚠️'
+  ];
+  $('orbBtn')&&($('orbBtn').onclick=()=>{
+    $('orbAns').textContent=ORB[Math.floor(Math.random()*ORB.length)];
+    sfx.pop();
+  });
+
+  // الأعذار
+  const EX_A=['النت فصل','السيرفر عمل restart لوحده','الراوتر سخن','GitHub وقع','الـ VPN قطع','البطارية خلاصت','الكابل اتقطع'];
+  const EX_B=['وأنا كنت','في نفس اللحظة اللي','بينما أنا بحفظ','بعد ما خلصت','وماكنتش لسه'];
+  const EX_C=['بضغط آخر زر 😢','بحل أخطر bug في حياتي','بشحن التليفون','بشرب قهوتي','براجع الكود للمرة العاشرة'];
+  $('excuseBtn')&&($('excuseBtn').onclick=()=>{
+    $('excuseOut').textContent=EX_A[Math.floor(Math.random()*EX_A.length)]+' '
+      +EX_B[Math.floor(Math.random()*EX_B.length)]+' '
+      +EX_C[Math.floor(Math.random()*EX_C.length)];
+    sfx.pop();
+  });
+
+  // النكت
+  const JOKES=[
+    'ليه الـ hacker بيروح الجيم؟ عشان يشدد الـ firewall 💪',
+    'فيه 10 أنواع من الناس: اللي تفهم Binary واللي مش تفهم.',
+    'أنا مش كسلطان... أنا sudo 👑',
+    'البرمجة زي الضحك: أسهل حاجة تعملها bug.',
+    'زوجتي قالت اشتري خبز... رجعت بـ bread.git مش موجود في الريبو 🍞',
+    'أفضل طريقة لتصحيح الكود؟ امسحه واكتبه من الأول (مش مجربة، بس حاسة)',
+    'الـ WiFi في البيت اسمه "اختراق أخلاقي" عشان الجيران يحسوا بالأمان 😈',
+    '99 little bugs in the code... 127 little bugs in the code.',
+    'الـ programmer الوحيد اللي بينام مبكراً هو اللي مش عنديلوه deadline.',
+    'حولت المشكلة لفرصة... الفرصة اتبنت crash 🔥',
+    'إيه الفرق بين الـ virus والـ worm؟ الوورم بيمشي لوحده، والفايرس محتاج انت تدوس بنفسك 😅',
+    'CTRL+Z مش هيصلح حياتك بس بيصلح كودك... ساعات.'
+  ];
+  $('jokeBtn')&&($('jokeBtn').onclick=()=>{
+    $('jokeOut').textContent=JOKES[Math.floor(Math.random()*JOKES.length)];
+    sfx.pop();
+  });
+
+  // الاقتباسات
+  const QUOTES=[
+    '"التقنية ليها حل لكن الحماية عقلياتة" — Bruce Schneier',
+    '"The quieter you become, the more you can hear" — Ram Dass',
+    '"أعطني ستة أسطر من الكود من أي ملف وأتحقق إنه فيه ثغرة" 😄',
+    '"Talk is cheap. Show me the code." — Linus Torvalds',
+    '"الأمان مش منتج، الأمان عملية" — قاعدة الصناعة',
+    '"With great power comes great responsibility" — Uncle Ben (أول قاعدة للهاكر الأخلاقي)',
+    '"There are two hard things in CS: cache invalidation, naming things, and off-by-one errors."',
+    '"أحسن مكان لإخفاء جثة هو الصفحة التانية في جوجل" — مقولة SEO قديمة',
+    '"Any sufficiently advanced technology is indistinguishable from magic." — Arthur C. Clarke',
+    '"First, solve the problem. Then, write the code." — John Johnson'
+  ];
+  $('quoteBtn')&&($('quoteBtn').onclick=()=>{
+    $('quoteOut').textContent=QUOTES[Math.floor(Math.random()*QUOTES.length)];
+    sfx.key();
+  });
+
+  // بومودورو
+  (function(){
+    const ring=$('pomRing'); if(!ring) return;
+    let mode='work',total=25*60,left=total,timer=null,running=false;
+    function fmt(s){ return Math.floor(s/60)+':'+String(s%60).padStart(2,'0'); }
+    function paint(){
+      $('pomTime').textContent=fmt(left);
+      ring.style.setProperty('--p',(1-left/total)*100);
+      $('pomPhase').textContent=mode==='work'?'وضع العمل — 25 دقيقة تركيز 💪':'استراحة — 5 دقائق ☕';
+    }
+    function tick(){
+      left--;
+      if(left<=0){
+        sfx.win();
+        if(mode==='work'){ mode='rest'; total=5*60; }
+        else { mode='work'; total=25*60; }
+        left=total;
+      }
+      paint();
+    }
+    $('pomToggle').onclick=()=>{
+      running=!running;
+      $('pomToggle').textContent=running?'⏸ وقف مؤقتًا':'▶ كمّل';
+      if(running) timer=setInterval(tick,1000);
+      else clearInterval(timer);
+    };
+    $('pomResetB').onclick=()=>{
+      clearInterval(timer); running=false;
+      mode='work'; total=25*60; left=total;
+      $('pomToggle').textContent='▶ ابدأ';
+      paint();
+    };
+    paint();
+  })();
+})();
+
+// ===== 3.16) UX: تقدم + اختصارات + كونامي + تحية + رادار =====
+(function(){
+  const $=id=>document.getElementById(id);
+
+  // شريط التقدم
+  addEventListener('scroll',()=>{
+    const h=document.documentElement;
+    const p=h.scrollTop/(h.scrollHeight-h.clientHeight)*100;
+    const bar=$('progressBar');
+    if(bar) bar.style.width=p+'%';
+  },{passive:true});
+
+  // المودالات
+  function openModal(id){ $(id).classList.add('open'); sfx.key(); }
+  function closeModals(){ document.querySelectorAll('.modal-ov.open').forEach(m=>m.classList.remove('open')); }
+  $('settingsBtn')&&($('settingsBtn').onclick=()=>openModal('setModal'));
+  $('keysBtn')&&($('keysBtn').onclick=()=>openModal('keyModal'));
+  document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeModals);
+  document.querySelectorAll('.modal-ov').forEach(m=>m.onclick=e=>{ if(e.target===m) closeModals(); });
+
+  // الإعدادات
+  const root=document.documentElement;
+  let acc=null; try{ acc=localStorage.getItem('casemiro_acc'); }catch(e){}
+  if(acc){
+    root.style.setProperty('--accRGB',acc);
+    root.style.setProperty('--acc','rgb('+acc+')');
+    document.querySelectorAll('.swatch').forEach(s=>s.classList.toggle('sel',s.dataset.c===acc));
+  }
+  document.querySelectorAll('.swatch').forEach(sw=>{
+    sw.onclick=()=>{
+      root.style.setProperty('--accRGB',sw.dataset.c);
+      root.style.setProperty('--acc','rgb('+sw.dataset.c+')');
+      document.querySelectorAll('.swatch').forEach(x=>x.classList.remove('sel'));
+      sw.classList.add('sel');
+      try{ localStorage.setItem('casemiro_acc',sw.dataset.c); }catch(e){}
+      sfx.pop();
+    };
+  });
+  let fs=null; try{ fs=localStorage.getItem('casemiro_fs'); }catch(e){}
+  if(fs){ root.style.fontSize=fs+'px'; $('fsRange').value=fs; }
+  $('fsRange')&&($('fsRange').oninput=e=>{
+    root.style.fontSize=e.target.value+'px';
+    try{ localStorage.setItem('casemiro_fs',e.target.value); }catch(err){}
+  });
+  let rm=false; try{ rm=localStorage.getItem('casemiro_rm')==='1'; }catch(e){}
+  if(rm){ document.body.classList.add('reduced'); $('rmChk').checked=true; }
+  $('rmChk')&&($('rmChk').onchange=e=>{
+    document.body.classList.toggle('reduced',e.target.checked);
+    try{ localStorage.setItem('casemiro_rm',e.target.checked?'1':'0'); }catch(err){}
+  });
+
+  // اختصارات الكيبورد
+  document.addEventListener('keydown',e=>{
+    const typing=/INPUT|TEXTAREA|SELECT/.test(document.activeElement?.tagName||'');
+    if(e.key==='Escape'){ closeModals(); document.body.classList.remove('cv-mode'); return; }
+    if(typing) return;
+    if(e.key==='?'){ openModal('keyModal'); }
+    else if(e.key==='m'||e.key==='M'){ $('soundBtn')&&$('soundBtn').click(); }
+    else if(e.key==='t'||e.key==='T'){ $('themeBtn')&&$('themeBtn').click(); }
+    else if(e.shiftKey&&(e.key==='R'||e.key==='r')){ window.__emergency.toggle(); }
+    else if(e.shiftKey&&(e.key==='B'||e.key==='b')){
+      try{ localStorage.removeItem('casemiro_booted'); }catch(err){}
+      location.reload();
+    }
+  });
+
+  // كود كونامي 🎮
+  const KONAMI=['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let ki=0;
+  document.addEventListener('keydown',e=>{
+    const k=e.key.length===1?e.key.toLowerCase():e.key;
+    if(k===KONAMI[ki]){
+      ki++;
+      if(ki===KONAMI.length){
+        ki=0;
+        document.body.classList.add('konami');
+        window.__ach&&window.__ach.unlock('neo');
+        sfx.win();
+        setTimeout(()=>{
+          document.body.classList.remove('konami');
+        },6000);
+        const z=$('toastZone');
+        if(z){
+          const t=document.createElement('div');
+          t.className='ach-toast';
+          t.innerHTML='<span class="ic">🎮</span><div><b>🕹️ KONAMI UNLOCKED!</b><small>انت من الناس اللي عارفة الأسرار 😎</small></div>';
+          z.appendChild(t);
+          setTimeout(()=>t.remove(),4500);
+        }
+      }
+    } else ki = k===KONAMI[0]?1:0;
+  });
+
+  // التحية بالاسم
+  (function(){
+    let name=null; try{ name=localStorage.getItem('casemiro_name'); }catch(e){}
+    if(name){
+      const g=$('greetLine');
+      if(g){ g.hidden=false; g.innerHTML='👋 أهلاً برجوعك يا <b>'+esc(name)+'</b> — كارت الهكر بتاعك مستنيك تحت'; }
+    }
+  })();
+
+  // رسم الرادار للمهارات
+  (function(){
+    const cv=$('radarCv'); if(!cv) return;
+    const ctx=cv.getContext('2d');
+    const skills=[['Network',85],['Linux',92],['Python',80],['Malware',75],['SOC',78]];
+    const cx=cv.width/2, cy=cv.height/2, R=Math.min(cx,cy)-90;
+    const N=skills.length;
+    const pt=(i,val)=>{
+      const ang=-Math.PI/2+i*2*Math.PI/N;
+      return [cx+Math.cos(ang)*R*val/100, cy+Math.sin(ang)*R*val/100];
+    };
+    ctx.strokeStyle='rgba(var(--accRGB-x,.3),1)';
+    for(let lvl=20;lvl<=100;lvl+=20){
+      ctx.beginPath();
+      for(let i=0;i<=N;i++){
+        const [x,y]=pt(i%N,lvl);
+        i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+      }
+      ctx.strokeStyle=getComputedStyle(root).getPropertyValue('--acc').trim()||'#00e5ff';
+      ctx.globalAlpha=.18;
+      ctx.stroke();
+      ctx.globalAlpha=1;
+    }
+    for(let i=0;i<N;i++){
+      const [x,y]=pt(i,100);
+      ctx.beginPath(); ctx.moveTo(cx,cy); ctx.lineTo(x,y);
+      ctx.globalAlpha=.15; ctx.stroke(); ctx.globalAlpha=1;
+    }
+    ctx.beginPath();
+    for(let i=0;i<=N;i++){
+      const [x,y]=pt(i%N,skills[i%N][1]);
+      i?ctx.lineTo(x,y):ctx.moveTo(x,y);
+    }
+    ctx.closePath();
+    ctx.fillStyle='rgba(var(--accRGB-x,.25),1)';
+    const accCol=getComputedStyle(root).getPropertyValue('--acc').trim()||'#00e5ff';
+    ctx.fillStyle=accCol; ctx.globalAlpha=.22; ctx.fill();
+    ctx.globalAlpha=1; ctx.lineWidth=2.5; ctx.strokeStyle=accCol; ctx.stroke();
+    skills.forEach(([name,val],i)=>{
+      const [x,y]=pt(i,val);
+      ctx.beginPath(); ctx.arc(x,y,5,0,6.29);
+      ctx.fillStyle=accCol; ctx.fill();
+      const [lx,ly]=pt(i,128);
+      ctx.fillStyle=getComputedStyle(root).getPropertyValue('--text').trim()||'#fff';
+      ctx.font='800 21px Tahoma'; ctx.textAlign='center';
+      ctx.fillText(name+' '+val+'%',lx,ly+6);
+    });
+  })();
+})();
 (function(){
   const el=document.getElementById('sessMin');
   if(!el) return;
@@ -2657,6 +3896,8 @@ window.__ctf = (function(){
       ['#contactTitle','تواصل <span>معايا</span>','Contact <span>Me</span>'],
       ['#gbTitle','سجل <span>الزوار</span> ✍️','Visitor <span>Log</span> ✍️'],
       ['#arcadeTitle','أركيد الـ<span>هاكرز</span> 🎮','Hacker <span>Arcade</span> 🎮'],
+      ['#labTitle','مختبر الـ<span>أدوات</span> 🔬','The <span>Tools</span> Lab 🔬'],
+      ['#dashTitle','غرفة <span>العمليات</span> 📡','The <span>Ops</span> Room 📡'],
       ['#faqTitle','أسئلة <span>شائعة</span> ❓','FAQ ❓']
     ]
   };
