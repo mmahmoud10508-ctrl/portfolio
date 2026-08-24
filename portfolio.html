@@ -2046,7 +2046,7 @@ const io = new IntersectionObserver(es=>{
       if(e.target.classList.contains('about-card')) startTyping();
     }
   });
-},{threshold:.15});
+},{threshold:0, rootMargin:'0px 0px -50px 0px'});
 document.querySelectorAll('.reveal').forEach(x=>io.observe(x));
 
 // ===== قائمة الموبايل =====
