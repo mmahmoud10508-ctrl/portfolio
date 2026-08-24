@@ -326,19 +326,20 @@
     display:flex; align-items:center; gap:8px;
     padding:10px 16px 14px;
     border-top:1px solid rgba(255,255,255,.08);
+    direction:ltr;
   }
   .tprompt { color:#28c840; font-family:'Consolas',monospace; font-size:13px; white-space:nowrap; }
+  #termIn {
+    flex:1; background:none; border:none; outline:none;
+    color:#28c840; font-family:'Consolas',monospace; font-size:14px;
+    caret-color:#28c840;
+  }
   #termGo {
     flex:none; background:none; border:none; color:#28c840;
     font-family:'Consolas',monospace; font-size:24px; font-weight:bold;
     cursor:pointer; padding:0 2px; line-height:1; transition:.2s;
   }
   #termGo:hover, #termGo:active { color:#00e5ff; transform:scale(1.15); }
-  #termIn {
-    flex:1; background:none; border:none; outline:none;
-    color:#e8e8f0; font-family:'Consolas',monospace; font-size:13px;
-    caret-color:#00e5ff;
-  }
   #termIn::placeholder { color:#555; }
 
   /* لعبة Hack the Button */
