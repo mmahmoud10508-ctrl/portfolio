@@ -328,6 +328,12 @@
     border-top:1px solid rgba(255,255,255,.08);
   }
   .tprompt { color:#28c840; font-family:'Consolas',monospace; font-size:13px; white-space:nowrap; }
+  #termGo {
+    flex:none; background:none; border:none; color:#28c840;
+    font-family:'Consolas',monospace; font-size:24px; font-weight:bold;
+    cursor:pointer; padding:0 2px; line-height:1; transition:.2s;
+  }
+  #termGo:hover, #termGo:active { color:#00e5ff; transform:scale(1.15); }
   #termIn {
     flex:1; background:none; border:none; outline:none;
     color:#e8e8f0; font-family:'Consolas',monospace; font-size:13px;
@@ -563,7 +569,8 @@
       <div id="termOut" dir="ltr"></div>
       <div class="term-line">
         <span class="tprompt">guest@casemiro:~$</span>
-        <input id="termIn" dir="ltr" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="help">
+        <input id="termIn" dir="ltr" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="go" placeholder="help">
+        <button id="termGo" type="button" title="تنفيذ">↵</button>
       </div>
     </div>
 
@@ -1209,6 +1216,11 @@ const matrixFX = (function(){
       else { hi = hist.length; inp.value=''; }
       e.preventDefault();
     }
+  });
+  document.getElementById('termGo').addEventListener('click', ()=>{
+    run(inp.value);
+    inp.value='';
+    inp.focus();
   });
   out.parentElement.addEventListener('click', ()=> inp.focus());
 })();
